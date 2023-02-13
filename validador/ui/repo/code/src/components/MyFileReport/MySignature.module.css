@@ -1,0 +1,17 @@
+.CustomAccordion {
+	background: inherit !important;
+	box-shadow: none !important;
+}
+
+.CustomAccordion::before {
+	height: 0px !important;
+}
+
+.CustomAccordion > div {
+	padding: 0px;
+	min-height: 32px;
+}
+
+.CustomAccordion > div > div {
+	margin: 0px;
+}

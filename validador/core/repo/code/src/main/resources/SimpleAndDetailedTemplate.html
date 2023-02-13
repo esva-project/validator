@@ -1,0 +1,33 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="/resources/bootstrap.min.css" />
+        <link rel="stylesheet" href="/resources/demo.css" />
+        <link rel="stylesheet" href="/resources/layout.css" />
+
+        <script src="/resources/jquery.min.js"></script>
+        <script src="/resources/popper.min.js"></script>
+        <script src="/resources/bootstrap.min.js"></script>
+
+        <script src="/resources/ResizeSensor.min.js"></script>
+
+        <script src="/resources/fontawesome.js"></script>
+
+        <style>
+            ::-webkit-scrollbar {
+                display: none
+            }
+        </style>
+    </head>
+    <body>
+        <div id="SimpleReportContainer">
+            {html}
+        </div>
+        <script type="text/javascript" th:inline="javascript">
+            $('[data-toggle="tooltip"]').tooltip();
+            $(".card-body.collapse").addClass("show");
+            new ResizeSensor(jQuery('#SimpleReportContainer'), function(){
+                window.parent.postMessage(document.getElementById('SimpleReportContainer').offsetHeight);
+            });
+        </script>
+    </body>
+</html>
