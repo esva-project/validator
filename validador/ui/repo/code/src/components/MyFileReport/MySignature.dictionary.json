@@ -1,0 +1,66 @@
+{
+    "fromTimestampService": {
+        "en": "From timestamp service",
+        "pt": "Do serviço timestamp"
+    },
+    "signedBy": {
+        "en": "Signed by:",
+        "pt": "Assinado por:"
+    },
+    "downloadCertificate": {
+        "en": "Download Certificate",
+        "pt": "Descarregar Certificado"
+    },
+    "commonName": {
+        "en": "Common Name:",
+        "pt": "Nome Comum:"
+    },
+    "countryName": {
+        "en": "Country Name:",
+        "pt": "Nome do País:"
+    },
+    "email": {
+        "en": "Email:",
+        "pt": "Email:"
+    },
+    "subjectSerialName": {
+        "en": "Subject Serial Name:",
+        "pt": "Nome de Série do Sujeito:"
+    },
+    "organizationIdentifier": {
+        "en": "Organization Identifier:",
+        "pt": "Identificador da Organização:"
+    },
+    "sources": {
+        "en": "Sources:",
+        "pt": "Origens:"
+    },
+    "organizationUnits": {
+        "en": "Organization Units:",
+        "pt": "Organization Units:"
+    },
+    "organizationName": {
+        "en": "Organization Name:",
+        "pt": "Unidades Organizacionais:"
+    },
+    "entitlement": {
+        "en": "Entitlement:",
+        "pt": "Direito:"
+    },
+    "qualification": {
+        "en": "Qualification:",
+        "pt": "Qualificação:"
+    },
+    "signatureFormat": {
+        "en": "Signature Format:",
+        "pt": "Formato de Assinatura:"
+    },
+    "bestSignatureTime": {
+        "en": "Best Signature Time:",
+        "pt": "Melhor Data de Assinatura:"
+    },
+    "indication": {
+        "en": "Indication:",
+        "pt": "Indicação:"
+    }
+}

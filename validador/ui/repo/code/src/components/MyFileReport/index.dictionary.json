@@ -1,0 +1,18 @@
+{
+    "validationPolicy": {
+        "en": "Validation Policy:",
+        "pt": "Política de Validação"
+    },
+    "getEwp": {
+        "en": "Load EWP Report",
+        "pt": "Carregar Relatório EWP"
+    },
+    "openFullReport": {
+        "en": "Open full report",
+        "pt": "Ver relatório completo"
+    },
+    "removeFile": {
+        "en": "Remove file",
+        "pt": "Remover ficheiro"
+    }
+}

@@ -1,0 +1,7 @@
+.Main {
+	background: rgb(0, 166, 235);
+	background: -moz-linear-gradient(to right,rgba(223, 95, 63, 1) 0%, rgba(191, 30, 105, 1) 50%, rgba(44, 48, 112, 1) 100%);
+	background: -webkit-linear-gradient(to right,rgba(223, 95, 63, 1) 0%, rgba(191, 30, 105, 1) 50%, rgba(44, 48, 112, 1) 100%);
+	background: linear-gradient(to right,rgba(223, 95, 63, 1) 0%, rgba(191, 30, 105, 1) 50%, rgba(44, 48, 112, 1) 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#00a6eb",endColorstr="#090979",GradientType=1);
+}

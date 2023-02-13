@@ -1,0 +1,11 @@
+{
+    "watch": ["src"],
+    "ext": "ts",
+    "ignore": [],
+    "exec": "ts-node src/server.ts",
+    "signal": "SIGTERM",
+    "env": {
+      "NODE_OPTIONS": "--trace-warnings"
+    }
+  }
+  

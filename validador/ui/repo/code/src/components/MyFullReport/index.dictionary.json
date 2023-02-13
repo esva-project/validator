@@ -1,0 +1,30 @@
+{
+    "simpleReport": {
+        "en": "Simple Report",
+        "pt": "Relatório Simples"
+    },
+    "detailedReport": {
+        "en": "Detailed Report",
+        "pt": "Relatório Detalhado"
+    },
+    "diagnosisTree": {
+        "en": "Diagnosis Tree",
+        "pt": "Árvore de Diagnóstico"
+    },
+    "etsiValidationReport": {
+        "en": "ETSI validation report",
+        "pt": "Relatório de validação ETSI"
+    },
+    "downlaodXml": {
+        "en": "Downlaod as XML",
+        "pt": "Descarregar como XML"
+    },
+    "downlaodPdf": {
+        "en": "Downlaod as PDF",
+        "pt": "Descarregar como PDF"
+    },
+    "close": {
+        "en": "Close",
+        "pt": "Fechar"
+    }
+}
