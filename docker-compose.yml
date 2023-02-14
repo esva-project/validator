@@ -45,13 +45,13 @@ services:
       - my-proxy-net
 
   core: 
-    build: ./validador/core
+    build: ./validador/core/repo
     image: validador-core 
     container_name: validador-core 
     hostname: validador-core 
     restart: unless-stopped 
     volumes: 
-      -  ./validador/core/configs:/app/repo/code/configs
+      -  ./validador/core/configs:/app/repo/code/config
       -  ./validador/core/store:/app/store 
       -  ./validador/core/logs:/app/logs 
       -  ./validador/core/data:/app/data
