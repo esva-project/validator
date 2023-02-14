@@ -39,7 +39,7 @@ services:
     hostname: validador-ui 
     restart: unless-stopped 
     volumes: 
-      - ./validador/core/data/validations:/usr/share/nginx/html/validations 
+      - .d/validations:/usr/share/nginx/html/validations 
       - /data/esva/.env:/app/.env:ro
     networks:
       - my-proxy-net
