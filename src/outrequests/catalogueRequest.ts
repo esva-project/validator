@@ -24,7 +24,6 @@ const fetchCatalogue = async () => {
     if (error instanceof Error) {
       return error.message
     }
-    console.log('unexpected error:', error)
     return 'An unexpected error occurred'
   }
 }

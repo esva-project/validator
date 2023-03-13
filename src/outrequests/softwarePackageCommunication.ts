@@ -10,6 +10,7 @@ const instance = axios.create({
   method: 'POST'
 })
 
+// Make request to ESVA software package to retrieve file signature information
 const fetchFileMetadata = async (contentsToSend: string, filename: string) => {
   try {
     const response: AxiosResponse = await instance.post(
@@ -31,7 +32,6 @@ const fetchFileMetadata = async (contentsToSend: string, filename: string) => {
     if (error instanceof Error) {
       return error.message
     }
-    console.log('unexpected error:', error)
     return 'An unexpected error occurred'
   }
 }
