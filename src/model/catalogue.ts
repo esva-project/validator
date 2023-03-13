@@ -27,10 +27,12 @@ interface ApiInterface {
 }
 
 class Catalogue {
-  public catalogue: CatalogueInterface
+  private catalogue: CatalogueInterface
+  private lastUpdated: Date
 
-  constructor(catalogue: any) {
+  constructor(catalogue: CatalogueInterface) {
     this.catalogue = catalogue
+    this.lastUpdated = new Date()
   }
 
   public getHosts = () => this.catalogue.catalogue.host
@@ -41,6 +43,9 @@ class Catalogue {
   public getOMobilityLASAPIURL = (a: ApiImplementedInterface) => a['omobility-las'][0]['get-url']
   public getInstitutionsAPIURL = (a: ApiImplementedInterface) => a.institutions[0].url
   public getOUnitsAPIURL = (a: ApiImplementedInterface) => a['organizational-units'][0].url
+
+  public getLastUpdated = () => this.lastUpdated
+  public setLastUpdated = (l: Date) => (this.lastUpdated = l)
 }
 
 export { Catalogue }
