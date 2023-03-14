@@ -2,8 +2,6 @@ import https from 'https'
 
 import axios, { AxiosResponse } from 'axios'
 
-import { logger } from '../utils/logs'
-
 const instance = axios.create({
   baseURL: `http://validador-core`,
   headers: { 'Content-Type': 'application/json; charset=UTF-8' },
@@ -15,7 +13,6 @@ const instance = axios.create({
 
 // Make request to ESVA software package to retrieve file signature information
 const fetchFileMetadata = async (contentsToSend: string, filename: string) => {
-  logger.ola.warn(`http://validador-core/api/v2/validation/document`)
   try {
     const response: AxiosResponse = await instance.post(
       `/api/v2/validation/document`,
