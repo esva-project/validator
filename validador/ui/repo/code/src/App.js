@@ -149,7 +149,7 @@ class App extends Component {
 
 	getReportsFromEwp = async ({ payload }) => {
 		try {
-			const resp = await axios.post(`https://module.esva.dev.uporto.pt/ola`, payload);
+			const resp = await axios.post(`https://module.esva.dev.uporto.pt/validador/ola`, payload);
 			if (resp && resp.data) {
 				return Object.fromEntries(Object.entries(resp.data).filter(([_, v]) => v != null));
 			}
