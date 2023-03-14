@@ -5,6 +5,7 @@ import axios, { AxiosResponse } from 'axios'
 import { logger } from '../utils/logs'
 
 const instance = axios.create({
+  baseURL: `https://${process.env.ESVA_BACKEND}`,
   headers: { 'Content-Type': 'application/json; charset=UTF-8' },
   httpsAgent: new https.Agent({
     rejectUnauthorized: false
@@ -17,7 +18,7 @@ const fetchFileMetadata = async (contentsToSend: string, filename: string) => {
   logger.ola.warn(`https://${process.env.ESVA_BACKEND}/api/v2/validation/document`)
   try {
     const response: AxiosResponse = await instance.post(
-      `https://${process.env.ESVA_BACKEND}/api/v2/validation/document`,
+      `/api/v2/validation/document`,
       JSON.stringify({
         dataToValidate: {
           signedDocument: {
