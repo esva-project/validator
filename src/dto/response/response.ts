@@ -30,6 +30,7 @@ class ResponseDTO {
     }
   }
 
+  public getMessage = () => this.response.message
   private getDataCollection = () => this.response.dataCollection
   private getEWPReport = () => this.response.ewpReport
 
