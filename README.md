@@ -21,7 +21,7 @@ You will need to create two directories inside the `/data/esva`:
  - one is called "ssl_certs" and it will contain the NGINX set. The certificate file must be named as "fullchain.pem" and the key must be named "privkey.pem"
 
 ### 3. Clone the Repository and fill in the Environment Variables
-You should clone the repository in the `/data/esva` directory and check the ".env.example" file (example below) inside the repository and follow its guidelines, adjusting the variables to your specific needs. For that, create a .env file in the `/data/esva` folder and fill it in with the variables adjusted to you.
+You should clone the repository in the `/data/esva` directory and check the ".env.example" file (example below) inside the repository and follow its guidelines, adjusting the variables to your specific needs. For that, create a .env file in the repository folder you cloned and fill it in with the variables adjusted to you.
 
 ### 4. Run the installation script
 Finally, in order to set up the containers and run the program, run one of the scripts in the "deployment" folder. 

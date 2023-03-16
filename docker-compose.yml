@@ -11,8 +11,6 @@ services:
     build: nginx
     volumes:
       - /data/esva/ssl_certs:/etc/nginx/certs/:ro
-    env_file: 
-      - /data/esva/.env
     ports:
       - "443:443"
     networks:
@@ -27,7 +25,7 @@ services:
       - my-proxy-net
     volumes:
       - /data/esva/ewp_certs:/app/certificates:rw
-      - /data/esva/.env:/app/.env:ro
+      - /data/esva/validator/.env:/app/.env:ro
     restart: always
 
   ui: 
@@ -40,7 +38,7 @@ services:
     restart: unless-stopped 
     volumes: 
       - ./validador/core/data/validations:/usr/share/nginx/html/validations 
-      - /data/esva/.env:/app/.env:ro
+      - /data/esva/validator/.env:/app/.env:ro
     networks:
       - my-proxy-net
 
@@ -56,7 +54,10 @@ services:
       -  ./validador/core/logs:/app/logs 
       -  ./validador/core/data:/app/data
     networks:
-      - my-proxy-net
+      my-proxy-net:
+        aliases:
+         - ${HOST}
+         - 'validador-core'
     
 networks:
   proxynet:
