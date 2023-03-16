@@ -11,6 +11,8 @@ services:
     build: nginx
     volumes:
       - /data/esva/ssl_certs:/etc/nginx/certs/:ro
+    env_file: 
+      - /data/esva/validator/.env
     ports:
       - "443:443"
     networks:
@@ -48,6 +50,8 @@ services:
     container_name: validador-core 
     hostname: validador-core 
     restart: unless-stopped 
+    env_file: 
+      - /data/esva/validator/.env
     volumes: 
       -  ./validador/core/configs:/app/repo/code/config
       -  ./validador/core/store:/app/store 
