@@ -84,14 +84,14 @@ export default class MyFileReport extends Component {
 							)}
 							<div className="d-flex">
 								<div className="mx-2 position-relative">
-									{/* <Button
+									<Button
 										variant="outlined"
 										color={file.ewpError ? "error" : file.ewpSuccess ? "success" : undefined}
 										disabled={file.ewpLoading}
 										onClick={(event) => (event.stopPropagation() || file.ewpSuccess ? this.setState({ ewpReportOpen: true }) : this.props.onLoadEwp({ id }))}
 									>
 										{dictionary.getEwp[language]}
-									</Button> */}
+									</Button>
 									<Fade in={file.ewpLoading} mountOnEnter unmountOnExit appear timeout={500}>
 										<div className="w-100 d-flex align-items-center justify-content-center" style={{ position: "absolute", top: 0, left: 0, backgroundColor: "rgba(0, 0, 0, 0.3)" }}>
 											<CircularProgress size={36.5} />
