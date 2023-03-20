@@ -3,6 +3,7 @@ import https from 'https'
 import axios, { AxiosResponse } from 'axios'
 
 const instance = axios.create({
+  baseURL: `http://validador-core`,
   headers: { 'Content-Type': 'application/json; charset=UTF-8' },
   httpsAgent: new https.Agent({
     rejectUnauthorized: false
@@ -14,7 +15,7 @@ const instance = axios.create({
 const fetchFileMetadata = async (contentsToSend: string, filename: string) => {
   try {
     const response: AxiosResponse = await instance.post(
-      `https://${process.env.ESVA_BACKEND}/api/v2/validation/document`,
+      `/api/v2/validation/document`,
       JSON.stringify({
         dataToValidate: {
           signedDocument: {
@@ -30,6 +31,7 @@ const fetchFileMetadata = async (contentsToSend: string, filename: string) => {
     return response.data
   } catch (error) {
     if (error instanceof Error) {
+      console.log(error.message)
       return error.message
     }
     return 'An unexpected error occurred'
