@@ -1,0 +1,150 @@
+{
+	"logs": [
+		"SUCCESS: Found 2 signatures",
+		"INFO: Signature of Vasilis Andritsoudis is a Signature produced by a Certificate of unknown type",
+		"INFO: Signature of Vasilis Andritsoudis has expiration time 2024-08-16T09:39:27.000+0000",
+		"SUCCESS: Signature did not expire",
+		"INFO: Signature of Theodoros Alexandrou is a Advanced Electronic Signature supported by a Qualified Certificate",
+		"INFO: Signature of Theodoros Alexandrou has expiration time 2023-03-17T07:23:23.000+0000",
+		"SUCCESS: Signature did not expire",
+		"INFO: Signature of Bruno Pereira is a Not applicable",
+		"INFO: Signature of Bruno Pereira has expiration time null",
+		"ERROR: Signature Expired",
+		"SUCCESS: Found Correct Mobility with ID 7957EF4C45AC4946221ED3768EB67372",
+		"INFO: Bruno Pereira (up_ClaraTrueba@up.pt), Institutional Coordinator, signed the mobility on behalf of up.pt",
+		"INFO: Theodoros Alexandrou (talexandrou@it.auth.gr), Responsible person at the Receiving Institution, signed the mobility on behalf of uni-foundation.eu",
+		"WARNING: Sending HEI Signature Person Name (Bruno Pereira) Not Found in PDF Signatures",
+		"WARNING: Sending HEI Signature Person Email (up_ClaraTrueba@up.pt) Not Found in PDF Signatures",
+		"WARNING: Receiving HEI Signature Person Name (Theodoros Alexandrou) Not Found in PDF Signatures",
+		"SUCCESS: Receiving HEI Signature Person Email (talexandrou@it.auth.gr) matched in PDF Signatures",
+		"WARNING: Student Person Name (vasandven@it.auth.gr) Not Found in PDF Signatures",
+		"SUCCESS: Student Person Email (Vasilis Andritsoudis) matched in PDF Signatures",
+		"INFO: Found Contact from Universidade do Porto (up.pt): Clara Trueba (up_ClaraTrueba@up.pt)",
+		"SUCCESS: Fetched Information from up.pt insitution",
+		"SUCCESS: Institution HEI IDs contain/is equal to the Mobility SCHAC code (up.pt)",
+		"WARNING: Institution Role Descriptions do not contain/is different than the Mobility Signer Position (Institutional Coordinator)",
+		"WARNING: Institution Contact Names do not contain/is different than the Mobility Signature Name (Bruno Pereira)",
+		"SUCCESS: Institution Contact Emails contain/is equal to the Mobility Signature Email (up_ClaraTrueba@up.pt)",
+		"SUCCESS: Fetched Information from uni-foundation.eu insitution",
+		"SUCCESS: Institution HEI IDs contain/is equal to the Mobility SCHAC code (uni-foundation.eu)",
+		"WARNING: Institution Role Descriptions do not contain/is different than the Mobility Signer Position (Responsible person at the Receiving Institution)",
+		"WARNING: Institution Contact Names do not contain/is different than the Mobility Signature Name (Theodoros Alexandrou)",
+		"WARNING: Institution Contact Emails do not contain/is different than the Mobility Signature Email (talexandrou@it.auth.gr)",
+		"INFO: Found Contact from Faculty of Engineering of the University of Porto (7C66E36DFA2CDA4D517B71C507508725): Local-Erasmus FEUP (18490_Lefsefsfsp@up.pt)",
+		"SUCCESS: Fetched Information from 7C66E36DFA2CDA4D517B71C507508725 ounit named Faculty of Engineering of the University of Porto",
+		"SUCCESS: Organizational Unit OUnit IDs contain/is equal to the Mobility OUnit ID (7C66E36DFA2CDA4D517B71C507508725)",
+		"SUCCESS: Organizational Unit OUnit Names contain/is equal to the Mobility OUnit Name (Faculty of Engineering of the University of Porto)",
+		"WARNING: Organizational Unit Role Descriptions do not contain/is different than the Mobility Contact Position (undefined)",
+		"WARNING: Organizational Unit Contact Names do not contain/is different than the Mobility Contact Name (Bruno Pereira)",
+		"SUCCESS: Organizational Unit Contact Emails contain/is equal to the Mobility Contact Email (18490_Lefsefsfsp@up.pt)"
+	],
+	"message": "Document is Valid. Found 8/19 matches with the Mobility found in EWP.",
+	"validationResult": "SUCCESS",
+	"validations": {
+		"ewpResponse": {
+			"institution": {
+				"receiving_hei": {
+					"contacts": [],
+					"schac_code": "uni-foundation.eu"
+				},
+				"sending_hei": {
+					"contacts": [
+						{
+							"contactPersonEmail": "up_ClaraTrueba@up.pt",
+							"contactPersonName": "Clara Trueba",
+							"roleDescription": "Coordenador Institucional"
+						}
+					],
+					"schac_code": "up.pt"
+				}
+			},
+			"mobility": {
+				"sending_hei": {
+					"contactPersonEmail": "18490_Lefsefsfsp@up.pt",
+					"contactPersonName": "Bruno Pereira",
+					"signature": {
+						"signatureName": "Bruno Pereira",
+						"signatureEmail": "up_ClaraTrueba@up.pt",
+						"signerPosition": "Institutional Coordinator"
+					},
+					"schac_code": "up.pt",
+					"ounit_id": "7C66E36DFA2CDA4D517B71C507508725",
+					"ounit_name": "Faculty of Engineering of the University of Porto"
+				},
+				"receiving_hei": {
+					"contactPersonEmail": "adm@euf.com",
+					"contactPersonName": "Administrative   name",
+					"signature": {
+						"signatureName": "Theodoros Alexandrou",
+						"signatureEmail": "talexandrou@it.auth.gr",
+						"signerPosition": "Responsible person at the Receiving Institution"
+					},
+					"schac_code": "uni-foundation.eu"
+				},
+				"student": {
+					"contactPersonEmail": "Vasilis Andritsoudis",
+					"contactPersonName": "vasandven@it.auth.gr"
+				}
+			},
+			"ounit": {
+				"receiving_hei": {
+					"contacts": []
+				},
+				"sending_hei": {
+					"contacts": [
+						{
+							"contactPersonEmail": "18490_Lefsefsfsp@up.pt",
+							"contactPersonName": "Local-Erasmus FEUP",
+							"roleDescription": "Coordenador Local-Erasmus"
+						}
+					],
+					"ounit_id": "7C66E36DFA2CDA4D517B71C507508725",
+					"ounit_name": "Faculty of Engineering of the University of Porto"
+				}
+			}
+		},
+		"numberValidSignatures": 2,
+		"signature": [
+			{
+				"signatureLevel": "Signature produced by a Certificate of unknown type",
+				"signerDocument": "Vasilis Andritsoudis"
+			},
+			{
+				"signatureLevel": "Advanced Electronic Signature supported by a Qualified Certificate",
+				"signerDocument": "Theodoros Alexandrou"
+			}
+		],
+		"matches": {
+			"ewpResponseContentValidations": {
+				"isResponseIDEqualToPDFID": true,
+				"isResponseReceivingSCHACCodeEqualToPDFReceivingSCHACCode": true,
+				"isResponseSendingSCHACCodeEqualToPDFSendingSCHACCode": true
+			},
+			"receivingHeiValidations": {
+				"isHEISignatureEmailEqualsPDF": true,
+				"isHEISignatureNameEqualsPDF": false,
+				"isHEISignatureNameInInstitutionAPI": false,
+				"isHEISignatureEmailInInstitutionAPI": false,
+				"isHEISchacCodeEqualInInstitutionAPI": true,
+				"isHEIRolesEqualInInstitutionAPI": false
+			},
+			"sendingHeiValidations": {
+				"isHEISignatureEmailEqualsPDF": false,
+				"isHEISignatureNameEqualsPDF": false,
+				"isHEISignatureNameInInstitutionAPI": false,
+				"isHEISignatureEmailInInstitutionAPI": true,
+				"isHEISchacCodeEqualInInstitutionAPI": true,
+				"isHEIRolesEqualInInstitutionAPI": false,
+				"isOUnitIDEqualInOUnitAPI": true,
+				"isOUnitNameEqualInOUnitAPI": true,
+				"isOUnitContactNameEqualInOUnitAPI": false,
+				"isOUnitContactEmailEqualInOUnitAPI": true,
+				"isOUnitRolesEqualInInstitutionAPI": false
+			},
+			"studentValidations": {
+				"isEmailEqual": true,
+				"isNameEqual": false
+			}
+		}
+	}
+}
