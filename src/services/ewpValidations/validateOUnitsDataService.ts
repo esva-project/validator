@@ -20,7 +20,7 @@ const validateEWPOUnitsResponse = async (
 
   institutionsAndMobilityValidation.setOUnitHEIInformation(flow, ounits_response)
 
-  const location = 'Organizational Unit Contact List'
+  const location = 'Institution or Organizational Unit Contact List'
 
   institutionsAndMobilityValidation.addHEIValidation(
     flow,

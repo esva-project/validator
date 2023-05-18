@@ -156,7 +156,7 @@ export default class MyFileReport extends Component {
 							required
 							margin="normal"
 							id="sendingHeiCode"
-							label="Sending Institution SHAC code"
+							label="Sending Institution SCHAC code"
 							type="text"
 							fullWidth
 							variant="standard"
@@ -167,7 +167,7 @@ export default class MyFileReport extends Component {
 							required
 							margin="normal"
 							id="receivingHeiCode"
-							label="Receiving Institution SHAC code"
+							label="Receiving Institution SCHAC code"
 							type="text"
 							fullWidth
 							variant="standard"
