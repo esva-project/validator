@@ -56,7 +56,10 @@ class EWPReport implements EWPReportInterface {
 
   public foundSendingHEIValidation = (nameAttribute: string, location: string) => {
     const obj = this.sendingHeiValidations.find(
-      (f) => f.getLabel().includes(nameAttribute) && f.getLabel().includes(location)
+      (f) =>
+        f.getLabel().includes(nameAttribute) &&
+        f.getLabel().includes(location) &&
+        f.getStatus() != 'FOUND'
     )
     if (obj) {
       obj.setStatus('FOUND')
@@ -65,7 +68,10 @@ class EWPReport implements EWPReportInterface {
   }
   public foundReceivingHEIValidation = (nameAttribute: string, location: string) => {
     const obj = this.receivingHeiValidations.find(
-      (f) => f.getLabel().includes(nameAttribute) && f.getLabel().includes(location)
+      (f) =>
+        f.getLabel().includes(nameAttribute) &&
+        f.getLabel().includes(location) &&
+        f.getStatus() != 'FOUND'
     )
     if (obj) {
       obj.setStatus('FOUND')
@@ -74,7 +80,10 @@ class EWPReport implements EWPReportInterface {
   }
   public foundStudentValidation = (nameAttribute: string, location: string) => {
     const obj = this.studentValidations.find(
-      (f) => f.getLabel().includes(nameAttribute) && f.getLabel().includes(location)
+      (f) =>
+        f.getLabel().includes(nameAttribute) &&
+        f.getLabel().includes(location) &&
+        f.getStatus() != 'FOUND'
     )
     if (obj) {
       obj.setStatus('FOUND')

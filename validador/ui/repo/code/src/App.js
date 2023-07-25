@@ -1,25 +1,22 @@
-import React, { Component } from "react";
 import axios from "axios";
+import React, { Component } from "react";
 
 import { Collapse, Dialog, Slide, Typography } from "@mui/material";
 
 import { uuidv4 } from "./helpers";
 
-import MyDropzone from "./components/MyDropzone";
-import MainAppBar from "./components/MainAppBar";
 import Home from "./components/Home";
+import MainAppBar from "./components/MainAppBar";
+import MyDropzone from "./components/MyDropzone";
 import MyFileReport from "./components/MyFileReport";
 import FaqModal from "./components/MyFooter/FaqModal";
 
 import Configs from "./configs/Configs.json";
 import { Languages } from "./constants/Globals";
-import restTmpl from "./resp.json";
 
 import Classes from "./App.module.css";
 
 import dictionary from "./App.dictionary.json";
-import MyDialogEwpReport from "./components/MyFileReport/MyDialogEwpReport";
-
 
 const Transition = React.forwardRef(function Transition(props, ref) {
 	return <Slide direction="up" ref={ref} {...props} />;
@@ -27,8 +24,6 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 
 class App extends Component {
 	constructor(props) {
-
-		console.log(Configs);
 		super(props);
 		this.inputFileRef = React.createRef();
 	}
@@ -117,10 +112,13 @@ class App extends Component {
 		}
 	};
 
-	getEwp = async ({ id: fileId }) => {
+	getEwp = async ({ id: fileId, ewpData }) => {
 		const { files } = this.state;
 		const fileDump = files.find(({ id }) => id === fileId);
 		this.setState({ files: files.map((file) => (file.id === fileId ? { ...fileDump, ewpLoading: true, ewpError: false } : file)) });
+		fileDump.formData.append("omobility_id", ewpData.mobilityID);
+		fileDump.formData.append("sending_hei_id", ewpData.sendingHeiCode);
+		fileDump.formData.append("receiving_hei_id", ewpData.receivingHeiCode);
 		const report = await this.getReportsFromEwp({ payload: fileDump.formData });
 		if (report) {
 			const newFile = { ...fileDump, ewpLoading: false, ewpSuccess: true, ewpReport: report };
@@ -128,7 +126,7 @@ class App extends Component {
 			return report;
 		}
 		if (fileDump) {
-			const newFile = { ...fileDump, ewpLoading: false, ewpError: true, ewpReport: restTmpl };
+			const newFile = { ...fileDump, ewpLoading: false, ewpError: true };
 			this.setState({ files: files.map((file) => (file.id === fileId ? newFile : file)) });
 		}
 	};
@@ -144,16 +142,16 @@ class App extends Component {
 			if (resp && resp.data) {
 				return Object.fromEntries(Object.entries(resp.data).filter(([_, v]) => v != null));
 			}
-		} catch (error) { }
+		} catch (error) {}
 	};
 
 	getReportsFromEwp = async ({ payload }) => {
 		try {
-			const resp = await axios.post(`https://module.esva.dev.uporto.pt/validador/ola`, payload);
+			const resp = await axios.post(`${Configs.ewpUrl}/validador/ola`, payload);
 			if (resp && resp.data) {
 				return Object.fromEntries(Object.entries(resp.data).filter(([_, v]) => v != null));
 			}
-		} catch (error) { }
+		} catch (error) {}
 	};
 
 	render() {
