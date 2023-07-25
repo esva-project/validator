@@ -10,7 +10,7 @@ const validateFileValidatorResponse = async (fileMeta: string) => {
   try {
     simpleReport = new SimpleReport(JSON.stringify(JSON.parse(fileMeta).simpleReport))
   } catch (error) {
-    return new ResponseDTO(0, 'Software Package response is invalid. ' + error)
+    return new ResponseDTO(400, 'Software Package response is invalid. ' + error)
   }
 
   // Validate Nr of Valid Signatures
@@ -18,15 +18,15 @@ const validateFileValidatorResponse = async (fileMeta: string) => {
     const msg = `Found ${simpleReport.getNrValidSignatures()} valid signatures`
     logger.ola.info(msg)
   } else {
-    return new ResponseDTO(0, 'No valid signatures found!')
+    return new ResponseDTO(500, 'No valid signatures found!')
   }
 
   // Fetch signatures and descriptions from the document
   const signatures = await fetchSignaturesInformation(simpleReport)
   if (!signatures.status) {
-    return new ResponseDTO(0, `Error while fetching signature information`)
+    return new ResponseDTO(500, `Error while fetching signature information`)
   }
-  const response = new ResponseDTO(1, 'Document is valid')
+  const response = new ResponseDTO(200, 'Document is valid')
   response.setPDFSignatures(signatures.values)
 
   // Fetch certificates from document

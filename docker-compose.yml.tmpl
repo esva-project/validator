@@ -62,7 +62,22 @@ services:
         aliases:
          - ${HOST}
          - 'validador-core'
-    
+  
+  db:
+    image: postgres:14.1-alpine
+    restart: always
+    environment:
+      - POSTGRES_DB=DB_1
+      - POSTGRES_HOST=${DB_HOST}
+      - POSTGRES_USER=esva_db
+      - POSTGRES_PASSWORD=${DB_PASS}
+    ports:
+      - '5432:5432'
+    volumes:
+      - db:/var/lib/postgresql/data
+    networks:
+      - my-proxy-net
+
 networks:
   proxynet:
     name: custom_network

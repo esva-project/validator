@@ -3,7 +3,7 @@ import https from 'https'
 import axios, { AxiosResponse } from 'axios'
 
 const instance = axios.create({
-  baseURL: `http://validador-core`,
+  baseURL: `https://${process.env.ESVA_BACKEND}`,
   headers: { 'Content-Type': 'application/json; charset=UTF-8' },
   httpsAgent: new https.Agent({
     rejectUnauthorized: false

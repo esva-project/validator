@@ -8,7 +8,9 @@ import { EWPReport } from './ewpReport'
 
 interface ResponseDTOInterface {
   message: string
+  status: number
   dataCollection: DataCollectionDTO
+  ewpURLs: string[]
   ewpReport: EWPReport
 }
 
@@ -26,7 +28,9 @@ class ResponseDTO {
     this.response = {
       dataCollection: new DataCollectionDTO(),
       ewpReport: new EWPReport(),
-      message
+      ewpURLs: [],
+      message,
+      status
     }
   }
 
@@ -80,6 +84,11 @@ class ResponseDTO {
     valueAttribute: string,
     location: string
   ) => this.getEWPReport().addStudentValidation(nameAttribute, valueAttribute, location)
+
+  public addURLs = (url: string) => this.response.ewpURLs.push(url)
+  public getURLs = () => this.response.ewpURLs
+
+  public getStatus = () => this.response.status
 
   public foundSendingHEIValdiation = (nameAttribute: string, location: string) =>
     this.getEWPReport().foundSendingHEIValidation(nameAttribute, location)

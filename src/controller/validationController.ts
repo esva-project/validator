@@ -3,8 +3,10 @@ import fs from 'fs'
 
 import { Request, Response } from 'express'
 
+import { LogDTOParameters } from '../dto/logsDTO'
 import { MobilityLaParameters } from '../dto/mobilityParameters'
 import softwarePackage from '../outrequests/softwarePackageCommunication'
+import logs from '../services/logs'
 import olaValidation from '../services/olaValidation'
 import { logger } from '../utils/logs'
 
@@ -37,6 +39,17 @@ const validateOLA = async (req: Request, res: Response) => {
     res.send(response)
     logger.ola.info('Validations: ' + JSON.stringify(response))
     logger.ola.info('----------------------------------------------------------------------------')
+
+    logs.insertLogs(
+      new LogDTOParameters(
+        req.ip,
+        req.path,
+        JSON.stringify(mobParams),
+        response.getURLs(),
+        response.getStatus(),
+        JSON.stringify(response)
+      )
+    )
   })
 }
 
