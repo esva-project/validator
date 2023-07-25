@@ -2,7 +2,7 @@ import { LogDTOParameters } from '../dto/logsDTO'
 import logsPersistence from '../persistence/logs'
 
 const insertLogs = async (logsDTO: LogDTOParameters) => {
-  logsPersistence
+  await logsPersistence
     .insertLogs(logsDTO)
     .then((logs) => {
       return logs
@@ -13,7 +13,7 @@ const insertLogs = async (logsDTO: LogDTOParameters) => {
 }
 
 const getLogs = async () => {
-  logsPersistence
+  await logsPersistence
     .getLogs()
     .then((logs) => {
       return logs
