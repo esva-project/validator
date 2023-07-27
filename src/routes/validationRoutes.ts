@@ -17,7 +17,7 @@ router.use(
   })
 )
 
-router.get('/stats', statsController.stats)
 router.post('/ola', validationController.validateOLA)
+router.get('/stats', statsController.stats)
 
 export default { router }
