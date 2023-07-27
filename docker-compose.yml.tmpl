@@ -67,9 +67,9 @@ services:
     image: postgres:14.1-alpine
     restart: always
     environment:
-      - POSTGRES_DB=DB_1
+      - POSTGRES_DB=esva_db
       - POSTGRES_HOST=db
-      - POSTGRES_USER=esva_db
+      - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=${DB_PASS}
     ports:
       - '5432:5432'
