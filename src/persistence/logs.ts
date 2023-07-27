@@ -5,6 +5,8 @@ const pg = pgPromise({})
 
 const db = pg(`postgres://postgres:"${process.env.DB_PASS}"@db:5432/esva_db`)
 
+console.log(`postgres://postgres:"${process.env.DB_PASS}"@db:5432/esva_db`)
+
 const getLogs = async () => {
   return await db.query('SELECT * FROM logs')
 }
