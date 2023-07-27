@@ -68,7 +68,7 @@ services:
     restart: always
     environment:
       - POSTGRES_DB=DB_1
-      - POSTGRES_HOST=${DB_HOST}
+      - POSTGRES_HOST=db
       - POSTGRES_USER=esva_db
       - POSTGRES_PASSWORD=${DB_PASS}
     ports:
