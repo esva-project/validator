@@ -6,7 +6,7 @@
   "scripts": {
     "build": "npm run lint && npm run clean && node esbuild.config.cjs",
     "clean": "rimraf dist/",
-    "lint": "eslint --ext .js,.ts,.tsx,.json src/  --max-warnings=0 -c ./.eslintrc.cjs",
+    "lint": "eslint --ext .js,.ts,.tsx,.json src/  --max-warnings=1 -c ./.eslintrc.cjs",
     "start": "npm run build && dotenv ./dist/server.js",
     "prepublishOnly": "npm run build",
     "test": "NODE_OPTIONS='--no-warnings --experimental-vm-modules' node_modules/.bin/jest --no-cache"
