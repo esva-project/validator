@@ -74,7 +74,7 @@ services:
     ports:
       - '5432:5432'
     volumes:
-      - /data/esva/postgres:/var/lib/postgresql/data
+      - /data/esva/postgres/data:/var/lib/postgresql/data
     networks:
       - my-proxy-net
 
