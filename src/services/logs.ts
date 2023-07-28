@@ -16,6 +16,7 @@ const getLogs = async () => {
   await logsPersistence
     .getLogs()
     .then((logs) => {
+      console.log(logs)
       return logs
     })
     .catch((error) => {
