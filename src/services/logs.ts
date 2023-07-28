@@ -13,7 +13,7 @@ const insertLogs = async (logsDTO: LogDTOParameters) => {
 }
 
 const getLogs = async () => {
-  return JSON.parse(await logsPersistence.getLogs())
+  return await logsPersistence.getLogs()
 }
 
 export default { getLogs, insertLogs }
