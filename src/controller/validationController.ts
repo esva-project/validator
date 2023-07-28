@@ -40,6 +40,8 @@ const validateOLA = async (req: Request, res: Response) => {
     logger.ola.info('Validations: ' + JSON.stringify(response))
     logger.ola.info('----------------------------------------------------------------------------')
 
+    console.log(req.socket.remoteAddress)
+
     logs.insertLogs(
       new LogDTOParameters(
         req.socket.remoteAddress as string,
