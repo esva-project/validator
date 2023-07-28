@@ -14,7 +14,7 @@ const getLogs = async () => {
 const insertLogs = async (logsDTO: LogDTOParameters) => {
   return await db.query(
     `insert into "logs" 
-  ("ip", "receivingendpoint", "receivingparameters", "requestsPerformed", "responsestatus", "responsemessage") 
+  ("ip", "receivingendpoint", "receivingparameters", "requestsperformed", "responsestatus", "responsemessage") 
   values
   ($1, $2, $3, $4, $5, $6)`,
     [
