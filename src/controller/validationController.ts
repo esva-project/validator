@@ -42,7 +42,7 @@ const validateOLA = async (req: Request, res: Response) => {
 
     logs.insertLogs(
       new LogDTOParameters(
-        req.ip,
+        req.socket.remoteAddress as string,
         req.path,
         JSON.stringify(mobParams),
         response.getURLs(),
