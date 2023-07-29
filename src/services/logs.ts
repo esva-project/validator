@@ -18,6 +18,8 @@ const getLogs = async () => {
 
   // Parse the "responsemessage" property in each log entry to JSON
   for (const log of parsedLogs) {
+    const timeParts = log.time.split('.')
+    log.time = timeParts[0]
     log.responsemessage = JSON.parse(log.responsemessage)
     log.receivingparameters = JSON.parse(log.receivingparameters)
   }

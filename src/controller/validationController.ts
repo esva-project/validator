@@ -46,7 +46,7 @@ const validateOLA = async (req: Request, res: Response) => {
       new LogDTOParameters(
         req.socket.remoteAddress as string,
         req.path,
-        JSON.stringify(mobParams),
+        JSON.stringify(mobParams.toJSON()),
         response.getURLs(),
         response.getStatus(),
         JSON.stringify(response)

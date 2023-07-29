@@ -18,6 +18,14 @@ class MobilityLaParameters {
   public getOMobilityID = () => this.response.omobility_id
   public getSendingSchac = () => this.response.sending_hei_id
   public getReceivingSchac = () => this.response.receiving_hei_id
+
+  public toJSON = () => {
+    return {
+      omobility_id: this.getOMobilityID(),
+      receiving_hei_id: this.getReceivingSchac(),
+      sending_hei_id: this.getSendingSchac()
+    }
+  }
 }
 
 export { MobilityLaParameters }
