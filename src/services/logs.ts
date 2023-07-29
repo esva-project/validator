@@ -13,7 +13,16 @@ const insertLogs = async (logsDTO: LogDTOParameters) => {
 }
 
 const getLogs = async () => {
-  return JSON.parse(await logsPersistence.getLogs())
+  const logs = await logsPersistence.getLogs()
+  const parsedLogs = JSON.parse(logs)
+
+  // Parse the "responsemessage" property in each log entry to JSON
+  for (const log of parsedLogs) {
+    log.responsemessage = JSON.parse(log.responsemessage)
+    log.receivingparameters = JSON.parse(log.receivingparameters)
+  }
+
+  return parsedLogs
 }
 
 export default { getLogs, insertLogs }
