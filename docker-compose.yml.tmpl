@@ -70,7 +70,7 @@ services:
       - POSTGRES_DB=esva_db
       - POSTGRES_HOST=db
       - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD="N0nJLc1z9R2"
+      - POSTGRES_PASSWORD=${DB_PASS}
     ports:
       - '5432:5432'
     volumes:
