@@ -42,7 +42,7 @@ const validateOLA = async (req: Request, res: Response) => {
     logger.ola.info('Validations: ' + JSON.stringify(response))
     logger.ola.info('----------------------------------------------------------------------------')
 
-    response.clearDataCollection()
+    response.clearDataForLogs()
 
     logs.insertLogs(
       new LogDTOParameters(
@@ -52,17 +52,6 @@ const validateOLA = async (req: Request, res: Response) => {
         response.getURLs(),
         response.getStatus(),
         JSON.stringify(response)
-      )
-    )
-
-    logs.insertLogs(
-      new LogDTOParameters(
-        req.socket.remoteAddress as string,
-        req.path,
-        JSON.stringify(mobParams.toJSON()),
-        response.getURLs(),
-        response.getStatus(),
-        JSON.stringify(response.getMessage())
       )
     )
   })

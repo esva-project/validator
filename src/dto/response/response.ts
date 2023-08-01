@@ -38,7 +38,9 @@ class ResponseDTO {
   private getDataCollection = () => this.response.dataCollection
   private getEWPReport = () => this.response.ewpReport
 
-  public clearDataCollection = () => (this.response.dataCollection = new DataCollectionDTO())
+  public clearDataForLogs = () => {
+    this.response.ewpURLs = []
+  }
 
   public setPDFSignatures = (signatures: any) => {
     for (const signature of signatures)

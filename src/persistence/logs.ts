@@ -1,3 +1,4 @@
+import * as cron from 'node-cron'
 import pgPromise from 'pg-promise'
 
 import { LogDTOParameters } from '../dto/logsDTO'
@@ -45,5 +46,26 @@ const insertLogs = async (logsDTO: LogDTOParameters) => {
     ]
   )
 }
+
+async function deleteOldLogs(): Promise<void> {
+  try {
+    const query = `
+      DELETE FROM logs
+      WHERE log_date < NOW() - INTERVAL '1 minute';
+    `
+    const result = await db.query(query)
+    console.log(`Deleted ${result.rowCount} old logs.`)
+  } catch (error) {
+    console.error('Error deleting old logs:', error)
+  }
+}
+
+// Schedule the cron job to run every day at midnight (0 0 * * *)
+cron.schedule('*/2 * * * *', async () => {
+  console.log('Running cron job to delete old logs...')
+  await deleteOldLogs()
+})
+
+console.log('Cron job scheduled.')
 
 export default { checkTableExists, getLogs, insertLogs }
