@@ -50,10 +50,11 @@ const insertLogs = async (logsDTO: LogDTOParameters) => {
 async function deleteOldLogs(): Promise<void> {
   try {
     const currentTimeMinusOneMinute = new Date(Date.now() - 60_000).toISOString()
-    console.log(currentTimeMinusOneMinute)
+    const timeParts = currentTimeMinusOneMinute.split('.')
+    console.log(timeParts[0])
     const query = `
       DELETE FROM logs
-      WHERE time < '${currentTimeMinusOneMinute}';
+      WHERE time < '${timeParts[0]}';
     `
     const result = await db.query(query)
     console.log(`Deleted ${result.rowCount} old logs.`)
