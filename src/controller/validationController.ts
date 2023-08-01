@@ -12,6 +12,8 @@ import { logger } from '../utils/logs'
 
 // Use Case to Validate OLAs
 const validateOLA = async (req: Request, res: Response) => {
+  console.log(req.path)
+
   // Read file that is sent
   const f = req.files
   const file = JSON.parse(JSON.stringify(f))
@@ -40,7 +42,7 @@ const validateOLA = async (req: Request, res: Response) => {
     logger.ola.info('Validations: ' + JSON.stringify(response))
     logger.ola.info('----------------------------------------------------------------------------')
 
-    console.log(req.socket.remoteAddress)
+    response.clearDataCollection()
 
     logs.insertLogs(
       new LogDTOParameters(
@@ -50,6 +52,17 @@ const validateOLA = async (req: Request, res: Response) => {
         response.getURLs(),
         response.getStatus(),
         JSON.stringify(response)
+      )
+    )
+
+    logs.insertLogs(
+      new LogDTOParameters(
+        req.socket.remoteAddress as string,
+        req.path,
+        JSON.stringify(mobParams.toJSON()),
+        response.getURLs(),
+        response.getStatus(),
+        JSON.stringify(response.getMessage())
       )
     )
   })

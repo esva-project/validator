@@ -31,7 +31,6 @@ const fetchFileMetadata = async (contentsToSend: string, filename: string) => {
     return response.data
   } catch (error) {
     if (error instanceof Error) {
-      console.log(error.message)
       return error.message
     }
     return 'An unexpected error occurred'
