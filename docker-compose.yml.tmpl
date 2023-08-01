@@ -75,7 +75,6 @@ services:
       - '5432:5432'
     volumes:
       - /data/esva/postgres:/var/lib/postgresql/data
-      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
     networks:
       - my-proxy-net
 
