@@ -51,7 +51,7 @@ async function deleteOldLogs(): Promise<void> {
   try {
     const query = `
       DELETE FROM logs
-      WHERE log_date < NOW() - INTERVAL '1 minute';
+      WHERE time < NOW() - INTERVAL '1 minute';
     `
     const result = await db.query(query)
     console.log(`Deleted ${result.rowCount} old logs.`)
