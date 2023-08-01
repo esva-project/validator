@@ -51,10 +51,12 @@ async function deleteOldLogs(): Promise<void> {
   try {
     const currentTimeMinusOneMinute = new Date(Date.now() - 60_000).toISOString()
     const timeParts = currentTimeMinusOneMinute.split('.')
-    console.log(timeParts[0])
+    const timeQuery = timeParts[0].replace('T', ' ')
+
+    console.log(timeQuery)
     const query = `
       DELETE FROM logs
-      WHERE time < '${timeParts[0]}';
+      WHERE time < '${timeQuery}';
     `
     const result = await db.query(query)
     console.log(`Deleted ${result.rowCount} old logs.`)
