@@ -7,19 +7,23 @@ const db = pg(`postgres://postgres:${process.env.DB_PASS}@db:5432/esva_db`)
 
 console.log(`postgres://postgres:${process.env.DB_PASS}@db:5432/esva_db`)
 
-const checkTableExists = async (tableName: string) => {
+const checkTableExists = async () => {
   try {
     const query = `
-      SELECT EXISTS (
-        SELECT 1
-        FROM information_schema.tables
-        WHERE table_name = $1
+      CREATE TABLE IF NOT EXISTS logs (
+        time VARCHAR DEFAULT NOW(),
+        ip VARCHAR,
+        receivingEndpoint VARCHAR,
+        receivingParameters VARCHAR,
+        requestsPerformed VARCHAR[],
+        responseStatus SMALLINT,
+        responseMessage VARCHAR
       );
     `
-    const result = await db.query(query, [tableName])
-    console.log(result)
+    await db.query(query)
+    console.log('Table logs created (if it did not exist).')
   } catch (error) {
-    console.error('Error checking if table exists:', error)
+    console.error('Error creating table:', error)
   }
 }
 
