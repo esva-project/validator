@@ -25,6 +25,6 @@ You should clone the repository in the `/data/esva` directory and check the ".en
 
 ### 4. Run the installation script
 Finally, in order to set up the containers and run the program, run one of the scripts in the "deployment" folder. 
-There is a script that compiles the code in the main, staging, or production branch. You must be working on the respective branch to run the script (e.g.`git checkout main` before running the buildContainersMain.sh script).
+There is a script that compiles the code in the development or production branch. You must be working on the respective branch to run the script (e.g.`git checkout main` before running the buildContainersMain.sh script).
 After you run the script, the containers will be up and you will be able to use ESVA module.
 If you cannot run the script, give it executable permission (e.g. `chmod +x <script>`)
