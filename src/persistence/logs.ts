@@ -49,7 +49,9 @@ const insertLogs = async (logsDTO: LogDTOParameters) => {
 
 async function deleteOldLogs(): Promise<void> {
   try {
-    const currentTimeMinusOneMinute = new Date(Date.now() - 60_000).toISOString()
+    const currentTimeMinusOneMinute = new Date(
+      Date.now() - 6 * 30 * 24 * 60 * 60 * 1000
+    ).toISOString()
     const timeParts = currentTimeMinusOneMinute.split('.')
     const timeQuery = timeParts[0].replace('T', ' ')
 
@@ -58,15 +60,15 @@ async function deleteOldLogs(): Promise<void> {
       DELETE FROM logs
       WHERE time < '${timeQuery}';
     `
-    const result = await db.query(query)
-    console.log(`Deleted ${result.rowCount} old logs.`)
+    await db.query(query)
+    console.log(`Deleted old logs.`)
   } catch (error) {
     console.error('Error deleting old logs:', error)
   }
 }
 
 // Schedule the cron job to run every day at midnight (0 0 * * *)
-cron.schedule('*/2 * * * *', async () => {
+cron.schedule('0 0 * * *', async () => {
   console.log('Running cron job to delete old logs...')
   await deleteOldLogs()
 })
