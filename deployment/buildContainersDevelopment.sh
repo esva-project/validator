@@ -1,6 +1,6 @@
 #!/bin/sh
 CURRENT=$(git rev-parse --abbrev-ref HEAD)
-SUPPOSED="main"
+SUPPOSED="development"
 if [ "$CURRENT" = "$SUPPOSED" ]; then
     export $(grep -v '^#' ../.env | xargs -d '\n') && sed -e "s,\$ESVA_BACKEND,${ESVA_BACKEND},g" ../validador/ui/configs/Configs.json.tmpl > ../validador/ui/configs/Configs.json
     git pull
