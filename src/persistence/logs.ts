@@ -7,7 +7,7 @@ const pg = pgPromise({})
 const db = pg(`postgres://postgres:"${process.env.DB_PASS}"@db:5432/esva_db`)
 
 const checkTableExists = async () => {
-  parseInt(process.env.TIME_STORAGE_LOGS as string)
+  Number.parseInt(process.env.TIME_STORAGE_LOGS as string)
   console.log(db)
   try {
     const query = `
@@ -54,7 +54,7 @@ const insertLogs = async (logsDTO: LogDTOParameters) => {
 async function deleteOldLogs(): Promise<void> {
   try {
     const currentTimeMinusOneMinute = new Date(
-      Date.now() - parseInt(process.env.TIME_STORAGE_LOGS as string) * 30 * 24 * 60 * 60 * 1000
+      Date.now() - Number.parseInt(process.env.TIME_STORAGE_LOGS as string) * 30 * 24 * 60 * 60 * 1000
     ).toISOString()
     const timeParts = currentTimeMinusOneMinute.split('.')
     const timeQuery = timeParts[0].replace('T', ' ')
