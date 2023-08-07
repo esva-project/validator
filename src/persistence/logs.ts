@@ -7,8 +7,7 @@ const pg = pgPromise({})
 const db = pg(`postgres://postgres:"${process.env.DB_PASS}"@db:5432/esva_db`)
 
 const checkTableExists = async () => {
-  Number.parseInt(process.env.TIME_STORAGE_LOGS as string)
-  console.log(db)
+  console.log(Number.parseInt(process.env.TIME_STORAGE_LOGS as string))
   try {
     const query = `
       CREATE TABLE IF NOT EXISTS logs (
