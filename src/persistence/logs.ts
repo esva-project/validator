@@ -33,6 +33,7 @@ const getLogs = async () => {
 }
 
 const insertLogs = async (logsDTO: LogDTOParameters) => {
+  console.log(db);
   return await db.query(
     `insert into "logs" 
   ("ip", "receivingendpoint", "receivingparameters", "requestsperformed", "responsestatus", "responsemessage") 
