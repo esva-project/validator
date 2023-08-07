@@ -4,7 +4,7 @@
 This document describes the deployment of the ESVA Module and its endpoints. 
 
 ## Deployment
-Each partner is responsible for its own instalation of this module in their own machines. To install the module, 5 steps are required for the reader to make:
+Each partner is responsible for its own instalation of this module in their own machines. To install the module, 4 steps are required for the reader to make:
 
 ### 1. Create the Home Folder
 In your machine, create a home directory for the module in your `/data` folder called "esva".
@@ -17,11 +17,11 @@ You will need to have 2 sets of certificates:
  
 You will need to create two directories inside the `/data/esva`:
 
- - one is called "ewp_certs" and it will contain the EWP node certificate set. These files ought to follow the name schema of your institution schac_code followed by the file extension (e.g. ewp.up.pt.crt, ewp.up.pt.key, ewp.up.pt.pub);
- - one is called "ssl_certs" and it will contain the NGINX certificate set. The certificate file must be named as "fullchain.pem" and the key must be named "privkey.pem"
+ - "ewp_certs" will contain the EWP node certificate set. These files ought to follow the name schema of your institution schac_code followed by the file extension (e.g. example.pt.crt, example.pt.key, example.pt.pub);
+ - "ssl_certs" will contain the NGINX certificate set. The certificate file must be named as "fullchain.pem" and the key must be named "privkey.pem"
 
 ### 3. Clone the Repository and fill in the Environment Variables
-You should clone the repository in the `/data/esva` directory and check the ".env.example" file inside the repository and follow its guidelines, adjusting the variables to your specific needs. For that, create a .env file in the repository folder you cloned and fill it in with the variables adjusted to you.
+Clone the repository in the `/data/esva` directory and check the ".env.example" file inside the repository and follow its guidelines, adjusting the variables to your specific needs. For that, create a .env file in the repository folder you cloned and fill it in with the variables adjusted to you.
 
 ### 4. Run the installation script
 Finally, in order to set up the containers and run the program, run one of the scripts in the "deployment" folder. 

@@ -28,12 +28,10 @@ const checkTableExists = async () => {
 }
 
 const getLogs = async () => {
-  console.log(db)
   return JSON.stringify(await db.query('SELECT * FROM logs'))
 }
 
 const insertLogs = async (logsDTO: LogDTOParameters) => {
-  console.log(db)
   return await db.query(
     `insert into "logs" 
   ("ip", "receivingendpoint", "receivingparameters", "requestsperformed", "responsestatus", "responsemessage") 
