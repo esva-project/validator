@@ -4,10 +4,10 @@ import pgPromise from 'pg-promise'
 import { LogDTOParameters } from '../dto/logsDTO'
 const pg = pgPromise({})
 
-const db = pg(`postgres://postgres:${process.env.DB_PASS}@db:5432/esva_db`)
+const db = pg(`postgres://postgres:"${process.env.DB_PASS}"@db:5432/esva_db`)
 
 console.log(db)
-console.log(`postgres://postgres:${process.env.DB_PASS}@db:5432/esva_db`)
+console.log(`postgres://postgres:"${process.env.DB_PASS}"@db:5432/esva_db`)
 
 const checkTableExists = async () => {
   console.log(Number.parseInt(process.env.TIME_STORAGE_LOGS as string))
