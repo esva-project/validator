@@ -7,6 +7,7 @@ const pg = pgPromise({})
 const db = pg(`postgres://postgres:${process.env.DB_PASS}@db:5432/esva_db`)
 
 const checkTableExists = async () => {
+  console.log(db)
   try {
     const query = `
       CREATE TABLE IF NOT EXISTS logs (
@@ -27,6 +28,7 @@ const checkTableExists = async () => {
 }
 
 const getLogs = async () => {
+  console.log(db)
   return JSON.stringify(await db.query('SELECT * FROM logs'))
 }
 
