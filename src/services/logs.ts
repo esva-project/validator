@@ -14,6 +14,8 @@ const insertLogs = async (logsDTO: LogDTOParameters) => {
 }
 
 const getLogs = async () => {
+  await logsPersistence.checkTableExists()
+
   const logs = await logsPersistence.getLogs()
   const parsedLogs = JSON.parse(logs)
 
