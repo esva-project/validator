@@ -55,7 +55,7 @@ async function deleteOldLogs(): Promise<void> {
   try {
     const currentTimeMinusOneMinute = new Date(
       Date.now() -
-      Number.parseInt(process.env.TIME_STORAGE_LOGS as string) * 30 * 24 * 60 * 60 * 1000
+        Number.parseInt(process.env.TIME_STORAGE_LOGS as string) * 30 * 24 * 60 * 60 * 1000
     ).toISOString()
     const timeParts = currentTimeMinusOneMinute.split('.')
     const timeQuery = timeParts[0].replace('T', ' ')
