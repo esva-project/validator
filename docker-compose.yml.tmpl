@@ -66,6 +66,8 @@ services:
   db:
     image: postgres:14.1-alpine
     restart: always
+    container_name: db
+    hostname: db
     environment:
       - POSTGRES_DB=esva_db
       - POSTGRES_HOST=db
