@@ -32,7 +32,7 @@ const processMobility = async (contents: MobilityLaParameters, responseSoFar: Re
     return mobility_response
   }
 
-  responseSoFar.addURLs(mobility_response.url)
+  responseSoFar.addURLs(mobility_response.url[0])
 
   logger.ola.info('Mobility Response: ' + JSON.stringify(mobility_response))
 
@@ -56,7 +56,7 @@ const processInstitutions = async (
     return sending_institutions_response
   }
 
-  mobilityValidation.addURLs(sending_institutions_response.url)
+  mobilityValidation.addURLs(sending_institutions_response.url[0])
 
   logger.ola.info(
     contents.getSendingSchac() +
@@ -78,7 +78,7 @@ const processInstitutions = async (
     return receiving_institutions_response
   }
 
-  responseSoFar.addURLs(receiving_institutions_response.url)
+  responseSoFar.addURLs(receiving_institutions_response.url[0])
 
   logger.ola.info(
     contents.getReceivingSchac() +
@@ -111,7 +111,7 @@ const processOUnits = async (
       return sending_ounits_response
     }
 
-    institutionsAndMobilityValidation.addURLs(sending_ounits_response.url)
+    institutionsAndMobilityValidation.addURLs(sending_ounits_response.url[0])
 
     logger.ola.info(
       contents.getSendingSchac() + ' OUnits Response: ' + JSON.stringify(sending_ounits_response)
@@ -137,7 +137,7 @@ const processOUnits = async (
       return receiving_ounits_response
     }
 
-    responseSoFar.addURLs(receiving_ounits_response.url)
+    responseSoFar.addURLs(receiving_ounits_response.url[0])
 
     logger.ola.info(
       contents.getReceivingSchac() +

@@ -2,6 +2,7 @@ import * as cron from 'node-cron'
 import pgPromise from 'pg-promise'
 
 import { LogDTOParameters } from '../dto/logsDTO'
+import { LogGetDTOParameters } from '../dto/logsGetDTO'
 const pg = pgPromise({})
 
 const db = pg(`postgres://postgres:"${process.env.DB_PASS}"@db:5432/esva_db`)
@@ -22,7 +23,6 @@ const checkTableExists = async () => {
         responseMessage VARCHAR
       );
     `
-    console.log(query)
     await db.query(query)
     console.log('Table logs created (if it did not exist).')
   } catch (error) {
@@ -30,8 +30,52 @@ const checkTableExists = async () => {
   }
 }
 
-const getLogs = async () => {
-  return JSON.stringify(await db.query('SELECT * FROM logs'))
+const getLogs = async (logsDTO: LogGetDTOParameters) => {
+  let query = 'SELECT * FROM logs'
+
+  const conditions: string[] = []
+
+  if (logsDTO.getSince()) {
+    conditions.push(`time >= '${logsDTO.getSince()}'`)
+  }
+  if (logsDTO.getUntil()) {
+    conditions.push(`time <= '${logsDTO.getUntil()}'`)
+  }
+  if (logsDTO.getIP()) {
+    conditions.push(`ip LIKE '%${logsDTO.getIP()}%'`)
+  }
+  if (logsDTO.getBrowser()) {
+    conditions.push(`browser = '${logsDTO.getBrowser()}'`)
+  }
+  if (logsDTO.getOS()) {
+    conditions.push(`operating_system = '${logsDTO.getOS()}'`)
+  }
+  if (logsDTO.getReceivingEndpoint()) {
+    conditions.push(`receiving_endpoint = '${logsDTO.getReceivingEndpoint()}'`)
+  }
+  if (logsDTO.getReceivingParametersContains()) {
+    conditions.push(`receiving_parameters LIKE '%${logsDTO.getReceivingParametersContains()}%'`)
+  }
+  if (logsDTO.getRequestsPerformedContains().length > 0) {
+    const requests = logsDTO.getRequestsPerformedContains().join("','")
+    conditions.push(`requests_performed IN ('${requests}')`)
+  }
+  if (logsDTO.getResponseStatus()) {
+    conditions.push(`response_status = 200`)
+  } else {
+    conditions.push(`response_status <> 200`)
+  }
+  if (logsDTO.getResponseMessageContains()) {
+    conditions.push(`response_message LIKE '%${logsDTO.getResponseMessageContains()}%'`)
+  }
+
+  if (conditions.length > 0) {
+    query += ` WHERE ${conditions.join(' AND ')}`
+  }
+
+  query += ` ORDER BY time DESC LIMIT 10 OFFSET '${logsDTO.getSelectedPage() * 10}'`
+
+  return JSON.stringify(await db.query(query))
 }
 
 const insertLogs = async (logsDTO: LogDTOParameters) => {
