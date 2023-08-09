@@ -71,6 +71,8 @@ const getLogs = async (logsDTO: LogGetDTOParameters) => {
     conditions.push(`response_message LIKE '%${logsDTO.getResponseMessageContains()}%'`)
   }
 
+  console.log(conditions)
+
   if (conditions.length > 0) {
     query += ` WHERE ${conditions.join(' AND ')}`
   }
