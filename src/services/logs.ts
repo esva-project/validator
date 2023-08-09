@@ -1,4 +1,5 @@
 import { LogDTOParameters } from '../dto/logsDTO'
+import { LogGetDTOParameters } from '../dto/logsGetDTO'
 import logsPersistence from '../persistence/logs'
 
 const insertLogs = async (logsDTO: LogDTOParameters) => {
@@ -13,10 +14,10 @@ const insertLogs = async (logsDTO: LogDTOParameters) => {
     })
 }
 
-const getLogs = async () => {
+const getLogs = async (logParameters: LogGetDTOParameters) => {
   await logsPersistence.checkTableExists()
 
-  const logs = await logsPersistence.getLogs()
+  const logs = await logsPersistence.getLogs(logParameters)
   const parsedLogs = JSON.parse(logs)
 
   // Parse the "responsemessage" property in each log entry to JSON
