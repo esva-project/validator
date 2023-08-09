@@ -27,7 +27,9 @@ const getLogs = async () => {
     log.receivingparameters = JSON.parse(log.receivingparameters)
   }
 
-  return parsedLogs
+  const prettifiedLogs = JSON.stringify(parsedLogs, undefined, 2)
+
+  return prettifiedLogs
 }
 
 export default { getLogs, insertLogs }
