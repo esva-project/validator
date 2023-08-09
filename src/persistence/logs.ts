@@ -39,7 +39,7 @@ const insertLogs = async (logsDTO: LogDTOParameters) => {
     `insert into "logs" 
   ("ip", "browser", "operating_system", "receivingendpoint", "receivingparameters", "requestsperformed", "responsestatus", "responsemessage") 
   values
-  ($1, $2, $3, $4, $5, $6)`,
+  ($1, $2, $3, $4, $5, $6, $7, $8)`,
     [
       logsDTO.getIP(),
       logsDTO.getBrowser(),
