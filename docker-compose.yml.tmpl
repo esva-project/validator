@@ -29,6 +29,7 @@ services:
       - '4000:4000'
     volumes:
       - /data/esva/ewp_certs:/app/certificates:rw
+      - /data/esva/ssl_certs:/app/certificates:rw
       - /data/esva/validator/.env:/app/.env:ro
     restart: always
 
