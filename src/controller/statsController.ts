@@ -1,11 +1,11 @@
 import { Request, Response } from 'express'
 
-import logs from '../services/logs'
+import logsService from '../services/logs'
 
 // Use Case to Validate OLAs
-const stats = async (req: Request, res: Response) => {
+const logs = async (req: Request, res: Response) => {
   console.log(req.path)
-  res.send(await logs.getLogs())
+  res.send(await logsService.getLogs())
 }
 
-export default { stats }
+export default { logs }

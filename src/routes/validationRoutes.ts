@@ -18,6 +18,6 @@ router.use(
 )
 
 router.post('/ola', validationController.validateOLA)
-router.get('/stats', statsController.stats)
+router.get('/logs', statsController.logs)
 
 export default { router }
