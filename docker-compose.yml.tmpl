@@ -25,6 +25,8 @@ services:
     container_name: esvavalidator
     networks:
       - my-proxy-net
+    ports:
+      - '4000:4000'
     volumes:
       - /data/esva/ewp_certs:/app/certificates:rw
       - /data/esva/validator/.env:/app/.env:ro
