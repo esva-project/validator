@@ -7,7 +7,6 @@ import logsService from '../services/logs'
 const logs = async (req: Request, res: Response) => {
   console.log(req.path)
   const logParameters = await processLogParameters(req.query)
-  console.log(logParameters)
 
   const logs = await logsService.getLogs(logParameters)
 
@@ -16,6 +15,7 @@ const logs = async (req: Request, res: Response) => {
 }
 
 const processLogParameters = async (query: any) => {
+  console.log(query)
   return new LogGetDTOParameters(
     query.page,
     query.since,

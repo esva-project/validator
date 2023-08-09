@@ -33,6 +33,8 @@ const checkTableExists = async () => {
 const getLogs = async (logsDTO: LogGetDTOParameters) => {
   let query = 'SELECT * FROM logs'
 
+  console.log(logsDTO)
+
   const conditions: string[] = []
 
   if (logsDTO.getSince()) {
