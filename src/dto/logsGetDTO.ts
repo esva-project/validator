@@ -8,7 +8,7 @@ interface LogGetDTOInterface {
   receivingendpoint: string
   receivingparameterscontains: string
   requestsperformedcontains: string[]
-  responsestatus: boolean
+  responsestatus: string
   responsemessagecontains: string
 }
 
@@ -25,7 +25,7 @@ class LogGetDTOParameters {
     receivingendpoint: string,
     receivingparameterscontains: string,
     requestsperformedcontains: string[],
-    responsestatus: boolean,
+    responsestatus: string,
     responsemessagecontains: string
   ) {
     this.logDTO = {
