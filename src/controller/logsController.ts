@@ -9,7 +9,10 @@ const logs = async (req: Request, res: Response) => {
   console.log(req.fields)
   console.log(req.query)
 
-  res.send(await logsService.getLogs())
+  const logs = await logsService.getLogs()
+  console.log(logs)
+
+  res.send(logs)
 }
 
 export default { logs }
