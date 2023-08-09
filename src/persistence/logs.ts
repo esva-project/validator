@@ -13,6 +13,8 @@ const checkTableExists = async () => {
       CREATE TABLE IF NOT EXISTS logs (
         time VARCHAR DEFAULT NOW(),
         ip VARCHAR,
+        browser VARCHAR,
+        operating_system VARCHAR,
         receivingEndpoint VARCHAR,
         receivingParameters VARCHAR,
         requestsPerformed VARCHAR[],
@@ -34,11 +36,13 @@ const getLogs = async () => {
 const insertLogs = async (logsDTO: LogDTOParameters) => {
   return await db.query(
     `insert into "logs" 
-  ("ip", "receivingendpoint", "receivingparameters", "requestsperformed", "responsestatus", "responsemessage") 
+  ("ip", "browser", "operating_system", "receivingendpoint", "receivingparameters", "requestsperformed", "responsestatus", "responsemessage") 
   values
   ($1, $2, $3, $4, $5, $6)`,
     [
       logsDTO.getIP(),
+      logsDTO.getBrowser(),
+      logsDTO.getOS(),
       logsDTO.getReceivingEndpoint(),
       logsDTO.getReceivingParameters(),
       logsDTO.getRequestsPerformed(),
