@@ -22,6 +22,7 @@ const checkTableExists = async () => {
         responseMessage VARCHAR
       );
     `
+    console.log(query)
     await db.query(query)
     console.log('Table logs created (if it did not exist).')
   } catch (error) {
