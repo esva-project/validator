@@ -75,6 +75,8 @@ const getLogs = async (logsDTO: LogGetDTOParameters) => {
 
   query += ` ORDER BY time DESC LIMIT 10 OFFSET '${logsDTO.getSelectedPage() * 10}'`
 
+  console.log(query)
+
   return JSON.stringify(await db.query(query))
 }
 
