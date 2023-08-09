@@ -26,8 +26,8 @@ const logsApp = express()
 logsApp.get('/logs', statsController.logs)
 
 const logsSslOptions = {
-  cert: fs.readFileSync('./certificates/fullchain.pem'),
-  key: fs.readFileSync('./certificates/privkey.pem')
+  cert: fs.readFileSync('./certificates/ssl_certs/fullchain.pem'),
+  key: fs.readFileSync('./certificates/ssl_certs/privkey.pem')
 }
 
 const logsServer = https.createServer(logsSslOptions, logsApp)
