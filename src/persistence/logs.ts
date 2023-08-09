@@ -79,7 +79,7 @@ const getLogs = async (logsDTO: LogGetDTOParameters) => {
     query += ` WHERE ${conditions.join(' AND ')}`
   }
 
-  query += ` ORDER BY time DESC LIMIT 10 OFFSET '${logsDTO.getSelectedPage() * 10}'`
+  query += ` ORDER BY time DESC LIMIT 10 OFFSET ${logsDTO.getSelectedPage() * 10}`
 
   console.log(query)
 
