@@ -12,6 +12,8 @@ const logs = async (req: Request, res: Response) => {
   const logs = await logsService.getLogs()
   console.log(logs)
 
+  res.setHeader('Content-Type', 'application/json')
+
   res.send(logs)
 }
 
