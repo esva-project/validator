@@ -1,5 +1,8 @@
 #!/usr/bin/env node
 
+import fs from 'fs'
+import https from 'https'
+
 import express from 'express'
 import morgan from 'morgan'
 
@@ -7,7 +10,6 @@ import statsController from './controller/statsController' // Import the statsCo
 import routes from './routes/validationRoutes'
 
 const app = express()
-const logsApp = express() // New Express app for /logs endpoint
 
 /** Logging */
 app.use(morgan('dev'))
@@ -19,12 +21,18 @@ app.use(express.json())
 /** Routes */
 app.use('/', routes.router)
 
-// Define the /logs endpoint on the new app and start on port 4000
+// Create a separate HTTPS server for the /logs route
+const logsApp = express()
 logsApp.get('/logs', statsController.logs)
 
-// Set the port for the /logs app
+const logsSslOptions = {
+  cert: fs.readFileSync('./certificates/fullchain.pem'),
+  key: fs.readFileSync('./certificates/privkey.pem')
+}
+
+const logsServer = https.createServer(logsSslOptions, logsApp)
 const LOGS_PORT = 4000
-logsApp.listen(LOGS_PORT, () => {
+logsServer.listen(LOGS_PORT, () => {
   console.log(`Logs app is running on port ${LOGS_PORT}`)
 })
 
