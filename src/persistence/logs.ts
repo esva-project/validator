@@ -63,9 +63,11 @@ const getLogs = async (logsDTO: LogGetDTOParameters) => {
     conditions.push(`requestsPerformed IN ('${requests}')`)
   }
   if (logsDTO.getResponseStatus()) {
-    conditions.push(`responseStatus = 200`)
-  } else if (!logsDTO.getResponseStatus()) {
-    conditions.push(`responseStatus <> 200`)
+    if (logsDTO.getResponseStatus() == 'true') {
+      conditions.push(`responseStatus = 200`)
+    } else {
+      conditions.push(`responseStatus <> 200`)
+    }
   }
   if (logsDTO.getResponseMessageContains()) {
     conditions.push(`responseMessage LIKE '%${logsDTO.getResponseMessageContains()}%'`)
