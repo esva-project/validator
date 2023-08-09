@@ -16,6 +16,9 @@ const logs = async (req: Request, res: Response) => {
 
 const processLogParameters = async (query: any) => {
   console.log(query)
+  if (query.requestsperformedcontains == undefined) {
+    query.requestsperformedcontains = []
+  }
   return new LogGetDTOParameters(
     query.page,
     query.since,
