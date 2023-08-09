@@ -53,22 +53,22 @@ const getLogs = async (logsDTO: LogGetDTOParameters) => {
     conditions.push(`operating_system = '${logsDTO.getOS()}'`)
   }
   if (logsDTO.getReceivingEndpoint()) {
-    conditions.push(`receiving_endpoint = '${logsDTO.getReceivingEndpoint()}'`)
+    conditions.push(`receivingEndpoint = '${logsDTO.getReceivingEndpoint()}'`)
   }
   if (logsDTO.getReceivingParametersContains()) {
-    conditions.push(`receiving_parameters LIKE '%${logsDTO.getReceivingParametersContains()}%'`)
+    conditions.push(`receivingParameters LIKE '%${logsDTO.getReceivingParametersContains()}%'`)
   }
   if (logsDTO.getRequestsPerformedContains().length > 0) {
     const requests = logsDTO.getRequestsPerformedContains().join("','")
-    conditions.push(`requests_performed IN ('${requests}')`)
+    conditions.push(`requestsPerformed IN ('${requests}')`)
   }
   if (logsDTO.getResponseStatus()) {
-    conditions.push(`response_status = 200`)
-  } else {
-    conditions.push(`response_status <> 200`)
+    conditions.push(`responseStatus = 200`)
+  } else if (!logsDTO.getResponseStatus()) {
+    conditions.push(`responseStatus <> 200`)
   }
   if (logsDTO.getResponseMessageContains()) {
-    conditions.push(`response_message LIKE '%${logsDTO.getResponseMessageContains()}%'`)
+    conditions.push(`responseMessage LIKE '%${logsDTO.getResponseMessageContains()}%'`)
   }
 
   console.log(conditions)
