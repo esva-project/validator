@@ -6,7 +6,7 @@ import https from 'https'
 import express from 'express'
 import morgan from 'morgan'
 
-import statsController from './controller/statsController' // Import the statsController module
+import statsController from './controller/logsController' // Import the statsController module
 import routes from './routes/validationRoutes'
 
 const app = express()

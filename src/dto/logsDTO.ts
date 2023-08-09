@@ -1,5 +1,7 @@
 interface LogDTOInterface {
   ip: string
+  browser: string
+  operating_system: string
   receivingendpoint: string
   receivingparameters: string
   requestsperformed: string[]
@@ -12,6 +14,8 @@ class LogDTOParameters {
 
   constructor(
     ip: string,
+    browser: string,
+    operating_system: string,
     receivingendpoint: string,
     receivingparameters: string,
     requestsperformed: string[],
@@ -19,7 +23,9 @@ class LogDTOParameters {
     responsemessage: string
   ) {
     this.logDTO = {
+      browser,
       ip,
+      operating_system,
       receivingendpoint,
       receivingparameters,
       requestsperformed,
@@ -29,6 +35,8 @@ class LogDTOParameters {
   }
 
   public getIP = () => this.logDTO.ip
+  public getBrowser = () => this.logDTO.browser
+  public getOS = () => this.logDTO.operating_system
   public getReceivingEndpoint = () => this.logDTO.receivingendpoint
   public getReceivingParameters = () => this.logDTO.receivingparameters
   public getRequestsPerformed = () => this.logDTO.requestsperformed

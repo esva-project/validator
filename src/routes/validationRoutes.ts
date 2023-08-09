@@ -3,7 +3,7 @@ import bodyParser from 'body-parser'
 import express from 'express'
 import formidableMiddleware from 'express-formidable'
 
-import statsController from '../controller/statsController'
+import statsController from '../controller/logsController'
 import validationController from '../controller/validationController'
 
 const router = express.Router()
