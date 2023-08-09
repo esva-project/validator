@@ -2,6 +2,7 @@
 import fs from 'fs'
 
 import { Request, Response } from 'express'
+import useragent from 'useragent'
 
 import { LogDTOParameters } from '../dto/logsDTO'
 import { MobilityLaParameters } from '../dto/mobilityParameters'
@@ -42,11 +43,20 @@ const validateOLA = async (req: Request, res: Response) => {
     logger.ola.info('Validations: ' + JSON.stringify(response))
     logger.ola.info('----------------------------------------------------------------------------')
 
-    response.clearDataForLogs()
+    const userAgentString = req.headers['user-agent']
+    const agent = useragent.parse(userAgentString)
+
+    const browser = agent.toAgent()
+    const os = agent.os.toString()
+
+    console.log(browser)
+    console.log(os)
 
     logs.insertLogs(
       new LogDTOParameters(
         req.socket.remoteAddress as string,
+        browser,
+        os,
         req.path,
         JSON.stringify(mobParams.toJSON()),
         response.getURLs(),
