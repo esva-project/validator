@@ -29,14 +29,13 @@ const getLogs = async (logParameters: LogGetDTOParameters) => {
   }
 
   const startingIndex = (logParameters.getSelectedPage() - 1) * 10 + 1
-  let finishIndex = startingIndex + 9
-
-  if (total < 9) finishIndex = total
+  const nrLogsAtual = parsedLogs.length
 
   const returningJSON = {
     index: {
-      currentLogs: `Showing logs from index ${startingIndex} to ${finishIndex} out of ${total}`,
-      currentPage: `Showing page ${logParameters.getSelectedPage()} of ${Math.ceil(total / 10)}`
+      currentLogs: `Showing ${nrLogsAtual} logs from index ${startingIndex}`,
+      currentPage: `Showing page ${logParameters.getSelectedPage()} of ${Math.ceil(total / 10)}`,
+      totalLogs: `${total}`
     },
     logs: parsedLogs
   }
