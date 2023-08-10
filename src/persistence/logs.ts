@@ -88,7 +88,18 @@ const getLogs = async (logsDTO: LogGetDTOParameters) => {
 
   console.log(query)
 
-  return JSON.stringify(await db.query(query))
+  const countQuery =
+    `SELECT COUNT(*) AS total_count
+  FROM logs ` + ` WHERE ${conditions.join(' AND ')}`
+
+  // Execute the queries
+  const logsResult = await db.query(query)
+  const countResult = await db.query(countQuery)
+
+  const logs = logsResult.rows
+  const totalCount = countResult.rows[0].total_count
+
+  return JSON.stringify({ logs, totalCount })
 }
 
 const insertLogs = async (logsDTO: LogDTOParameters) => {

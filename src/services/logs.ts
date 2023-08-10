@@ -20,6 +20,8 @@ const getLogs = async (logParameters: LogGetDTOParameters) => {
   const logs = await logsPersistence.getLogs(logParameters)
   const parsedLogs = JSON.parse(logs)
 
+  console.log(parsedLogs)
+
   // Parse the "responsemessage" property in each log entry to JSON
   for (const log of parsedLogs) {
     const timeParts = log.time.split('.')
