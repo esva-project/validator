@@ -17,13 +17,14 @@ const insertLogs = async (logsDTO: LogDTOParameters) => {
 const getLogs = async (logParameters: LogGetDTOParameters) => {
   await logsPersistence.checkTableExists()
 
-  const logs = await logsPersistence.getLogs(logParameters)
+  const [logs, total] = await logsPersistence.getLogs(logParameters)
   const parsedLogs = JSON.parse(logs)
 
   console.log(parsedLogs)
+  console.log(total)
 
   // Parse the "responsemessage" property in each log entry to JSON
-  for (const log of parsedLogs.logsResult) {
+  for (const log of parsedLogs) {
     const timeParts = log.time.split('.')
     log.time = timeParts[0]
     log.responsemessage = JSON.parse(log.responsemessage)

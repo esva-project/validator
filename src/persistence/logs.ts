@@ -101,7 +101,7 @@ const getLogs = async (logsDTO: LogGetDTOParameters) => {
 
   const totalCount = countResult[0].total_count
 
-  return JSON.stringify({ logsResult, totalCount })
+  return JSON.stringify(logsResult), totalCount
 }
 
 const insertLogs = async (logsDTO: LogDTOParameters) => {
