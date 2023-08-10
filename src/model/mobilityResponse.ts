@@ -3,7 +3,7 @@ interface MobilityInterface {
 }
 
 interface LAInterface {
-  la: LADetailsInterface
+  la?: LADetailsInterface
 }
 
 interface LADetailsInterface {
@@ -60,16 +60,46 @@ class Mobility {
     this.mobility = mobility
   }
 
-  public getOMobilityID = () => this.mobility['omobility-las-get-response'].la['omobility-id']
-  public getSendingHEI = () =>
-    new HEI(this.mobility['omobility-las-get-response'].la['sending-hei'])
-  public getReceivingHEI = () =>
-    new HEI(this.mobility['omobility-las-get-response'].la['receiving-hei'])
-  public getStudent = () => new Student(this.mobility['omobility-las-get-response'].la.student)
-  public getSendingSignature = () =>
-    this.mobility['omobility-las-get-response'].la['first-version']['sending-hei-signature']
-  public getReceivingSignature = () =>
-    this.mobility['omobility-las-get-response'].la['first-version']['receiving-hei-signature']
+  public getOMobilityID = () => {
+    if (this.mobility['omobility-las-get-response'].la) {
+      return this.mobility['omobility-las-get-response'].la['omobility-id']
+    }
+    return ''
+  }
+  public getSendingHEI = () => {
+    if (this.mobility['omobility-las-get-response'].la) {
+      return new HEI(this.mobility['omobility-las-get-response'].la['sending-hei'])
+    }
+    return
+  }
+  public getReceivingHEI = () => {
+    if (this.mobility['omobility-las-get-response'].la) {
+      return new HEI(this.mobility['omobility-las-get-response'].la['receiving-hei'])
+    }
+    return
+  }
+  public getStudent = () => {
+    if (this.mobility['omobility-las-get-response'].la) {
+      return new Student(this.mobility['omobility-las-get-response'].la.student)
+    }
+    return
+  }
+  public getSendingSignature = () => {
+    if (this.mobility['omobility-las-get-response'].la) {
+      return this.mobility['omobility-las-get-response'].la['first-version'][
+        'sending-hei-signature'
+      ]
+    }
+    return
+  }
+  public getReceivingSignature = () => {
+    if (this.mobility['omobility-las-get-response'].la) {
+      return this.mobility['omobility-las-get-response'].la['first-version'][
+        'receiving-hei-signature'
+      ]
+    }
+    return
+  }
 }
 
 class HEI {
@@ -95,4 +125,4 @@ class Student {
   public getEmail = () => this.student.email
 }
 
-export { Mobility, MobilityInterface }
+export { HEI, Mobility, MobilityInterface, MobilitySignatureInterface }

@@ -12,7 +12,9 @@ const validateEWPMobilityResponse = async (
   const msg = `Found Correct Mobility with ID ${params.getOMobilityID()}`
   logger.ola.info(msg)
 
-  console.log(mobility_response)
+  if (mobility_response.getOMobilityID() == '') {
+    return response
+  }
 
   // Set the EWPResponse object in the response JSON
   response.setMobilityHEIInformation(1, mobility_response)
