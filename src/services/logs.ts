@@ -29,7 +29,9 @@ const getLogs = async (logParameters: LogGetDTOParameters) => {
   }
 
   const startingIndex = (logParameters.getSelectedPage() - 1) * 10 + 1
-  const finishIndex = startingIndex + 10
+  let finishIndex = startingIndex + 9
+
+  if (total < 9) finishIndex = total
 
   const returningJSON = {
     index: {
