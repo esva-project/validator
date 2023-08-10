@@ -25,6 +25,10 @@ const processLogParameters = async (query: any) => {
     query.page = 1
   }
 
+  const valuesArray = Array.isArray(query.requestsperformedcontains)
+    ? query.requestsperformedcontains
+    : [query.requestsperformedcontains]
+
   return new LogGetDTOParameters(
     query.page,
     query.since,
@@ -34,7 +38,7 @@ const processLogParameters = async (query: any) => {
     query.operating_system,
     query.receivingendpoint,
     query.receivingparameterscontains,
-    query.requestsperformedcontains,
+    valuesArray,
     query.responsestatus,
     query.responsemessagecontains
   )
