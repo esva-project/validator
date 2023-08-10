@@ -88,7 +88,7 @@ const getLogs = async (logsDTO: LogGetDTOParameters) => {
 
   console.log(query)
 
-  let countQuery = `SELECT COUNT(*) AS total_count FROM logs `
+  let countQuery = `SELECT COUNT(*) AS total_count FROM logs`
 
   if (conditions.length > 0) {
     countQuery += ` WHERE ${conditions.join(' AND ')}`
