@@ -1,5 +1,5 @@
 import { Institutions } from '../../model/institutionResponse'
-import { Mobility } from '../../model/mobilityResponse'
+import { HEI, Mobility, MobilitySignatureInterface } from '../../model/mobilityResponse'
 import { OUnits } from '../../model/ounitResponse'
 import {
   SignerCertificateInformationDTO,
@@ -82,8 +82,11 @@ class DataCollectionDTO implements DataCollectionInterface {
   public setMobilityHEI = (flow: number, _info: Mobility) => {
     const editing_hei = flow == 1 ? this.getEWPDataSendingHEI() : this.getEWPDataReceivingHEI()
 
-    const hei = flow == 1 ? _info.getSendingHEI() : _info.getReceivingHEI()
-    const hei_signature = flow == 1 ? _info.getSendingSignature() : _info.getReceivingSignature()
+    const hei = flow == 1 ? (_info.getSendingHEI() as HEI) : (_info.getReceivingHEI() as HEI)
+    const hei_signature =
+      flow == 1
+        ? (_info.getSendingSignature() as MobilitySignatureInterface)
+        : (_info.getReceivingSignature() as MobilitySignatureInterface)
     const sign_contact_to_add = new EWPDataContact(
       hei_signature['signer-name'],
       hei_signature['signer-email'],
@@ -112,8 +115,8 @@ class DataCollectionDTO implements DataCollectionInterface {
   }
 
   public setMobilityStudent = (_info: Mobility) => {
-    this.getEWPDataStudent().setName(_info.getStudent().getName())
-    this.getEWPDataStudent().setEmail(_info.getStudent().getEmail())
+    this.getEWPDataStudent().setName(_info.getStudent()?.getName() as string)
+    this.getEWPDataStudent().setEmail(_info.getStudent()?.getEmail() as string)
   }
 
   public setInstitutionContacts = (flow: number, _info: Institutions) => {
