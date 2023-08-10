@@ -28,3 +28,40 @@ Finally, in order to set up the containers and run the program, run one of the s
 There is a script that compiles the code in the development or production branch. You must be working on the respective branch to run the script (e.g.`git checkout development` before running the buildContainersDevelopment.sh script).
 After you run the script, the containers will be up and you will be able to use ESVA module.
 If you cannot run the script, give it executable permission (e.g. `chmod +x <script>`)
+
+
+## Notes
+
+### Logs Access
+
+Logs can be accessed in the port 4000 with endpoint "/logs". Thus, if your DNS is esva.example.com, you can access the logs in https://esva.example.com:4000/logs.
+This GET request will list the logs in a JSON list format. Access to the logs should be limited to the technical team.
+
+You can filter the logs using the following optional parameters:
+
+* **page (number):** this will filter the page of the log list. If not specified, the default is 1. The logs are shown in sets of 10 entries. Thus, if the value is 1, the logs fetched are from entry 0 to 9. If the value is 2, the logs fetched are from entry 10 to 19. And so on.
+
+* **since (string):** this will list the logs beginning in the specific time frame. Write this value in the following format: "YYYY-MM-DD HH:MM:SS" *(e.g. 2023-08-10 08:01:58)*
+
+* **until (string):** this will list the logs until a specific time frame. Write this value in the following format: "YYYY-MM-DD HH:MM:SS" *(e.g. 2023-08-10 09:01:58)*
+
+* **ip (string):** this will filter the logs by the IPv4 address from where the request was executed *(e.g. 172.165.1.45)*
+
+* **browser (string):** this will filter the logs by the browser from where the request was executed *(e.g. Chrome, Firefox, etc)*
+
+* **operating_system (string):** this will filter the logs by the operating system from where the request was executed *(e.g. Windows, Mac OS X, etc)*
+
+* **receivingendpoint (string):** this will filter the logs by the called endpoint. You can add the '/' character or not *(e.g. 'receivingendpoint=/ola' or you can write 'receivingendpoint=ola')*
+
+* **receivingparameterscontains (string):** this will filter the logs wherein the request parameters contain part of or the entire string you specify *(e.g. you can write a mobility id, a sending SCHAC code, etc)*
+
+* **requestsperformedcontains (string array):** this will filter the logs wherein the ESVA attribute matching process successfully called the EWP URL specified in this parameter *(e.g. https://esva.example.com/institutions. If you write this and logs are listed, it means those requests ended up calling this "institutions" endpoint to validate and match attributes with the signatures).* You may specify as many "requestsperformedcontains" query parameters as you wish. Please note that the URLs must be complete, meaning you cannot write part of the URL.
+
+* **responsestatus (string):** this will filter the logs that were successful or not. Write "true" if you want to list the logs that ended up in a success or write "false" otherwise.
+
+* **responsemessagecontains (string):** this will filter the logs that contain, in any point of the response message, the value you specify. For example, you can write the name or email of a person and it will fetch the responses that contain such values.
+
+
+A request with all these filters should look something like the following:
+
+- https://esva.example.pt:4000/logs?since=2023-08-10%2008:00:50&until=2023-08-10%2009:00:50&ip=172.165.1.45&browser=Chrome&operating_system=Windows&receivingendpoint=ola&receivingparameterscontains=123&requestsperformedcontains=https://example.com/ounits&requestsperformedcontains=https://partne.com/institutions&responsestatus=true&responsemessagecontains=John%20Doe
