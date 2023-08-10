@@ -64,9 +64,9 @@ const getLogs = async (logsDTO: LogGetDTOParameters) => {
   if (logsDTO.getRequestsPerformedContains().length > 0) {
     const requests = logsDTO
       .getRequestsPerformedContains()
-      .map((request) => `'${request}'`)
+      .map((request) => `${request}`)
       .join(',')
-    conditions.push(`'${requests}' = ANY(requestsPerformed)`)
+    conditions.push(`${requests} = ANY(requestsPerformed)`)
   }
   if (logsDTO.getResponseStatus()) {
     if (logsDTO.getResponseStatus() == 'true') {
