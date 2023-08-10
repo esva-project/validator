@@ -53,11 +53,14 @@ const getLogs = async (logsDTO: LogGetDTOParameters) => {
     conditions.push(`operating_system LIKE '%${logsDTO.getOS()}%'`)
   }
   if (logsDTO.getReceivingEndpoint()) {
-    conditions.push(`receivingEndpoint = '${logsDTO.getReceivingEndpoint()}'`)
+    conditions.push(
+      `(receivingEndpoint = '/${logsDTO.getReceivingEndpoint()}' OR receivingEndpoint = '${logsDTO.getReceivingEndpoint()}')`
+    )
   }
   if (logsDTO.getReceivingParametersContains()) {
     conditions.push(`receivingParameters LIKE '%${logsDTO.getReceivingParametersContains()}%'`)
   }
+  console.log(logsDTO.getRequestsPerformedContains())
   if (logsDTO.getRequestsPerformedContains().length > 0) {
     const requests = logsDTO.getRequestsPerformedContains().join("','")
     conditions.push(`requestsPerformed IN ('${requests}')`)
