@@ -34,7 +34,7 @@ const processMobility = async (contents: MobilityLaParameters, responseSoFar: Re
 
   responseSoFar.addURLs(mobility_response.url[0])
 
-  logger.ola.info('Mobility Response: ' + JSON.stringify(mobility_response))
+  console.log('Mobility Response: ' + JSON.stringify(mobility_response))
 
   // Start Validation Mobility Data
   return await validateEWPMobility.validateEWPMobilityResponse(
