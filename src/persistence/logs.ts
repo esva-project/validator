@@ -47,10 +47,10 @@ const getLogs = async (logsDTO: LogGetDTOParameters) => {
     conditions.push(`ip LIKE '%${logsDTO.getIP()}%'`)
   }
   if (logsDTO.getBrowser()) {
-    conditions.push(`browser = '${logsDTO.getBrowser()}'`)
+    conditions.push(`browser LIKE '%${logsDTO.getBrowser()}%'`)
   }
   if (logsDTO.getOS()) {
-    conditions.push(`operating_system = '${logsDTO.getOS()}'`)
+    conditions.push(`operating_system LIKE '%${logsDTO.getOS()}%'`)
   }
   if (logsDTO.getReceivingEndpoint()) {
     conditions.push(`receivingEndpoint = '${logsDTO.getReceivingEndpoint()}'`)
