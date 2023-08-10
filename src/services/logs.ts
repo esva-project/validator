@@ -23,7 +23,7 @@ const getLogs = async (logParameters: LogGetDTOParameters) => {
   console.log(parsedLogs)
 
   // Parse the "responsemessage" property in each log entry to JSON
-  for (const log of parsedLogs) {
+  for (const log of parsedLogs.logsResult) {
     const timeParts = log.time.split('.')
     log.time = timeParts[0]
     log.responsemessage = JSON.parse(log.responsemessage)
