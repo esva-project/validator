@@ -20,15 +20,19 @@ const getLogs = async (logParameters: LogGetDTOParameters) => {
   const [logs, total] = await logsPersistence.getLogs(logParameters)
   const parsedLogs = JSON.parse(logs)
 
-  console.log(parsedLogs)
-  console.log(total)
-
   // Parse the "responsemessage" property in each log entry to JSON
   for (const log of parsedLogs) {
     const timeParts = log.time.split('.')
     log.time = timeParts[0]
     log.responsemessage = JSON.parse(log.responsemessage)
     log.receivingparameters = JSON.parse(log.receivingparameters)
+  }
+
+  const startingIndex = (logParameters.getSelectedPage() - 1) * 10 + 1
+  const finishIndex = startingIndex + 10
+  parsedLogs.index = {
+    currentLogs: `Showing logs from index ${startingIndex} to ${finishIndex} out of ${total}`,
+    currentPage: `Showing page ${logParameters.getSelectedPage()} of ${Math.ceil(total / 10)}`
   }
 
   const prettifiedLogs = JSON.stringify(parsedLogs, undefined, 2)
