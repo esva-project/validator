@@ -2,10 +2,8 @@ import React, { Component } from "react";
 
 import { AppBar, Collapse, Slide, Toolbar, Typography } from "@mui/material";
 
-import LanguageMenu from "./LanguageMenu";
-
-import ImgESVA from "../../assets/esva_logo.svg";
 import ImgCeLock from "../../assets/ce_lock_no_bg.png";
+import ImgESVA from "../../assets/esva_logo.svg";
 
 import dictionary from "./index.dictionary.json";
 
@@ -39,9 +37,9 @@ export default class MainAppBar extends Component {
 								<Typography variant="h4">{dictionary.title[language]}</Typography>
 							</Collapse>
 						</div>
-						<div className="ms-4">
+						{/* <div className="ms-4">
 							<LanguageMenu language={language} onUpdateLanguage={this.props.onUpdateLanguage} />
-						</div>
+						</div> */}
 						<div className="ms-4" style={{ maxWidth: 42, minWidth: 25 }}>
 							<Slide in={anim2} mountOnEnter unmountOnExit appear timeout={500} direction="left">
 								<img src={ImgCeLock} alt="CeLock" style={{ maxHeight: "100%", maxWidth: "100%" }} />
