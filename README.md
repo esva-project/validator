@@ -33,11 +33,11 @@ You will need to create two directories inside the `/data/esva`:
 Clone the repository in the `/data/esva` directory and check the ".env.example" file inside the repository and follow its guidelines, adjusting the variables to your specific needs. For that, create a .env file in the repository folder you cloned and fill it in with the variables adjusted to you.
 
 ### 4. Privacy Policy
-To properly use ESVA, the Privacy Policy needs to be written and accessed at will.
-To do this, the following steps need to be performed:
+Before making ESVA available to the community, the Privacy Policy should be completed with your HEIs info. Once this is done please make sure your updated privacy policy can be accessed at will by the users.
+To ensure this, the following steps need to be performed:
 1. Write your Privacy Policy. You can do this in two ways:
-	a.  Upon cloning the repository, the file "ESVA_Privacy_Policy_template.pdf" should be available in the home folder of the repository. You can use it as a template for your own Privacy Policy.
-	b. You can write your own Privacy Policy according to the needs of your own university.
+   a.  Upon cloning the repository, the file "ESVA_Privacy_Policy_template.pdf" should be available in the home folder of the repository. You can use it as a template for your own Privacy Policy.
+   b. You can write your own Privacy Policy according to the needs of your own HEI.
 2. Name your file "privacy-policy.pdf"
 3. Place it in the home folder of the repository (`/data/esva/validador`)
 
