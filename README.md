@@ -36,8 +36,8 @@ Clone the repository in the `/data/esva` directory and check the ".env.example" 
 Before making ESVA available to the community, the Privacy Policy should be completed with your HEIs info. Once this is done please make sure your updated privacy policy can be accessed at will by the users.
 To ensure this, the following steps need to be performed:
 1. Write your Privacy Policy. You can do this in two ways:
-   a.  Upon cloning the repository, the file "ESVA_Privacy_Policy_template.pdf" should be available in the home folder of the repository. You can use it as a template for your own Privacy Policy.
-   b. You can write your own Privacy Policy according to the needs of your own HEI.
+   - Upon cloning the repository, the file "ESVA_Privacy_Policy_template.pdf" should be available in the home folder of the repository. You can use it as a template for your own Privacy Policy.
+   - You can write your own Privacy Policy according to the needs of your own HEI.
 2. Name your file "privacy-policy.pdf"
 3. Place it in the home folder of the repository (`/data/esva/validador`)
 
@@ -51,7 +51,8 @@ There is a script that compiles the code in the development or production branch
 
 After you run the script, the containers will be up and you will be able to use ESVA module.
 
-If you cannot run the script, give it executable permission (e.g. `chmod +x <script>`)
+If you cannot run the script, give it executable permission (e.g. `chmod +x <script>`).
+Also, please make sure you have "docker" and "docker-compose" installed and running in your machine.
 
 ## Notes
 ### Logs Access
