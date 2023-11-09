@@ -80,7 +80,7 @@ class DataCollectionDTO implements DataCollectionInterface {
   public getEWPDataStudent = () => this.ewpData.student
 
   public setMobilityHEI = (flow: number, _info: Mobility) => {
-    const editiESEng_hei = flow == 1 ? this.getEWPDataSendingHEI() : this.getEWPDataReceivingHEI()
+    const editing_hei = flow == 1 ? this.getEWPDataSendingHEI() : this.getEWPDataReceivingHEI()
 
     const hei = flow == 1 ? (_info.getSendingHEI() as HEI) : (_info.getReceivingHEI() as HEI)
     const hei_signature =
@@ -115,8 +115,8 @@ class DataCollectionDTO implements DataCollectionInterface {
   }
 
   public setMobilityStudent = (_info: Mobility) => {
-    this.getEWPDataStudent().setName(_info.getStudent().getName() as string)
-    this.getEWPDataStudent().setEmail(_info.getStudent().getEmail() as string)
+    this.getEWPDataStudent().setName(_info.getStudent()?.getName() as string)
+    this.getEWPDataStudent().setEmail(_info.getStudent()?.getEmail() as string)
   }
 
   public setInstitutionContacts = (flow: number, _info: Institutions) => {
