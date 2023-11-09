@@ -13,7 +13,10 @@ const validateOLA = async (fileMeta: string, params: MobilityLaParameters) => {
   if (response.countSignatures() == 0) return response
 
   const mobilityValidation = await processMobility(params, response)
+  if (mobilityValidation.getMessage().includes('Could not fetch')) return mobilityValidation
   const institutionsAndMobilityValidation = await processInstitutions(params, mobilityValidation)
+  if (institutionsAndMobilityValidation.getMessage().includes('Could not fetch'))
+    return mobilityValidation
   const fullResponse = await processOUnits(params, institutionsAndMobilityValidation)
   return fullResponse
 }
@@ -29,11 +32,13 @@ const processMobility = async (contents: MobilityLaParameters, responseSoFar: Re
     return mobility_response
   }
 
-  logger.ola.info('Mobility Response: ' + JSON.stringify(mobility_response))
+  responseSoFar.addURLs(mobility_response.url[0])
+
+  console.log('Mobility Response: ' + JSON.stringify(mobility_response))
 
   // Start Validation Mobility Data
   return await validateEWPMobility.validateEWPMobilityResponse(
-    mobility_response,
+    mobility_response.m,
     contents,
     responseSoFar
   )
@@ -51,6 +56,8 @@ const processInstitutions = async (
     return sending_institutions_response
   }
 
+  mobilityValidation.addURLs(sending_institutions_response.url[0])
+
   logger.ola.info(
     contents.getSendingSchac() +
       ' Institutions Response: ' +
@@ -59,7 +66,7 @@ const processInstitutions = async (
 
   const responseSoFar = await validateEWPInstitutions.validateEWPInstitutionsResponse(
     1,
-    sending_institutions_response,
+    sending_institutions_response.i,
     mobilityValidation
   )
 
@@ -71,6 +78,8 @@ const processInstitutions = async (
     return receiving_institutions_response
   }
 
+  responseSoFar.addURLs(receiving_institutions_response.url[0])
+
   logger.ola.info(
     contents.getReceivingSchac() +
       ' Institutions Response: ' +
@@ -79,7 +88,7 @@ const processInstitutions = async (
 
   return await validateEWPInstitutions.validateEWPInstitutionsResponse(
     2,
-    receiving_institutions_response,
+    receiving_institutions_response.i,
     responseSoFar
   )
 }
@@ -102,13 +111,15 @@ const processOUnits = async (
       return sending_ounits_response
     }
 
+    institutionsAndMobilityValidation.addURLs(sending_ounits_response.url[0])
+
     logger.ola.info(
       contents.getSendingSchac() + ' OUnits Response: ' + JSON.stringify(sending_ounits_response)
     )
 
     responseSoFar = await validateEWPOUnits.validateEWPOUnitsResponse(
       1,
-      sending_ounits_response,
+      sending_ounits_response.o,
       institutionsAndMobilityValidation
     )
   }
@@ -126,6 +137,8 @@ const processOUnits = async (
       return receiving_ounits_response
     }
 
+    responseSoFar.addURLs(receiving_ounits_response.url[0])
+
     logger.ola.info(
       contents.getReceivingSchac() +
         ' OUnits Response: ' +
@@ -134,7 +147,7 @@ const processOUnits = async (
 
     responseSoFar = await validateEWPOUnits.validateEWPOUnitsResponse(
       2,
-      receiving_ounits_response,
+      receiving_ounits_response.o,
       responseSoFar
     )
   }

@@ -2,14 +2,19 @@
 import fs from 'fs'
 
 import { Request, Response } from 'express'
+import useragent from 'useragent'
 
+import { LogDTOParameters } from '../dto/logsDTO'
 import { MobilityLaParameters } from '../dto/mobilityParameters'
 import softwarePackage from '../outrequests/softwarePackageCommunication'
+import logs from '../services/logs'
 import olaValidation from '../services/olaValidation'
 import { logger } from '../utils/logs'
 
 // Use Case to Validate OLAs
 const validateOLA = async (req: Request, res: Response) => {
+  console.log(req.path)
+
   // Read file that is sent
   const f = req.files
   const file = JSON.parse(JSON.stringify(f))
@@ -37,6 +42,28 @@ const validateOLA = async (req: Request, res: Response) => {
     res.send(response)
     logger.ola.info('Validations: ' + JSON.stringify(response))
     logger.ola.info('----------------------------------------------------------------------------')
+
+    const userAgentString = req.headers['user-agent']
+    const agent = useragent.parse(userAgentString)
+
+    const browser = agent.toAgent()
+    const os = agent.os.toString()
+
+    console.log(browser)
+    console.log(os)
+
+    logs.insertLogs(
+      new LogDTOParameters(
+        req.socket.remoteAddress as string,
+        browser,
+        os,
+        req.path,
+        JSON.stringify(mobParams.toJSON()),
+        response.getURLs(),
+        response.getStatus(),
+        JSON.stringify(response)
+      )
+    )
   })
 }
 

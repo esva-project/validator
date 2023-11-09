@@ -3,7 +3,8 @@ import bodyParser from 'body-parser'
 import express from 'express'
 import formidableMiddleware from 'express-formidable'
 
-import controller from '../controller/validationController'
+import statsController from '../controller/logsController'
+import validationController from '../controller/validationController'
 
 const router = express.Router()
 
@@ -16,6 +17,7 @@ router.use(
   })
 )
 
-router.post('/ola', controller.validateOLA)
+router.post('/ola', validationController.validateOLA)
+router.get('/logs', statsController.logs)
 
 export default { router }

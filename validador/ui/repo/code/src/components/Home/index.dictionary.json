@@ -3,6 +3,14 @@
         "en": "Electronic Signature Validator",
         "pt": "Validador de Assinaturas Eletrónicas"
     },
+    "whenUsingThisValidator": {
+        "en": "When using this validator users are acknowledging and accepting the",
+        "pt": "Ao utilizar este validador, os utilizadores reconhecem e aceitam a"
+    },
+    "privacyPolicy": {
+        "en": "privacy policy",
+        "pt": "política de privacidade"
+    },
     "dragYourPdfs": {
         "en": "Drag your signed PDFs and XMLs to this page...",
         "pt": "Arrasta os teus PDFs e XMLs assinados para esta página..."

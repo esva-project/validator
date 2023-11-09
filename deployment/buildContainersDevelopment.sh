@@ -1,6 +1,6 @@
 #!/bin/sh
 CURRENT=$(git rev-parse --abbrev-ref HEAD)
-SUPPOSED="production"
+SUPPOSED="development"
 if [ "$CURRENT" = "$SUPPOSED" ]; then
     export $(grep -v '^#' ../.env | xargs -d '\n') && sed -e "s,\$ESVA_BACKEND,${ESVA_BACKEND},g" -e "s,\$IS_EWP_ACTIVE,${IS_EWP_ACTIVE},g" ../validador/ui/configs/Configs.json.tmpl > ../validador/ui/configs/Configs.json
     cp ../privacy-policy.pdf ../validador/ui/repo/code/src/assets/privacy-policy.pdf

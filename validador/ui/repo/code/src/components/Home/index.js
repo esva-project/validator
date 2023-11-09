@@ -1,18 +1,21 @@
 import React, { Component } from "react";
 
-import { Typography, Zoom, Button } from "@mui/material";
+import { Button, Typography, Zoom } from "@mui/material";
 
-import Img1 from "./img1.png";
-import ImgUPorto from "../../assets/uporto_logo.png";
-import ImgDigitalSign from "../../assets/digitalsign_logo.png";
-import ImgMendel from "../../assets/mendel_logo.png";
 import ImgAuth from "../../assets/auth_logo.png";
+import ImgDigitalSign from "../../assets/digitalsign_logo.png";
 import ImgEuf from "../../assets/euf_logo.png";
+import ImgMendel from "../../assets/mendel_logo.png";
+import ImgUPorto from "../../assets/uporto_logo.png";
+import Img1 from "./img1.png";
 
 import Classes from "./index.module.css";
 
-import dictionary from "./index.dictionary.json";
 import MyFooter from "../MyFooter";
+
+import dictionary from "./index.dictionary.json";
+
+import PrivacyPolicy from "../../assets/privacy-policy.pdf";
 
 export default class Home extends Component {
 	state = {
@@ -35,7 +38,14 @@ export default class Home extends Component {
 					<Zoom in={anim1} timeout={500}>
 						<div className="w-100 flex-grow-1 d-flex align-items-center">
 							<div className="w-100">
-								<Typography align="center" color="white" className=" mb-2">
+								<Typography align="center" color="white" className="mb-2">
+									{dictionary.whenUsingThisValidator[language]}{" "}
+									<a href={PrivacyPolicy} target="_blank" rel="noopener noreferrer">
+										{dictionary.privacyPolicy[language]}
+									</a>
+									.
+								</Typography>
+								<Typography align="center" color="white" className="mb-2">
 									{dictionary.dragYourPdfs[language]}
 								</Typography>
 								<div className="w-100 d-flex justify-content-center">

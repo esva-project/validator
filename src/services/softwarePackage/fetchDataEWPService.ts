@@ -34,10 +34,11 @@ const fetchMobilityXMLFromEWP = async (pdfContents: MobilityLaParameters) => {
 
   if (url) {
     const mobility_response: MobilityInterface = await EWPRequest.get(url, params)
-    return new Mobility(mobility_response)
+    const m = new Mobility(mobility_response)
+    return { m, url }
   }
 
-  return new ResponseDTO(0, 'Could not fetch Mobility Response from EWP')
+  return new ResponseDTO(400, 'Could not fetch Mobility Response from EWP')
 }
 const fetchInstitutionsXMLFromEWP = async (hei_id: string) => {
   updateDataFromEWP()
@@ -55,10 +56,11 @@ const fetchInstitutionsXMLFromEWP = async (hei_id: string) => {
 
   if (url) {
     const institutions_response: InstitutionsInterface = await EWPRequest.get(url, params)
-    return new Institutions(institutions_response)
+    const i = new Institutions(institutions_response)
+    return { i, url }
   }
 
-  return new ResponseDTO(0, 'Could not fetch Institutions Response from EWP')
+  return new ResponseDTO(400, 'Could not fetch Institutions Response from EWP')
 }
 
 const fetchOUnitsXMLFromEWP = async (hei_id: string, ounit_id: string) => {
@@ -80,10 +82,11 @@ const fetchOUnitsXMLFromEWP = async (hei_id: string, ounit_id: string) => {
 
   if (url) {
     const ounits_response: OUnitsInterface = await EWPRequest.get(url, params)
-    return new OUnits(ounits_response)
+    const o = new OUnits(ounits_response)
+    return { o, url }
   }
 
-  return new ResponseDTO(0, 'Could not fetch OUnits Response from EWP')
+  return new ResponseDTO(400, 'Could not fetch OUnits Response from EWP')
 }
 
 export default { fetchInstitutionsXMLFromEWP, fetchMobilityXMLFromEWP, fetchOUnitsXMLFromEWP }

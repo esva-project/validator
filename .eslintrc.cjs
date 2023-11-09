@@ -67,6 +67,7 @@ module.exports = {
         'sort-keys': ['error', 'asc', { caseSensitive: false, natural: true }],
         'sort-vars': ['error', { ignoreCase: true }],
         'unicorn/consistent-function-scoping': 'off',
+        'unicorn/expiring-todo-comments': 'off',
         'unicorn/filename-case': 'off',
         'unicorn/new-for-builtins': 'off',
         'unicorn/prefer-node-protocol': 'off',

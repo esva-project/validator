@@ -16,5 +16,6 @@ RUN npm i
 COPY ./ ./
 
 EXPOSE 6060
+EXPOSE 4000
 
 CMD ["npm", "run", "start"]

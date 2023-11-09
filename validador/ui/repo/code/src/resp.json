@@ -1,150 +1,182 @@
 {
-	"logs": [
-		"SUCCESS: Found 2 signatures",
-		"INFO: Signature of Vasilis Andritsoudis is a Signature produced by a Certificate of unknown type",
-		"INFO: Signature of Vasilis Andritsoudis has expiration time 2024-08-16T09:39:27.000+0000",
-		"SUCCESS: Signature did not expire",
-		"INFO: Signature of Theodoros Alexandrou is a Advanced Electronic Signature supported by a Qualified Certificate",
-		"INFO: Signature of Theodoros Alexandrou has expiration time 2023-03-17T07:23:23.000+0000",
-		"SUCCESS: Signature did not expire",
-		"INFO: Signature of Bruno Pereira is a Not applicable",
-		"INFO: Signature of Bruno Pereira has expiration time null",
-		"ERROR: Signature Expired",
-		"SUCCESS: Found Correct Mobility with ID 7957EF4C45AC4946221ED3768EB67372",
-		"INFO: Bruno Pereira (up_ClaraTrueba@up.pt), Institutional Coordinator, signed the mobility on behalf of up.pt",
-		"INFO: Theodoros Alexandrou (talexandrou@it.auth.gr), Responsible person at the Receiving Institution, signed the mobility on behalf of uni-foundation.eu",
-		"WARNING: Sending HEI Signature Person Name (Bruno Pereira) Not Found in PDF Signatures",
-		"WARNING: Sending HEI Signature Person Email (up_ClaraTrueba@up.pt) Not Found in PDF Signatures",
-		"WARNING: Receiving HEI Signature Person Name (Theodoros Alexandrou) Not Found in PDF Signatures",
-		"SUCCESS: Receiving HEI Signature Person Email (talexandrou@it.auth.gr) matched in PDF Signatures",
-		"WARNING: Student Person Name (vasandven@it.auth.gr) Not Found in PDF Signatures",
-		"SUCCESS: Student Person Email (Vasilis Andritsoudis) matched in PDF Signatures",
-		"INFO: Found Contact from Universidade do Porto (up.pt): Clara Trueba (up_ClaraTrueba@up.pt)",
-		"SUCCESS: Fetched Information from up.pt insitution",
-		"SUCCESS: Institution HEI IDs contain/is equal to the Mobility SCHAC code (up.pt)",
-		"WARNING: Institution Role Descriptions do not contain/is different than the Mobility Signer Position (Institutional Coordinator)",
-		"WARNING: Institution Contact Names do not contain/is different than the Mobility Signature Name (Bruno Pereira)",
-		"SUCCESS: Institution Contact Emails contain/is equal to the Mobility Signature Email (up_ClaraTrueba@up.pt)",
-		"SUCCESS: Fetched Information from uni-foundation.eu insitution",
-		"SUCCESS: Institution HEI IDs contain/is equal to the Mobility SCHAC code (uni-foundation.eu)",
-		"WARNING: Institution Role Descriptions do not contain/is different than the Mobility Signer Position (Responsible person at the Receiving Institution)",
-		"WARNING: Institution Contact Names do not contain/is different than the Mobility Signature Name (Theodoros Alexandrou)",
-		"WARNING: Institution Contact Emails do not contain/is different than the Mobility Signature Email (talexandrou@it.auth.gr)",
-		"INFO: Found Contact from Faculty of Engineering of the University of Porto (7C66E36DFA2CDA4D517B71C507508725): Local-Erasmus FEUP (18490_Lefsefsfsp@up.pt)",
-		"SUCCESS: Fetched Information from 7C66E36DFA2CDA4D517B71C507508725 ounit named Faculty of Engineering of the University of Porto",
-		"SUCCESS: Organizational Unit OUnit IDs contain/is equal to the Mobility OUnit ID (7C66E36DFA2CDA4D517B71C507508725)",
-		"SUCCESS: Organizational Unit OUnit Names contain/is equal to the Mobility OUnit Name (Faculty of Engineering of the University of Porto)",
-		"WARNING: Organizational Unit Role Descriptions do not contain/is different than the Mobility Contact Position (undefined)",
-		"WARNING: Organizational Unit Contact Names do not contain/is different than the Mobility Contact Name (Bruno Pereira)",
-		"SUCCESS: Organizational Unit Contact Emails contain/is equal to the Mobility Contact Email (18490_Lefsefsfsp@up.pt)"
-	],
-	"message": "Document is Valid. Found 8/19 matches with the Mobility found in EWP.",
-	"validationResult": "SUCCESS",
-	"validations": {
-		"ewpResponse": {
-			"institution": {
-				"receiving_hei": {
-					"contacts": [],
-					"schac_code": "uni-foundation.eu"
-				},
-				"sending_hei": {
-					"contacts": [
-						{
-							"contactPersonEmail": "up_ClaraTrueba@up.pt",
-							"contactPersonName": "Clara Trueba",
-							"roleDescription": "Coordenador Institucional"
-						}
-					],
-					"schac_code": "up.pt"
-				}
-			},
-			"mobility": {
-				"sending_hei": {
-					"contactPersonEmail": "18490_Lefsefsfsp@up.pt",
-					"contactPersonName": "Bruno Pereira",
-					"signature": {
-						"signatureName": "Bruno Pereira",
-						"signatureEmail": "up_ClaraTrueba@up.pt",
-						"signerPosition": "Institutional Coordinator"
-					},
-					"schac_code": "up.pt",
-					"ounit_id": "7C66E36DFA2CDA4D517B71C507508725",
-					"ounit_name": "Faculty of Engineering of the University of Porto"
-				},
-				"receiving_hei": {
-					"contactPersonEmail": "adm@euf.com",
-					"contactPersonName": "Administrative   name",
-					"signature": {
-						"signatureName": "Theodoros Alexandrou",
-						"signatureEmail": "talexandrou@it.auth.gr",
-						"signerPosition": "Responsible person at the Receiving Institution"
-					},
-					"schac_code": "uni-foundation.eu"
-				},
-				"student": {
-					"contactPersonEmail": "Vasilis Andritsoudis",
-					"contactPersonName": "vasandven@it.auth.gr"
-				}
-			},
-			"ounit": {
-				"receiving_hei": {
-					"contacts": []
-				},
-				"sending_hei": {
-					"contacts": [
-						{
-							"contactPersonEmail": "18490_Lefsefsfsp@up.pt",
-							"contactPersonName": "Local-Erasmus FEUP",
-							"roleDescription": "Coordenador Local-Erasmus"
-						}
-					],
-					"ounit_id": "7C66E36DFA2CDA4D517B71C507508725",
-					"ounit_name": "Faculty of Engineering of the University of Porto"
-				}
-			}
-		},
-		"numberValidSignatures": 2,
-		"signature": [
-			{
-				"signatureLevel": "Signature produced by a Certificate of unknown type",
-				"signerDocument": "Vasilis Andritsoudis"
-			},
-			{
-				"signatureLevel": "Advanced Electronic Signature supported by a Qualified Certificate",
-				"signerDocument": "Theodoros Alexandrou"
-			}
-		],
-		"matches": {
-			"ewpResponseContentValidations": {
-				"isResponseIDEqualToPDFID": true,
-				"isResponseReceivingSCHACCodeEqualToPDFReceivingSCHACCode": true,
-				"isResponseSendingSCHACCodeEqualToPDFSendingSCHACCode": true
-			},
-			"receivingHeiValidations": {
-				"isHEISignatureEmailEqualsPDF": true,
-				"isHEISignatureNameEqualsPDF": false,
-				"isHEISignatureNameInInstitutionAPI": false,
-				"isHEISignatureEmailInInstitutionAPI": false,
-				"isHEISchacCodeEqualInInstitutionAPI": true,
-				"isHEIRolesEqualInInstitutionAPI": false
-			},
-			"sendingHeiValidations": {
-				"isHEISignatureEmailEqualsPDF": false,
-				"isHEISignatureNameEqualsPDF": false,
-				"isHEISignatureNameInInstitutionAPI": false,
-				"isHEISignatureEmailInInstitutionAPI": true,
-				"isHEISchacCodeEqualInInstitutionAPI": true,
-				"isHEIRolesEqualInInstitutionAPI": false,
-				"isOUnitIDEqualInOUnitAPI": true,
-				"isOUnitNameEqualInOUnitAPI": true,
-				"isOUnitContactNameEqualInOUnitAPI": false,
-				"isOUnitContactEmailEqualInOUnitAPI": true,
-				"isOUnitRolesEqualInInstitutionAPI": false
-			},
-			"studentValidations": {
-				"isEmailEqual": true,
-				"isNameEqual": false
-			}
-		}
-	}
+    "response": {
+        "dataCollection": {
+            "ewpData": {
+                "sending_hei": {
+                    "institution_contacts": [
+                        {
+                            "contact-name": "Bruno Pereira",
+                            "email": "up_ClaraTrueba@up.pt",
+                            "role-description": "Institutional Coordinator",
+                            "api_fetched": [
+                                "Mobility LA Signer"
+                            ]
+                        },
+                        {
+                            "contact-name": "Clara Trueba",
+                            "email": "up_ClaraTrueba@up.pt",
+                            "role-description": "Coordenador Institucional",
+                            "api_fetched": [
+                                "Institution Contact List"
+                            ]
+                        }
+                    ],
+                    "ounit_contacts": [
+                        {
+                            "contact-name": "Bruno Pereira",
+                            "email": "18490_Lefsefsfsp@up.pt",
+                            "api_fetched": [
+                                "Mobility LA Contact"
+                            ]
+                        },
+                        {
+                            "contact-name": "Local-Erasmus FEUP",
+                            "email": "18490_Lefsefsfsp@up.pt",
+                            "role-description": "Coordenador Local-Erasmus",
+                            "api_fetched": [
+                                "OUnit Contact List"
+                            ]
+                        }
+                    ],
+                    "ounit_id": "7C66E36DFA2CDA4D517B71C507508725",
+                    "ounit_name": [
+                        {
+                            "api_fetched": [
+                                "OMobility LA",
+                                "OUnits"
+                            ],
+                            "value": "Faculty of Engineering of the University of Porto"
+                        },
+                        {
+                            "api_fetched": [
+                                "OUnits"
+                            ],
+                            "value": "Faculdade de Engenharia da Universidade do Porto"
+                        }
+                    ],
+                    "schac_code": "up.pt"
+                },
+                "receiving_hei": {
+                    "institution_contacts": [
+                        {
+                            "contact-name": "Theodoros Alexandrou",
+                            "email": "talexandrou@it.auth.gr",
+                            "role-description": "Responsible person at the Receiving Institution",
+                            "api_fetched": [
+                                "Mobility LA Signer"
+                            ]
+                        }
+                    ],
+                    "ounit_contacts": [
+                        {
+                            "contact-name": "Administrative   name",
+                            "email": "adm@euf.com",
+                            "api_fetched": [
+                                "Mobility LA Contact"
+                            ]
+                        }
+                    ],
+                    "ounit_name": [
+                        {
+                            "api_fetched": [],
+                            "value": "No Organizational Unit Name Found"
+                        }
+                    ],
+                    "schac_code": "uni-foundation.eu"
+                },
+                "student": {
+                    "contact_person_name": {
+                        "api_fetched": [
+                            "Mobility LA Student"
+                        ],
+                        "value": "Vasilis Andritsoudis"
+                    },
+                    "contact_person_email": {
+                        "api_fetched": [
+                            "Mobility LA Student"
+                        ],
+                        "value": "vasandven@it.auth.gr"
+                    }
+                }
+            },
+            "signature": [
+                {
+                    "level": "Signature produced by a Certificate of unknown type",
+                    "commonName": "Vasilis Andritsoudis",
+                    "country": "GR",
+                    "organizationId": null,
+                    "organizationName": "Aristotle University of Thessaloniki",
+                    "email": "vasandven@csd.auth.gr",
+                    "subjectDistinguishedName": "1.2.840.113549.1.9.1=#1615766173616e6476656e406373642e617574682e6772,CN=Vasilis Andritsoudis,2.5.4.5=#130a32333633323038393134,2.5.4.42=#0c07566173696c6973,2.5.4.4=#0c0c416e64726974736f75646973,OU=Class B - Private Key created and stored in software CSP,OU=School of Informatics,O=Aristotle University of Thessaloniki,L=Thessaloniki,C=GR"
+                }
+            ]
+        },
+        "ewpReport": {
+            "sendingHeiValidations": [
+                {
+                    "label": "Is the LA Signer Name (Bruno Pereira) present in (Document Signatures)",
+                    "status": "NOT FOUND"
+                },
+                {
+                    "label": "Is the LA Signer Email (up_ClaraTrueba@up.pt) present in (Document Signatures)",
+                    "status": "NOT FOUND"
+                },
+                {
+                    "label": "Is the LA Signer Name (Bruno Pereira) present in (Institution or Organizational Unit Contact List)",
+                    "status": "NOT FOUND"
+                },
+                {
+                    "label": "Is the LA Signer Email (up_ClaraTrueba@up.pt) present in (Institution or Organizational Unit Contact List)",
+                    "status": "FOUND"
+                },
+                {
+                    "label": "Is the LA Signer Position (Institutional Coordinator) present in (Institution Contact List)",
+                    "status": "NOT FOUND"
+                },
+                {
+                    "label": "Is the LA Contact Person Name (Bruno Pereira) present in (Organizational Unit Contact List)",
+                    "status": "NOT FOUND"
+                },
+                {
+                    "label": "Is the LA Contact Person Email (18490_Lefsefsfsp@up.pt) present in (Organizational Unit Contact List)",
+                    "status": "NOT FOUND"
+                }
+            ],
+            "receivingHeiValidations": [
+                {
+                    "label": "Is the LA Signer Name (Theodoros Alexandrou) present in (Document Signatures)",
+                    "status": "NOT FOUND"
+                },
+                {
+                    "label": "Is the LA Signer Email (talexandrou@it.auth.gr) present in (Document Signatures)",
+                    "status": "NOT FOUND"
+                },
+                {
+                    "label": "Is the LA Signer Name (Theodoros Alexandrou) present in (Institution or Organizational Unit Contact List)",
+                    "status": "NOT FOUND"
+                },
+                {
+                    "label": "Is the LA Signer Email (talexandrou@it.auth.gr) present in (Institution or Organizational Unit Contact List)",
+                    "status": "NOT FOUND"
+                },
+                {
+                    "label": "Is the LA Signer Position (Responsible person at the Receiving Institution) present in (Institution Contact List)",
+                    "status": "NOT FOUND"
+                }
+            ],
+            "studentValidations": [
+                {
+                    "label": "Is the Student Name (Vasilis Andritsoudis) present in (Document Signatures)",
+                    "status": "FOUND"
+                },
+                {
+                    "label": "Is the Student Email (vasandven@it.auth.gr) present in (Document Signatures)",
+                    "status": "NOT FOUND"
+                }
+            ],
+            "validValidations": 3,
+            "totalValidations": 14
+        },
+        "message": "Document is valid"
+    }
 }
