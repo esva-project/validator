@@ -49,6 +49,9 @@ const validateEWPOUnitsResponse = async (
 
   // Compare Institution and Mobility Informations
   for (const contact of ounits_response.getContacts()) {
+    console.log('validatiing ounits')
+    console.log(contact.getContactPersonEmail())
+    console.log(ounit_information.getMobilityContacts())
     if (contact.getContactPersonName() === ounit_information.getMobilityContacts()?.getName()) {
       institutionsAndMobilityValidation.foundSendingHEIValdiation('LA Signer Name', location)
     }
