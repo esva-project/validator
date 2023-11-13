@@ -11,7 +11,7 @@ interface LADetailsInterface {
   'sending-hei': HEIInterface
   'receiving-hei': HEIInterface
   student: StudentInterface
-  'first-version': FirstVersionInterface
+  'first-version'?: FirstVersionInterface
 }
 
 interface HEIInterface {
@@ -85,20 +85,26 @@ class Mobility {
     return
   }
   public getSendingSignature = () => {
-    if (this.mobility['omobility-las-get-response'].la) {
+    if (
+      this.mobility['omobility-las-get-response'].la &&
+      this.mobility['omobility-las-get-response'].la['first-version']
+    ) {
       return this.mobility['omobility-las-get-response'].la['first-version'][
         'sending-hei-signature'
       ]
     }
-    return
+    return ''
   }
   public getReceivingSignature = () => {
-    if (this.mobility['omobility-las-get-response'].la) {
+    if (
+      this.mobility['omobility-las-get-response'].la &&
+      this.mobility['omobility-las-get-response'].la['first-version']
+    ) {
       return this.mobility['omobility-las-get-response'].la['first-version'][
         'receiving-hei-signature'
       ]
     }
-    return
+    return ''
   }
 }
 
