@@ -10,6 +10,7 @@ const validateEWPInstitutionsResponse = async (
   // Add information about the institution found
   const msg = `Fetched Information from ${institutions_response.getHEIID()} institution`
   logger.ola.info(msg)
+  console.log(msg)
 
   const hei_information =
     flow == 1
@@ -39,6 +40,8 @@ const validateEWPInstitutionsResponse = async (
     hei_information.getMobilitySignature()?.getRole() as string,
     locationInstitution
   )
+
+  console.log('performing validations')
 
   // Compare Institution and Mobility Informations
   for (const contact of institutions_response.getContacts()) {
