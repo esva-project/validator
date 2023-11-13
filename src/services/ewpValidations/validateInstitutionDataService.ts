@@ -41,23 +41,12 @@ const validateEWPInstitutionsResponse = async (
     locationInstitution
   )
 
-  console.log('performing validations')
-
   // Compare Institution and Mobility Informations
   for (const contact of institutions_response.getContacts()) {
-    console.log(contact.getContactPersonName())
-    console.log(hei_information.getMobilitySignature()?.getName())
-
-    console.log(contact.getContactPersonEmail())
-    console.log(hei_information.getMobilitySignature()?.getEmail())
-    console.log(
-      contact.getContactPersonEmail() === hei_information.getMobilitySignature()?.getEmail()
-    )
-
-    console.log(contact.getContactPersonRoleDescription())
-    console.log(hei_information.getMobilitySignature()?.getRole())
-
-    if (contact.getContactPersonName() === hei_information.getMobilitySignature()?.getName()) {
+    if (
+      contact.getContactPersonName().toLowerCase() ===
+      hei_information.getMobilitySignature()?.getName().toLowerCase()
+    ) {
       mobilityValidation.foundSendingHEIValdiation('LA Signer Name', locationBothAPIs)
     }
     if (contact.getContactPersonEmail() === hei_information.getMobilitySignature()?.getEmail()) {

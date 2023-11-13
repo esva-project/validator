@@ -49,17 +49,20 @@ const validateEWPOUnitsResponse = async (
 
   // Compare Institution and Mobility Informations
   for (const contact of ounits_response.getContacts()) {
-    console.log('validatiing ounits')
-    console.log(contact.getContactPersonName())
-    console.log(ounit_information.getMobilityContacts())
-    if (contact.getContactPersonName() === ounit_information.getMobilitySignature()?.getName()) {
+    if (
+      contact.getContactPersonName().toLowerCase() ===
+      ounit_information.getMobilitySignature()?.getName().toLowerCase()
+    ) {
       institutionsAndMobilityValidation.foundSendingHEIValdiation('LA Signer Name', location)
     }
     if (contact.getContactPersonEmail() === ounit_information.getMobilitySignature()?.getEmail()) {
       institutionsAndMobilityValidation.foundSendingHEIValdiation('LA Signer Email', location)
     }
 
-    if (contact.getContactPersonName() === ounit_information.getMobilityContacts()?.getName()) {
+    if (
+      contact.getContactPersonName().toLowerCase() ===
+      ounit_information.getMobilityContacts()?.getName().toLowerCase()
+    ) {
       institutionsAndMobilityValidation.foundSendingHEIValdiation(
         'LA Contact Person Name',
         location
