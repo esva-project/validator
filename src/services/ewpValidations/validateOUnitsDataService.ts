@@ -51,11 +51,11 @@ const validateEWPOUnitsResponse = async (
   for (const contact of ounits_response.getContacts()) {
     console.log('validatiing ounits')
     console.log(contact.getContactPersonEmail())
-    console.log(ounit_information.getMobilityContacts())
-    if (contact.getContactPersonName() === ounit_information.getMobilityContacts()?.getName()) {
+    console.log(ounit_information.getMobilitySignature())
+    if (contact.getContactPersonName() === ounit_information.getMobilitySignature()?.getName()) {
       institutionsAndMobilityValidation.foundSendingHEIValdiation('LA Signer Name', location)
     }
-    if (contact.getContactPersonEmail() === ounit_information.getMobilityContacts()?.getEmail()) {
+    if (contact.getContactPersonEmail() === ounit_information.getMobilitySignature()?.getEmail()) {
       institutionsAndMobilityValidation.foundSendingHEIValdiation('LA Signer Email', location)
     }
   }
