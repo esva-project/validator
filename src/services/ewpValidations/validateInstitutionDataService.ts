@@ -50,6 +50,9 @@ const validateEWPInstitutionsResponse = async (
 
     console.log(contact.getContactPersonEmail())
     console.log(hei_information.getMobilitySignature()?.getEmail())
+    console.log(
+      contact.getContactPersonEmail() === hei_information.getMobilitySignature()?.getEmail()
+    )
 
     console.log(contact.getContactPersonRoleDescription())
     console.log(hei_information.getMobilitySignature()?.getRole())
@@ -58,6 +61,7 @@ const validateEWPInstitutionsResponse = async (
       mobilityValidation.foundSendingHEIValdiation('LA Signer Name', locationBothAPIs)
     }
     if (contact.getContactPersonEmail() === hei_information.getMobilitySignature()?.getEmail()) {
+      console.log('here?')
       mobilityValidation.foundSendingHEIValdiation('LA Signer Email', locationBothAPIs)
     }
     if (
