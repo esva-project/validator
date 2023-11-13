@@ -58,6 +58,19 @@ const validateEWPOUnitsResponse = async (
     if (contact.getContactPersonEmail() === ounit_information.getMobilitySignature()?.getEmail()) {
       institutionsAndMobilityValidation.foundSendingHEIValdiation('LA Signer Email', location)
     }
+
+    if (contact.getContactPersonName() === ounit_information.getMobilityContacts()?.getName()) {
+      institutionsAndMobilityValidation.foundSendingHEIValdiation(
+        'LA Contact Person Name',
+        location
+      )
+    }
+    if (contact.getContactPersonEmail() === ounit_information.getMobilityContacts()?.getEmail()) {
+      institutionsAndMobilityValidation.foundSendingHEIValdiation(
+        'LA Contact Person Email',
+        location
+      )
+    }
   }
   return institutionsAndMobilityValidation
 }
