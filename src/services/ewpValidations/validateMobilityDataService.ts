@@ -44,19 +44,16 @@ const validateEWPMobilityResponse = async (
     )
 
     for (const signature of response.getSignatures()) {
-      if (
-        signature.getCommonName().toLowerCase() ===
-        (sending_signature.getName() as string).toLowerCase()
-      ) {
+      console.log(sending_signature.getName())
+      console.log(receiving_signature.getName())
+
+      if (signature.getCommonName().toLowerCase() === sending_signature.getName()) {
         response.foundSendingHEIValdiation('LA Signer Name', location)
       }
       if (signature.getEmail() === sending_signature.getEmail()) {
         response.foundSendingHEIValdiation('LA Signer Email', location)
       }
-      if (
-        signature.getCommonName().toLowerCase() ===
-        (receiving_signature.getName() as string).toLowerCase()
-      ) {
+      if (signature.getCommonName().toLowerCase() === receiving_signature.getName()) {
         response.foundReceivingHEIValdiation('LA Signer Name', location)
       }
       if (signature.getEmail() === receiving_signature.getEmail()) {
