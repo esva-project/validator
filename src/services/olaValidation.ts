@@ -15,8 +15,8 @@ const validateOLA = async (fileMeta: string, params: MobilityLaParameters) => {
   const mobilityValidation = await processMobility(params, response)
   if (mobilityValidation.getMessage().includes('Could not fetch')) return mobilityValidation
   const institutionsAndMobilityValidation = await processInstitutions(params, mobilityValidation)
-  if (institutionsAndMobilityValidation.getMessage().includes('Could not fetch'))
-    return mobilityValidation
+  // if (institutionsAndMobilityValidation.getMessage().includes('Could not fetch'))
+  //   return mobilityValidation
   const fullResponse = await processOUnits(params, institutionsAndMobilityValidation)
   return fullResponse
 }
