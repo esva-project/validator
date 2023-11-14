@@ -19,6 +19,7 @@ const updateDataFromEWP = async (): Promise<Catalogue> => {
       .then((newCatalogueData) => {
         console.log('UPDATING')
         catalogue = new Catalogue(newCatalogueData)
+        console.log(catalogue.getHosts().length)
         return catalogue
       })
       .catch((error) => {
