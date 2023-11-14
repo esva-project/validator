@@ -41,17 +41,13 @@ class Catalogue {
     h['institutions-covered'] ? h['institutions-covered'] : []
   public getHEIID = (i: InstitutionsCoveredInterface) => (i['hei-id'] ? i['hei-id'][0] : '')
   public getOMobilityLASAPIURL = (a: ApiImplementedInterface): string => {
-    return a['omobility-las'][0] && a['omobility-las'][0]['get-url']
-      ? a['omobility-las'][0]['get-url']
-      : ''
+    return a['omobility-las'][0] ? a['omobility-las'][0]['get-url'] : ''
   }
   public getInstitutionsAPIURL = (a: ApiImplementedInterface): string => {
-    return a['institutions'][0] && a['institutions'][0].url ? a['institutions'][0].url : ''
+    return a['institutions'][0] ? a['institutions'][0].url : ''
   }
   public getOUnitsAPIURL = (a: ApiImplementedInterface): string => {
-    return a['organizational-units'][0] && a['organizational-units'][0].url
-      ? a['organizational-units'][0].url
-      : ''
+    return a['organizational-units'][0] ? a['organizational-units'][0].url : ''
   }
   public getLastUpdated = () => this.lastUpdated
   public setLastUpdated = (l: Date) => (this.lastUpdated = l)
