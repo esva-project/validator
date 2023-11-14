@@ -78,7 +78,7 @@ const fetchInstitutionsXMLFromEWP = async (hei_id: string) => {
     return { i, url }
   }
 
-  return new ResponseDTO(400, 'Could not fetch Institutions Response from EWP')
+  return
 }
 
 const fetchOUnitsXMLFromEWP = async (hei_id: string, ounit_id: string) => {
