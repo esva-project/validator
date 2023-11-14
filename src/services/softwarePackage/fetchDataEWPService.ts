@@ -30,6 +30,7 @@ const updateDataFromEWP = async (): Promise<Catalogue> => {
   }
 
   console.log('RETURNING NORMAL')
+  console.log(catalogue.getHosts().length)
   return catalogue
 }
 
