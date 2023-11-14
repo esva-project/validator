@@ -41,7 +41,7 @@ class Catalogue {
     h['institutions-covered'] ? h['institutions-covered'] : []
   public getHEIID = (i: InstitutionsCoveredInterface) => (i['hei-id'] ? i['hei-id'][0] : '')
   public getOMobilityLASAPIURL = (a: ApiImplementedInterface): string => {
-    return a['omobility-las'][0] && a['omobility-las'][0].url
+    return a['omobility-las'][0] && a['omobility-las'][0]['get-url']
       ? a['omobility-las'][0]['get-url']
       : ''
   }
