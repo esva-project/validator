@@ -56,6 +56,13 @@ const validateEWPOUnitsResponse = async (
       institutionsAndMobilityValidation.foundSendingHEIValdiation('LA Signer Email', location)
     }
 
+    console.log('contacts')
+    console.log(contact.getContactPersonName())
+    console.log(ounit_information.getMobilityContacts()?.getName())
+    console.log(
+      ounit_information.getMobilityContacts()?.getName().includes(contact.getContactPersonName())
+    )
+
     if (contact.getContactPersonName() === ounit_information.getMobilityContacts()?.getName()) {
       institutionsAndMobilityValidation.foundSendingHEIValdiation(
         'LA Contact Person Name',

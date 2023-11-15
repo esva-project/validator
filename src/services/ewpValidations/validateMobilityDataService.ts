@@ -27,9 +27,14 @@ const validateEWPMobilityResponse = async (
   // Compare PDF Signatures With Sending HEI, Receiving HEI, and Student Information
   if (sending_signature && receiving_signature) {
     const location = 'Document Signatures'
-
+    console.log('printing sending stuff')
     console.log(sending_signature.getName())
+    console.log(sending_signature.getName() == 'undefined')
     console.log(sending_signature.getEmail())
+
+    console.log('printing receiving stuff')
+    console.log(receiving_signature.getName())
+    console.log(receiving_signature.getName())
     if (sending_signature.getName() == 'undefined' && sending_signature.getEmail()) {
       response.addHEIValidation(
         1,
@@ -65,9 +70,6 @@ const validateEWPMobilityResponse = async (
     )
 
     for (const signature of response.getSignatures()) {
-      console.log(sending_signature.getName())
-      console.log(receiving_signature.getName())
-
       if (signature.getCommonName().toLowerCase() === sending_signature.getName()) {
         response.foundSendingHEIValdiation('LA Signer Name', location)
       }
