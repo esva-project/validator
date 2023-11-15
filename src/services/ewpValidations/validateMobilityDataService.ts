@@ -28,10 +28,29 @@ const validateEWPMobilityResponse = async (
   if (sending_signature && receiving_signature) {
     const location = 'Document Signatures'
 
-    response.addHEIValidation(1, 'LA Signer Name', sending_signature.getName(), location)
-    response.addHEIValidation(1, 'LA Signer Email', sending_signature.getEmail(), location)
-    response.addHEIValidation(2, 'LA Signer Name', receiving_signature.getName(), location)
-    response.addHEIValidation(2, 'LA Signer Email', receiving_signature.getEmail(), location)
+    if (sending_signature.getName() == 'undefined' && sending_signature.getEmail()) {
+      response.addHEIValidation(
+        1,
+        'No LA Signer information was found to perform validations',
+        '',
+        ''
+      )
+    } else {
+      response.addHEIValidation(1, 'LA Signer Name', sending_signature.getName(), location)
+      response.addHEIValidation(1, 'LA Signer Email', sending_signature.getEmail(), location)
+    }
+
+    if (receiving_signature.getName() == 'undefined' && receiving_signature.getEmail()) {
+      response.addHEIValidation(
+        2,
+        'No LA Signer information was found to perform validations',
+        '',
+        ''
+      )
+    } else {
+      response.addHEIValidation(2, 'LA Signer Name', receiving_signature.getName(), location)
+      response.addHEIValidation(2, 'LA Signer Email', receiving_signature.getEmail(), location)
+    }
     response.addStudentHEIValidation(
       'Student Name',
       student_information.getName().getValue(),
@@ -62,6 +81,19 @@ const validateEWPMobilityResponse = async (
       if (
         signature.getCommonName().toLowerCase() ===
         student_information.getName().getValue().toLowerCase()
+      ) {
+        response.foundStudentValdiation('Student Name', location)
+      } else if (
+        signature.getEmail() === student_information.getEmail().getValue() &&
+        (signature
+          .getCommonName()
+          .toLowerCase()
+          .includes(student_information.getName().getValue().toLowerCase()) ||
+          student_information
+            .getName()
+            .getValue()
+            .toLowerCase()
+            .includes(signature.getCommonName().toLowerCase()))
       ) {
         response.foundStudentValdiation('Student Name', location)
       }

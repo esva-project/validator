@@ -22,28 +22,41 @@ const validateEWPInstitutionsResponse = async (
   const locationBothAPIs = 'Institution or Organizational Unit Contact List'
   const locationInstitution = 'Institution Contact List'
 
-  mobilityValidation.addHEIValidation(
-    flow,
-    'LA Signer Name',
-    hei_information.getMobilitySignature()?.getName() as string,
-    locationBothAPIs
-  )
-  mobilityValidation.addHEIValidation(
-    flow,
-    'LA Signer Email',
-    hei_information.getMobilitySignature()?.getEmail() as string,
-    locationBothAPIs
-  )
-  mobilityValidation.addHEIValidation(
-    flow,
-    'LA Signer Position',
-    hei_information.getMobilitySignature()?.getRole() as string,
-    locationInstitution
-  )
+  if (
+    (hei_information.getMobilitySignature()?.getName() as string) != 'undefined' ||
+    (hei_information.getMobilitySignature()?.getEmail() as string) != 'undefined'
+  ) {
+    mobilityValidation.addHEIValidation(
+      flow,
+      'LA Signer Name',
+      hei_information.getMobilitySignature()?.getName() as string,
+      locationBothAPIs
+    )
+    mobilityValidation.addHEIValidation(
+      flow,
+      'LA Signer Email',
+      hei_information.getMobilitySignature()?.getEmail() as string,
+      locationBothAPIs
+    )
+    mobilityValidation.addHEIValidation(
+      flow,
+      'LA Signer Position',
+      hei_information.getMobilitySignature()?.getRole() as string,
+      locationInstitution
+    )
+  }
 
   // Compare Institution and Mobility Informations
   for (const contact of institutions_response.getContacts()) {
     if (contact.getContactPersonName() === hei_information.getMobilitySignature()?.getName()) {
+      mobilityValidation.foundSendingHEIValdiation('LA Signer Name', locationBothAPIs)
+    } else if (
+      contact.getContactPersonEmail() === hei_information.getMobilitySignature()?.getEmail() &&
+      (contact
+        .getContactPersonName()
+        .includes(hei_information.getMobilitySignature()?.getName() as string) ||
+        hei_information.getMobilitySignature()?.getName().includes(contact.getContactPersonName()))
+    ) {
       mobilityValidation.foundSendingHEIValdiation('LA Signer Name', locationBothAPIs)
     }
     if (contact.getContactPersonEmail() === hei_information.getMobilitySignature()?.getEmail()) {
