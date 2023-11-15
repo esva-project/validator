@@ -61,6 +61,17 @@ const validateEWPOUnitsResponse = async (
         'LA Contact Person Name',
         location
       )
+    } else if (
+      contact.getContactPersonEmail() === ounit_information.getMobilityContacts()?.getEmail() &&
+      (contact
+        .getContactPersonName()
+        .includes(ounit_information.getMobilityContacts()?.getName() as string) ||
+        ounit_information.getMobilityContacts()?.getName().includes(contact.getContactPersonName()))
+    ) {
+      institutionsAndMobilityValidation.foundSendingHEIValdiation(
+        'LA Contact Person Name',
+        location
+      )
     }
     if (contact.getContactPersonEmail() === ounit_information.getMobilityContacts()?.getEmail()) {
       institutionsAndMobilityValidation.foundSendingHEIValdiation(

@@ -28,6 +28,8 @@ const validateEWPMobilityResponse = async (
   if (sending_signature && receiving_signature) {
     const location = 'Document Signatures'
 
+    console.log(sending_signature.getName())
+    console.log(sending_signature.getEmail())
     if (sending_signature.getName() == 'undefined' && sending_signature.getEmail()) {
       response.addHEIValidation(
         1,
