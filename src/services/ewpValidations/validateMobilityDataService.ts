@@ -29,13 +29,12 @@ const validateEWPMobilityResponse = async (
     const location = 'Document Signatures'
     console.log('printing sending stuff')
     console.log(sending_signature.getName())
-    console.log(sending_signature.getName() == 'undefined')
     console.log(sending_signature.getEmail())
 
     console.log('printing receiving stuff')
     console.log(receiving_signature.getName())
     console.log(receiving_signature.getName())
-    if (sending_signature.getName() == 'undefined' && sending_signature.getEmail()) {
+    if (sending_signature.getName() == undefined && sending_signature.getEmail() == undefined) {
       response.addHEIValidation(
         1,
         'No LA Signer information was found to perform validations',
@@ -43,11 +42,21 @@ const validateEWPMobilityResponse = async (
         ''
       )
     } else {
-      response.addHEIValidation(1, 'LA Signer Name', sending_signature.getName(), location)
-      response.addHEIValidation(1, 'LA Signer Email', sending_signature.getEmail(), location)
+      response.addHEIValidation(
+        1,
+        'LA Signer Name',
+        sending_signature.getName() as string,
+        location
+      )
+      response.addHEIValidation(
+        1,
+        'LA Signer Email',
+        sending_signature.getEmail() as string,
+        location
+      )
     }
 
-    if (receiving_signature.getName() == 'undefined' && receiving_signature.getEmail()) {
+    if (receiving_signature.getName() == undefined && receiving_signature.getEmail() == undefined) {
       response.addHEIValidation(
         2,
         'No LA Signer information was found to perform validations',
@@ -55,8 +64,18 @@ const validateEWPMobilityResponse = async (
         ''
       )
     } else {
-      response.addHEIValidation(2, 'LA Signer Name', receiving_signature.getName(), location)
-      response.addHEIValidation(2, 'LA Signer Email', receiving_signature.getEmail(), location)
+      response.addHEIValidation(
+        2,
+        'LA Signer Name',
+        receiving_signature.getName() as string,
+        location
+      )
+      response.addHEIValidation(
+        2,
+        'LA Signer Email',
+        receiving_signature.getEmail() as string,
+        location
+      )
     }
     response.addStudentHEIValidation(
       'Student Name',

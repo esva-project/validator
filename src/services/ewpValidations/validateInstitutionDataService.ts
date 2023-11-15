@@ -55,7 +55,7 @@ const validateEWPInstitutionsResponse = async (
       (contact
         .getContactPersonName()
         .includes(hei_information.getMobilitySignature()?.getName() as string) ||
-        hei_information.getMobilitySignature()?.getName().includes(contact.getContactPersonName()))
+        hei_information.getMobilitySignature()?.getName()?.includes(contact.getContactPersonName()))
     ) {
       mobilityValidation.foundSendingHEIValdiation('LA Signer Name', locationBothAPIs)
     }

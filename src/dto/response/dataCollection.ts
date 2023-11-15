@@ -26,8 +26,8 @@ interface EWPDataHEIInterface {
 }
 
 interface EWPDataContactInterface {
-  'contact-name': string
-  email: string
+  'contact-name': string | undefined
+  email: string | undefined
   'role-description': string
   api_fetched: string[]
 }
@@ -246,8 +246,8 @@ class ValueAPIFetched implements ValueAPIFetchedInterface {
 }
 
 class EWPDataContact implements EWPDataContactInterface {
-  'contact-name': string
-  email: string
+  'contact-name': string | undefined
+  email: string | undefined
   'role-description': string
   api_fetched: string[]
 

@@ -60,7 +60,7 @@ const validateEWPOUnitsResponse = async (
     console.log(contact.getContactPersonName())
     console.log(ounit_information.getMobilityContacts()?.getName())
     console.log(
-      ounit_information.getMobilityContacts()?.getName().includes(contact.getContactPersonName())
+      ounit_information.getMobilityContacts()?.getName()?.includes(contact.getContactPersonName())
     )
 
     if (contact.getContactPersonName() === ounit_information.getMobilityContacts()?.getName()) {
@@ -73,7 +73,10 @@ const validateEWPOUnitsResponse = async (
       (contact
         .getContactPersonName()
         .includes(ounit_information.getMobilityContacts()?.getName() as string) ||
-        ounit_information.getMobilityContacts()?.getName().includes(contact.getContactPersonName()))
+        ounit_information
+          .getMobilityContacts()
+          ?.getName()
+          ?.includes(contact.getContactPersonName()))
     ) {
       institutionsAndMobilityValidation.foundSendingHEIValdiation(
         'LA Contact Person Name',
