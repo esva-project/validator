@@ -201,7 +201,7 @@ class EWPDataHEI implements EWPDataHEIInterface {
   public addInstitutionContact = (c: EWPDataContact) => this.institution_contacts.push(c)
   public contactExistsInInstitutionContacts = (c: EWPDataContact, api: string) => {
     console.log(c)
-    if (c.getEmail() == '' && c.getName() == '') {
+    if (c.getEmail() == undefined && c.getName() == undefined) {
       console.log('this is empty')
       return true
     }
