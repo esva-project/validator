@@ -1,6 +1,7 @@
 import { ResponseDTO } from '../../dto/response/response'
 import { OUnits } from '../../model/ounitResponse'
 import { logger } from '../../utils/logs'
+import { partialPresentInFull } from '../../utils/strings'
 
 const validateEWPOUnitsResponse = async (
   flow: number,
@@ -70,13 +71,10 @@ const validateEWPOUnitsResponse = async (
       )
     } else if (
       contact.getContactPersonEmail() === ounit_information.getMobilityContacts()?.getEmail() &&
-      (contact
-        .getContactPersonName()
-        .includes(ounit_information.getMobilityContacts()?.getName() as string) ||
-        ounit_information
-          .getMobilityContacts()
-          ?.getName()
-          ?.includes(contact.getContactPersonName()))
+      partialPresentInFull(
+        contact.getContactPersonEmail(),
+        ounit_information.getMobilityContacts()?.getEmail() as string
+      )
     ) {
       institutionsAndMobilityValidation.foundSendingHEIValdiation(
         'LA Contact Person Name',

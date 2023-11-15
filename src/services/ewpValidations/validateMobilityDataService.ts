@@ -2,6 +2,7 @@ import { MobilityLaParameters } from '../../dto/mobilityParameters'
 import { ResponseDTO } from '../../dto/response/response'
 import { Mobility } from '../../model/mobilityResponse'
 import { logger } from '../../utils/logs'
+import { partialPresentInFull } from '../../utils/strings'
 
 const validateEWPMobilityResponse = async (
   mobility_response: Mobility,
@@ -108,15 +109,10 @@ const validateEWPMobilityResponse = async (
         response.foundStudentValdiation('Student Name', location)
       } else if (
         signature.getEmail() === student_information.getEmail().getValue() &&
-        (signature
-          .getCommonName()
-          .toLowerCase()
-          .includes(student_information.getName().getValue().toLowerCase()) ||
-          student_information
-            .getName()
-            .getValue()
-            .toLowerCase()
-            .includes(signature.getCommonName().toLowerCase()))
+        partialPresentInFull(
+          signature.getCommonName().toLowerCase(),
+          student_information.getName().getValue().toLowerCase()
+        )
       ) {
         response.foundStudentValdiation('Student Name', location)
       }

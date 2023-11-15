@@ -1,6 +1,7 @@
 import { ResponseDTO } from '../../dto/response/response'
 import { Institutions } from '../../model/institutionResponse'
 import { logger } from '../../utils/logs'
+import { partialPresentInFull } from '../../utils/strings'
 
 const validateEWPInstitutionsResponse = async (
   flow: number,
@@ -23,8 +24,8 @@ const validateEWPInstitutionsResponse = async (
   const locationInstitution = 'Institution Contact List'
 
   if (
-    (hei_information.getMobilitySignature()?.getName() as string) != 'undefined' ||
-    (hei_information.getMobilitySignature()?.getEmail() as string) != 'undefined'
+    hei_information.getMobilitySignature()?.getName() != undefined ||
+    hei_information.getMobilitySignature()?.getEmail() != undefined
   ) {
     mobilityValidation.addHEIValidation(
       flow,
@@ -52,10 +53,10 @@ const validateEWPInstitutionsResponse = async (
       mobilityValidation.foundSendingHEIValdiation('LA Signer Name', locationBothAPIs)
     } else if (
       contact.getContactPersonEmail() === hei_information.getMobilitySignature()?.getEmail() &&
-      (contact
-        .getContactPersonName()
-        .includes(hei_information.getMobilitySignature()?.getName() as string) ||
-        hei_information.getMobilitySignature()?.getName()?.includes(contact.getContactPersonName()))
+      partialPresentInFull(
+        contact.getContactPersonName(),
+        hei_information.getMobilitySignature()?.getName() as string
+      )
     ) {
       mobilityValidation.foundSendingHEIValdiation('LA Signer Name', locationBothAPIs)
     }
