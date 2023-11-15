@@ -201,7 +201,7 @@ class EWPDataHEI implements EWPDataHEIInterface {
   public addInstitutionContact = (c: EWPDataContact) => this.institution_contacts.push(c)
   public contactExistsInInstitutionContacts = (c: EWPDataContact, api: string) => {
     if (c.getEmail() == '' && c.getName() == '') {
-      return false
+      return true
     }
 
     for (const contact of this.institution_contacts) {
