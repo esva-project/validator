@@ -199,13 +199,14 @@ class EWPDataHEI implements EWPDataHEIInterface {
   public setOUnitID = (o: string) => (this.ounit_id = o)
 
   public addInstitutionContact = (c: EWPDataContact) => this.institution_contacts.push(c)
-  public contactExistsInInstitutionContacts = (c: EWPDataContact, api: string) => {
-    console.log(c)
-    if (c.getEmail() == undefined && c.getName() == undefined) {
-      console.log('this is empty')
-      return true
+  public removeEmptyInstitutionContact = () => {
+    for (let i = 0; i < this.institution_contacts.length; i++) {
+      if (this.institution_contacts[i].getName() == undefined) {
+        this.institution_contacts.splice(i, 1)
+      }
     }
-
+  }
+  public contactExistsInInstitutionContacts = (c: EWPDataContact, api: string) => {
     for (const contact of this.institution_contacts) {
       if (contact.checkSimilarContact(c)) {
         console.log('already exists')

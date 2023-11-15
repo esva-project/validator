@@ -120,6 +120,9 @@ const validateEWPMobilityResponse = async (
         response.foundStudentValdiation('Student Email', location)
       }
     }
+
+    response.getSendingHEIInformation().removeEmptyInstitutionContact()
+    response.getReceivingHEIInformation().removeEmptyInstitutionContact()
   }
 
   return response
