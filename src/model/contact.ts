@@ -5,7 +5,7 @@ interface ContactInterface {
   'person-given-names': string
   'person-family-name': string
   email: string
-  'role-description': StringLang
+  'role-description': StringLang | undefined
 }
 
 class Contact {

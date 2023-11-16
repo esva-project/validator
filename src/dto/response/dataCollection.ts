@@ -129,7 +129,7 @@ class DataCollectionDTO implements DataCollectionInterface {
         new EWPDataContact(
           contact.getContactPersonName(),
           contact.getContactPersonEmail(),
-          contact.getContactPersonRoleDescription().getValue(),
+          contact.getContactPersonRoleDescription()?.getValue() as string,
           'Institution Contact List'
         )
       )
@@ -146,7 +146,7 @@ class DataCollectionDTO implements DataCollectionInterface {
         new EWPDataContact(
           contact.getContactPersonName(),
           contact.getContactPersonEmail(),
-          contact.getContactPersonRoleDescription().getValue(),
+          contact.getContactPersonRoleDescription()?.getValue() as string,
           'OUnit Contact List'
         )
       )

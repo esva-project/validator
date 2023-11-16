@@ -65,7 +65,7 @@ const validateEWPInstitutionsResponse = async (
       mobilityValidation.foundSendingHEIValdiation('LA Signer Email', locationBothAPIs)
     }
     if (
-      contact.getContactPersonRoleDescription().getValue() ===
+      contact.getContactPersonRoleDescription()?.getValue() ===
       hei_information.getMobilitySignature()?.getRole()
     ) {
       mobilityValidation.foundSendingHEIValdiation('LA Signer Position', locationInstitution)
