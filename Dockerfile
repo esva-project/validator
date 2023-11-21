@@ -11,6 +11,8 @@ RUN pip3 install --no-cache --upgrade pip setuptools
 
 RUN apk update && apk add make g++
 
+ENV NODE_OPTIONS=--max-old-space-size=16384
+
 RUN npm i
 
 COPY ./ ./

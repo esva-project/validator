@@ -111,7 +111,10 @@ class Validation implements ValidationInterface {
   status: string
 
   constructor(nameAttribute: string, valueAttribute: string, location: string) {
-    this.label = `Is the ${nameAttribute} (${valueAttribute}) present in (${location})`
+    this.label =
+      valueAttribute == '' && location == ''
+        ? nameAttribute
+        : `Is the ${nameAttribute} (${valueAttribute}) present in (${location})`
     this.status = 'NOT FOUND'
   }
 

@@ -16,9 +16,9 @@ interface InstitutionsCoveredInterface {
 }
 
 interface ApiImplementedInterface {
-  'omobility-las': ApiInterface[]
-  institutions: ApiInterface[]
-  'organizational-units': ApiInterface[]
+  'omobility-las': ApiInterface[] | undefined
+  institutions: ApiInterface[] | undefined
+  'organizational-units': ApiInterface[] | undefined
 }
 
 interface ApiInterface {
@@ -40,10 +40,15 @@ class Catalogue {
   public getInstitutionsCovered = (h: HostInterface) =>
     h['institutions-covered'] ? h['institutions-covered'] : []
   public getHEIID = (i: InstitutionsCoveredInterface) => (i['hei-id'] ? i['hei-id'][0] : '')
-  public getOMobilityLASAPIURL = (a: ApiImplementedInterface) => a['omobility-las'][0]['get-url']
-  public getInstitutionsAPIURL = (a: ApiImplementedInterface) => a.institutions[0].url
-  public getOUnitsAPIURL = (a: ApiImplementedInterface) => a['organizational-units'][0].url
-
+  public getOMobilityLASAPIURL = (a: ApiImplementedInterface): string => {
+    return a['omobility-las'] != undefined ? a['omobility-las'][0]['get-url'] : ''
+  }
+  public getInstitutionsAPIURL = (a: ApiImplementedInterface): string => {
+    return a['institutions'] != undefined ? a['institutions'][0].url : ''
+  }
+  public getOUnitsAPIURL = (a: ApiImplementedInterface): string => {
+    return a['organizational-units'] != undefined ? a['organizational-units'][0].url : ''
+  }
   public getLastUpdated = () => this.lastUpdated
   public setLastUpdated = (l: Date) => (this.lastUpdated = l)
 }

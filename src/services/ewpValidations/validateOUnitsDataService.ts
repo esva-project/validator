@@ -1,6 +1,7 @@
 import { ResponseDTO } from '../../dto/response/response'
 import { OUnits } from '../../model/ounitResponse'
 import { logger } from '../../utils/logs'
+import { partialPresentInFull } from '../../utils/strings'
 
 const validateEWPOUnitsResponse = async (
   flow: number,
@@ -49,11 +50,42 @@ const validateEWPOUnitsResponse = async (
 
   // Compare Institution and Mobility Informations
   for (const contact of ounits_response.getContacts()) {
-    if (contact.getContactPersonName() === ounit_information.getMobilityContacts()?.getName()) {
+    if (contact.getContactPersonName() === ounit_information.getMobilitySignature()?.getName()) {
       institutionsAndMobilityValidation.foundSendingHEIValdiation('LA Signer Name', location)
     }
-    if (contact.getContactPersonEmail() === ounit_information.getMobilityContacts()?.getEmail()) {
+    if (contact.getContactPersonEmail() === ounit_information.getMobilitySignature()?.getEmail()) {
       institutionsAndMobilityValidation.foundSendingHEIValdiation('LA Signer Email', location)
+    }
+
+    console.log('contacts')
+    console.log(contact.getContactPersonName())
+    console.log(ounit_information.getMobilityContacts()?.getName())
+    console.log(
+      ounit_information.getMobilityContacts()?.getName()?.includes(contact.getContactPersonName())
+    )
+
+    if (contact.getContactPersonName() === ounit_information.getMobilityContacts()?.getName()) {
+      institutionsAndMobilityValidation.foundSendingHEIValdiation(
+        'LA Contact Person Name',
+        location
+      )
+    } else if (
+      contact.getContactPersonEmail() === ounit_information.getMobilityContacts()?.getEmail() &&
+      partialPresentInFull(
+        contact.getContactPersonEmail(),
+        ounit_information.getMobilityContacts()?.getEmail() as string
+      )
+    ) {
+      institutionsAndMobilityValidation.foundSendingHEIValdiation(
+        'LA Contact Person Name',
+        location
+      )
+    }
+    if (contact.getContactPersonEmail() === ounit_information.getMobilityContacts()?.getEmail()) {
+      institutionsAndMobilityValidation.foundSendingHEIValdiation(
+        'LA Contact Person Email',
+        location
+      )
     }
   }
   return institutionsAndMobilityValidation

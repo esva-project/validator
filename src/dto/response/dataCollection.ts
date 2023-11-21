@@ -26,8 +26,8 @@ interface EWPDataHEIInterface {
 }
 
 interface EWPDataContactInterface {
-  'contact-name': string
-  email: string
+  'contact-name': string | undefined
+  email: string | undefined
   'role-description': string
   api_fetched: string[]
 }
@@ -129,7 +129,7 @@ class DataCollectionDTO implements DataCollectionInterface {
         new EWPDataContact(
           contact.getContactPersonName(),
           contact.getContactPersonEmail(),
-          contact.getContactPersonRoleDescription().getValue(),
+          contact.getContactPersonRoleDescription()?.getValue() as string,
           'Institution Contact List'
         )
       )
@@ -146,7 +146,7 @@ class DataCollectionDTO implements DataCollectionInterface {
         new EWPDataContact(
           contact.getContactPersonName(),
           contact.getContactPersonEmail(),
-          contact.getContactPersonRoleDescription().getValue(),
+          contact.getContactPersonRoleDescription()?.getValue() as string,
           'OUnit Contact List'
         )
       )
@@ -199,13 +199,23 @@ class EWPDataHEI implements EWPDataHEIInterface {
   public setOUnitID = (o: string) => (this.ounit_id = o)
 
   public addInstitutionContact = (c: EWPDataContact) => this.institution_contacts.push(c)
+  public removeEmptyInstitutionContact = () => {
+    for (let i = 0; i < this.institution_contacts.length; i++) {
+      if (this.institution_contacts[i].getName() == undefined) {
+        this.institution_contacts.splice(i, 1)
+      }
+    }
+  }
   public contactExistsInInstitutionContacts = (c: EWPDataContact, api: string) => {
     for (const contact of this.institution_contacts) {
       if (contact.checkSimilarContact(c)) {
+        console.log('already exists')
         contact.addAPI(api)
         return true
       }
     }
+
+    console.log('return false')
     return false
   }
 
@@ -246,8 +256,8 @@ class ValueAPIFetched implements ValueAPIFetchedInterface {
 }
 
 class EWPDataContact implements EWPDataContactInterface {
-  'contact-name': string
-  email: string
+  'contact-name': string | undefined
+  email: string | undefined
   'role-description': string
   api_fetched: string[]
 

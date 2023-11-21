@@ -30,7 +30,9 @@ class Institutions {
       }
     }
     for (const c of this.institutions['institutions-response'].hei.contact) {
-      c['role-description'] = new StringLang(c['role-description'])
+      if (c['role-description'] != undefined) {
+        c['role-description'] = new StringLang(c['role-description'])
+      }
     }
   }
 
