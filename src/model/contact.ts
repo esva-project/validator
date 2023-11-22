@@ -15,15 +15,16 @@ class Contact {
   }
 
   public getContactPersonName = () => {
-    console.log('another log')
-    console.log(this.contact['contact-name'])
-
-    return this.contact['contact-name']
-      ? this.contact['contact-name']
-      : // ? this.contact['contact-name']['_']
-        //   ? this.contact['contact-name']['_']
-        // : this.contact['contact-name']
-        this.contact['person-given-names'] + ' ' + this.contact['person-family-name']
+    if (this.contact['contact-name']) {
+      if (this.contact['contact-name'].includes('_')) {
+        const obj: StringLang = JSON.parse(this.contact['contact-name'])
+        return obj.getValue()
+      } else {
+        return this.contact['contact-name']
+      }
+    } else {
+      return this.contact['person-given-names'] + ' ' + this.contact['person-family-name']
+    }
   }
   public getContactPersonGivenName = () => this.contact['person-given-names']
   public getContactPersonFamilyName = () => this.contact['person-family-name']
