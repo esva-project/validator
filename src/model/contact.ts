@@ -15,9 +15,15 @@ class Contact {
   }
 
   public getContactPersonName = () => {
+    console.log('another log')
+    console.log(this.contact['contact-name'])
+
     return this.contact['contact-name']
       ? this.contact['contact-name']
-      : this.contact['person-given-names'] + ' ' + this.contact['person-family-name']
+      : // ? this.contact['contact-name']['_']
+        //   ? this.contact['contact-name']['_']
+        // : this.contact['contact-name']
+        this.contact['person-given-names'] + ' ' + this.contact['person-family-name']
   }
   public getContactPersonGivenName = () => this.contact['person-given-names']
   public getContactPersonFamilyName = () => this.contact['person-family-name']
