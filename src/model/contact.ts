@@ -19,7 +19,7 @@ class Contact {
     console.log(this.contact['contact-name'])
     console.log(typeof this.contact['contact-name'])
     if (this.contact['contact-name']) {
-      if (this.contact['contact-name'].includes('_')) {
+      if (typeof this.contact['contact-name'] == 'object') {
         const obj: StringLang = JSON.parse(this.contact['contact-name'])
         return obj.getValue()
       } else {
