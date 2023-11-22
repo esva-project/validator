@@ -1,7 +1,7 @@
 import { StringLang } from './auxiliary'
 
 interface ContactInterface {
-  'contact-name': string
+  'contact-name': string | StringLang
   'person-given-names': string
   'person-family-name': string
   email: string
@@ -19,12 +19,9 @@ class Contact {
     console.log(this.contact['contact-name'])
     console.log(typeof this.contact['contact-name'])
     if (this.contact['contact-name']) {
-      if (typeof this.contact['contact-name'] == 'object') {
-        const obj: StringLang = this.contact['contact-name']
-        return obj.getValue()
-      } else {
-        return this.contact['contact-name']
-      }
+      return this.contact['contact-name'] instanceof StringLang
+        ? this.contact['contact-name'].getValue()
+        : this.contact['contact-name']
     } else {
       return this.contact['person-given-names'] + ' ' + this.contact['person-family-name']
     }
