@@ -20,7 +20,7 @@ class Contact {
     console.log(typeof this.contact['contact-name'])
     if (this.contact['contact-name']) {
       if (typeof this.contact['contact-name'] == 'object') {
-        const obj: StringLang = JSON.parse(this.contact['contact-name'])
+        const obj: StringLang = this.contact['contact-name']
         return obj.getValue()
       } else {
         return this.contact['contact-name']
