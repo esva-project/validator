@@ -12,7 +12,7 @@ RUN pip3 install --no-cache --upgrade pip setuptools
 
 RUN apk update && apk add make g++
 
-RUN npm install -g npm@latest
+RUN npm install -g npm@6.14.15
 
 ENV NODE_OPTIONS=--max-old-space-size=16384
 
