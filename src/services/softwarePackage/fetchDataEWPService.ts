@@ -12,7 +12,7 @@ let catalogue: Catalogue = new Catalogue(await fetchCatalogue.fetchCatalogue())
 const updateDataFromEWP = async (): Promise<Catalogue> => {
   const lastUpdated = catalogue.getLastUpdated()
 
-  if (Date.now() - lastUpdated.getTime() > 1 * 30 * 1000) {
+  if (Date.now() - lastUpdated.getTime() > 60 * 60 * 1000) {
     // Perform asynchronous operation to update catalogue
     fetchCatalogue
       .fetchCatalogue()
