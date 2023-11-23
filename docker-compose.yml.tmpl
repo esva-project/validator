@@ -53,10 +53,6 @@ services:
     container_name: validador-core 
     hostname: validador-core 
     restart: unless-stopped 
-    resources:
-      limits:
-        memory: 2g
-        cpus: 2
     env_file: 
       - /data/esva/validator/.env
     volumes: 
