@@ -9,7 +9,7 @@ const instance = axios.create({
     rejectUnauthorized: false
   }),
   method: 'GET',
-  timeout: 60_000
+  timeout: 240_000
 })
 
 const fetchCatalogue = async () => {
