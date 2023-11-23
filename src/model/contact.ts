@@ -18,6 +18,7 @@ class Contact {
     console.log('another log')
     console.log(this.contact['contact-name'])
     console.log(typeof this.contact['contact-name'])
+    console.log(this.contact['contact-name'] instanceof StringLang)
     if (this.contact['contact-name']) {
       return this.contact['contact-name'] instanceof StringLang
         ? this.contact['contact-name'].getValue()
