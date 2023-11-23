@@ -1,12 +1,8 @@
 #!/usr/bin/env node
 
-import fs from 'fs'
-import https from 'https'
-
 import express from 'express'
 import morgan from 'morgan'
 
-import statsController from './controller/logsController' // Import the statsController module
 import routes from './routes/validationRoutes'
 
 const app = express()
@@ -22,19 +18,19 @@ app.use(express.json())
 app.use('/', routes.router)
 
 // Create a separate HTTPS server for the /logs route
-const logsApp = express()
-logsApp.get('/logs', statsController.logs)
+// const logsApp = express()
+// logsApp.get('/logs', statsController.logs)
 
-const logsSslOptions = {
-  cert: fs.readFileSync('./certificates/ssl_certs/fullchain.pem'),
-  key: fs.readFileSync('./certificates/ssl_certs/privkey.pem')
-}
+// const logsSslOptions = {
+//   cert: fs.readFileSync('./certificates/ssl_certs/fullchain.pem'),
+//   key: fs.readFileSync('./certificates/ssl_certs/privkey.pem')
+// }
 
-const logsServer = https.createServer(logsSslOptions, logsApp)
-const LOGS_PORT = 4000
-logsServer.listen(LOGS_PORT, () => {
-  console.log(`Logs app is running on port ${LOGS_PORT}`)
-})
+// const logsServer = https.createServer(logsSslOptions, logsApp)
+// const LOGS_PORT = 4000
+// logsServer.listen(LOGS_PORT, () => {
+//   console.log(`Logs app is running on port ${LOGS_PORT}`)
+// })
 
 /** Error handling */
 app.use((_, res) => {

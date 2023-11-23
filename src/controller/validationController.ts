@@ -4,10 +4,8 @@ import fs from 'fs'
 import { Request, Response } from 'express'
 import useragent from 'useragent'
 
-import { LogDTOParameters } from '../dto/logsDTO'
 import { MobilityLaParameters } from '../dto/mobilityParameters'
 import softwarePackage from '../outrequests/softwarePackageCommunication'
-import logs from '../services/logs'
 import olaValidation from '../services/olaValidation'
 import { logger } from '../utils/logs'
 
@@ -52,18 +50,18 @@ const validateOLA = async (req: Request, res: Response) => {
     console.log(browser)
     console.log(os)
 
-    logs.insertLogs(
-      new LogDTOParameters(
-        req.socket.remoteAddress as string,
-        browser,
-        os,
-        req.path,
-        JSON.stringify(mobParams.toJSON()),
-        response.getURLs(),
-        response.getStatus(),
-        JSON.stringify(response)
-      )
-    )
+    // logs.insertLogs(
+    //   new LogDTOParameters(
+    //     req.socket.remoteAddress as string,
+    //     browser,
+    //     os,
+    //     req.path,
+    //     JSON.stringify(mobParams.toJSON()),
+    //     response.getURLs(),
+    //     response.getStatus(),
+    //     JSON.stringify(response)
+    //   )
+    // )
   })
 }
 
