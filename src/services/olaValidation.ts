@@ -15,8 +15,8 @@ const validateOLA = async (fileMeta: string, params: MobilityLaParameters) => {
   const mobilityValidation = await processMobility(params, response)
   if (mobilityValidation.getMessage().includes('Could not fetch')) return mobilityValidation
   const institutionsAndMobilityValidation = await processInstitutions(params, mobilityValidation)
-  if (institutionsAndMobilityValidation.getMessage().includes('Could not fetch'))
-    return mobilityValidation
+  // if (institutionsAndMobilityValidation.getMessage().includes('Could not fetch'))
+  //   return mobilityValidation
   const fullResponse = await processOUnits(params, institutionsAndMobilityValidation)
   return fullResponse
 }
@@ -52,8 +52,8 @@ const processInstitutions = async (
   const sending_institutions_response = await fetchDataEWP.fetchInstitutionsXMLFromEWP(
     contents.getSendingSchac()
   )
-  if (sending_institutions_response instanceof ResponseDTO) {
-    return sending_institutions_response
+  if (sending_institutions_response == undefined) {
+    return mobilityValidation
   }
 
   mobilityValidation.addURLs(sending_institutions_response.url[0])
@@ -74,8 +74,8 @@ const processInstitutions = async (
   const receiving_institutions_response = await fetchDataEWP.fetchInstitutionsXMLFromEWP(
     contents.getReceivingSchac()
   )
-  if (receiving_institutions_response instanceof ResponseDTO) {
-    return receiving_institutions_response
+  if (receiving_institutions_response == undefined) {
+    return responseSoFar
   }
 
   responseSoFar.addURLs(receiving_institutions_response.url[0])

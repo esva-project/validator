@@ -9,11 +9,29 @@ import EWPRequest from '../../outrequests/ewpEndpointRequest'
 
 let catalogue: Catalogue = new Catalogue(await fetchCatalogue.fetchCatalogue())
 
-const updateDataFromEWP = async () => {
+const updateDataFromEWP = async (): Promise<Catalogue> => {
   const lastUpdated = catalogue.getLastUpdated()
-  if (Date.now() - lastUpdated.getTime() > 15 * 60 * 1000) {
-    catalogue = new Catalogue(await fetchCatalogue.fetchCatalogue())
+
+  if (Date.now() - lastUpdated.getTime() > 1 * 30 * 1000) {
+    // Perform asynchronous operation to update catalogue
+    fetchCatalogue
+      .fetchCatalogue()
+      .then((newCatalogueData) => {
+        console.log('UPDATING')
+        catalogue = new Catalogue(newCatalogueData)
+        console.log(catalogue.getHosts().length)
+        return catalogue
+      })
+      .catch((error) => {
+        console.log('ERROR')
+        console.log(error)
+        return catalogue
+      })
   }
+
+  console.log('RETURNING NORMAL')
+  console.log(catalogue.getHosts().length)
+  return catalogue
 }
 
 const fetchMobilityXMLFromEWP = async (pdfContents: MobilityLaParameters) => {
@@ -60,7 +78,7 @@ const fetchInstitutionsXMLFromEWP = async (hei_id: string) => {
     return { i, url }
   }
 
-  return new ResponseDTO(400, 'Could not fetch Institutions Response from EWP')
+  return
 }
 
 const fetchOUnitsXMLFromEWP = async (hei_id: string, ounit_id: string) => {

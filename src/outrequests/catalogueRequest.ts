@@ -8,7 +8,8 @@ const instance = axios.create({
   httpsAgent: new https.Agent({
     rejectUnauthorized: false
   }),
-  method: 'GET'
+  method: 'GET',
+  timeout: 60_000
 })
 
 const fetchCatalogue = async () => {
