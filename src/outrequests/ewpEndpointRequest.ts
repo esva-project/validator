@@ -20,20 +20,20 @@ const get = async (get_url: string, params: any) => {
     headers: {
       'Content-Type': 'application/xml; charset=UTF-8',
       Digest: 'SHA-256=' + digest.toString(),
-      Posing: '',
       'Request-Target': 'GET /' + parser.host.replace(':8443', ''),
       'X-Request-Id': uuidv4()
-    },
+    } as Record<string, string>,
     host: parser.host.replace(':8443', ''),
     method: 'GET',
     path: parser.pathname + '?' + new URLSearchParams(params).toString(),
     port: parser.port
   }
+  const actualUrl = Array.isArray(get_url) ? get_url[0] : get_url
 
-  if (get_url.includes('ewp.up.pt')) {
-    console.log('included')
+  if (actualUrl.includes('ewp.up.pt')) {
     options.headers.Posing = params.posing_hei
   }
+
   params.posing_hei = ''
 
   logger.ola.info('URL Found: ' + get_url)
