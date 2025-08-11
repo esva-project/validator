@@ -16,13 +16,7 @@ const get = async (get_url: string, params: any) => {
   const algorithm = 'sha256'
   const digest = crypto.createHash(algorithm).update('').digest('base64')
 
-  const options: {
-    headers: Record<string, string>
-    host: string
-    method: string
-    path: string
-    port?: string | number
-  } = {
+  const options = {
     headers: {
       'Content-Type': 'application/xml; charset=UTF-8',
       Digest: 'SHA-256=' + digest.toString(),
@@ -36,7 +30,8 @@ const get = async (get_url: string, params: any) => {
     port: parser.port
   }
 
-  if (get_url.includes('up.pt')) {
+  if (get_url.includes('ewp.up.pt')) {
+    console.log('included')
     options.headers.Posing = params.posing_hei
   }
   params.posing_hei = ''
