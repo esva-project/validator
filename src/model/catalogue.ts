@@ -16,6 +16,7 @@ interface InstitutionsCoveredInterface {
 }
 
 interface ApiImplementedInterface {
+  iias: ApiInterface[] | undefined
   'omobility-las': ApiInterface[] | undefined
   institutions: ApiInterface[] | undefined
   'organizational-units': ApiInterface[] | undefined
@@ -42,6 +43,9 @@ class Catalogue {
   public getHEIID = (i: InstitutionsCoveredInterface) => (i['hei-id'] ? i['hei-id'][0] : '')
   public getOMobilityLASAPIURL = (a: ApiImplementedInterface): string => {
     return a['omobility-las'] != undefined ? a['omobility-las'][0]['get-url'] : ''
+  }
+  public getOMobilityIIAAPIURL = (a: ApiImplementedInterface): string => {
+    return a['iias'] != undefined ? a['iias'][0]['get-url'] : ''
   }
   public getInstitutionsAPIURL = (a: ApiImplementedInterface): string => {
     return a['institutions'] != undefined ? a['institutions'][0].url : ''

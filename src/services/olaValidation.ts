@@ -1,7 +1,9 @@
+import { IIAParameters } from '../dto/iiaParameters'
 import { MobilityLaParameters } from '../dto/mobilityParameters'
 import { ResponseDTO } from '../dto/response/response'
 import { logger } from '../utils/logs'
 
+import validateIIADataService from './ewpValidations/validateIIADataService'
 import validateEWPInstitutions from './ewpValidations/validateInstitutionDataService'
 import validateEWPMobility from './ewpValidations/validateMobilityDataService'
 import validateEWPOUnits from './ewpValidations/validateOUnitsDataService'
@@ -18,6 +20,24 @@ const validateOLA = async (fileMeta: string, params: MobilityLaParameters) => {
   // if (institutionsAndMobilityValidation.getMessage().includes('Could not fetch'))
   //   return mobilityValidation
   const fullResponse = await processOUnits(params, institutionsAndMobilityValidation)
+  return fullResponse
+}
+
+const validateIIA = async (fileMeta: string, params: IIAParameters, receiving: string) => {
+  const response = await fileHandling.validateFileValidatorResponse(fileMeta)
+  if (response.countSignatures() == 0) return response
+
+  const mobilityValidation = await processIIA(params, response)
+  if (mobilityValidation.getMessage().includes('Could not fetch')) return mobilityValidation
+  const mob = new MobilityLaParameters(
+    params.getIIAID() as string,
+    params.getSchac() as string,
+    receiving
+  )
+  const institutionsAndMobilityValidation = await processInstitutions(mob, mobilityValidation)
+  // if (institutionsAndMobilityValidation.getMessage().includes('Could not fetch'))
+  //   return mobilityValidation
+  const fullResponse = await processOUnits(mob, institutionsAndMobilityValidation)
   return fullResponse
 }
 
@@ -41,6 +61,24 @@ const processMobility = async (contents: MobilityLaParameters, responseSoFar: Re
     mobility_response.m,
     contents,
     responseSoFar
+  )
+}
+
+const processIIA = async (contents: IIAParameters, responseSoFar: ResponseDTO) => {
+  // Fetch Mobility Data From EWP
+  const iia_response = await fetchDataEWP.fetchIIAXMLFromEWP(contents)
+  if (iia_response instanceof ResponseDTO) {
+    return iia_response
+  }
+
+  responseSoFar.addURLs(iia_response.url[0])
+
+  console.log('IIA Response: ' + JSON.stringify(iia_response))
+
+  return await validateIIADataService.validateEWPIIAResponse(
+    iia_response.i,
+    responseSoFar,
+    contents.getSchac()
   )
 }
 
@@ -155,4 +193,4 @@ const processOUnits = async (
   return responseSoFar
 }
 
-export default { validateOLA }
+export default { validateIIA, validateOLA }

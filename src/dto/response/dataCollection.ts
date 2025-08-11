@@ -1,3 +1,4 @@
+import { IIA, HEIIIA } from '../../model/iiaResponse'
 import { Institutions } from '../../model/institutionResponse'
 import { HEI, Mobility, MobilitySignatureInterface } from '../../model/mobilityResponse'
 import { OUnits } from '../../model/ounitResponse'
@@ -111,6 +112,41 @@ class DataCollectionDTO implements DataCollectionInterface {
     if (!editing_hei.contactExistsInInstitutionContacts(sign_contact_to_add, 'Mobility LA Signer'))
       editing_hei.addInstitutionContact(sign_contact_to_add)
     if (!editing_hei.contactExistsInOUnitContacts(ounit_contact_to_add, 'Mobility LA Contact'))
+      editing_hei.addOUnitContact(ounit_contact_to_add)
+  }
+
+  public setIIAHEI = (flow: number, _info: IIA, sending: string) => {
+    const editing_hei = flow == 1 ? this.getEWPDataSendingHEI() : this.getEWPDataReceivingHEI()
+
+    const hei =
+      flow == 1
+        ? (_info.getSendingHEI(sending) as HEIIIA)
+        : (_info.getReceivingHEI(sending) as HEIIIA)
+
+    const sign_contact_to_add = new EWPDataContact(
+      hei.getContactPersonName() as string,
+      hei.getContactPersonEmail() as string,
+      hei.getContactPersonRole() as string,
+      'IIA Signer'
+    )
+    const ounit_contact_to_add = new EWPDataContact(
+      hei.getContactPersonName() as string,
+      hei.getContactPersonEmail() as string,
+      '',
+      'IIA Contact'
+    )
+
+    const ounit_id = hei.getOUnitID()
+    const ounit_name = hei.getOUnitName()
+
+    editing_hei.setSchacCode(hei.getHEIID())
+    editing_hei.setOUnitID(ounit_id as string)
+    ounit_name == undefined || ounit_name == ''
+      ? editing_hei.setOUnitName('IIA', false, 'No Organizational Unit Name Found')
+      : editing_hei.setOUnitName('IIA', true, ounit_name)
+    if (!editing_hei.contactExistsInInstitutionContacts(sign_contact_to_add, 'IIA Signer'))
+      editing_hei.addInstitutionContact(sign_contact_to_add)
+    if (!editing_hei.contactExistsInOUnitContacts(ounit_contact_to_add, 'IIA Contact'))
       editing_hei.addOUnitContact(ounit_contact_to_add)
   }
 

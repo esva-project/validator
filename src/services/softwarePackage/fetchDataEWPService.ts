@@ -1,6 +1,8 @@
+import { IIAParameters } from '../../dto/iiaParameters'
 import { MobilityLaParameters } from '../../dto/mobilityParameters'
 import { ResponseDTO } from '../../dto/response/response'
 import { Catalogue } from '../../model/catalogue'
+import { IIA, IIAInterface } from '../../model/iiaResponse'
 import { Institutions, InstitutionsInterface } from '../../model/institutionResponse'
 import { Mobility, MobilityInterface } from '../../model/mobilityResponse'
 import { OUnits, OUnitsInterface } from '../../model/ounitResponse'
@@ -59,6 +61,32 @@ const fetchMobilityXMLFromEWP = async (pdfContents: MobilityLaParameters) => {
 
   return new ResponseDTO(400, 'Could not fetch Mobility Response from EWP')
 }
+
+const fetchIIAXMLFromEWP = async (pdfContents: IIAParameters) => {
+  updateDataFromEWP()
+  const params = {
+    hei_id: pdfContents.getSchac(),
+    iia_id: pdfContents.getIIAID()
+  }
+
+  let url = ''
+  for (const host of catalogue.getHosts()) {
+    for (const instCovered of catalogue.getInstitutionsCovered(host)) {
+      if (params.hei_id === catalogue.getHEIID(instCovered)) {
+        url = catalogue.getOMobilityIIAAPIURL(catalogue.getAPIImplemented(host))
+      }
+    }
+  }
+
+  if (url) {
+    const iia_response: IIAInterface = await EWPRequest.get(url, params)
+    const i = new IIA(iia_response)
+    return { i, url }
+  }
+
+  return new ResponseDTO(400, 'Could not fetch Mobility Response from EWP')
+}
+
 const fetchInstitutionsXMLFromEWP = async (hei_id: string) => {
   updateDataFromEWP()
   const params = { hei_id }
@@ -108,4 +136,9 @@ const fetchOUnitsXMLFromEWP = async (hei_id: string, ounit_id: string) => {
   return new ResponseDTO(400, 'Could not fetch OUnits Response from EWP')
 }
 
-export default { fetchInstitutionsXMLFromEWP, fetchMobilityXMLFromEWP, fetchOUnitsXMLFromEWP }
+export default {
+  fetchIIAXMLFromEWP,
+  fetchInstitutionsXMLFromEWP,
+  fetchMobilityXMLFromEWP,
+  fetchOUnitsXMLFromEWP
+}

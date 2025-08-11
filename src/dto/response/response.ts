@@ -1,3 +1,4 @@
+import { IIA } from '../../model/iiaResponse'
 import { Institutions } from '../../model/institutionResponse'
 import { Mobility } from '../../model/mobilityResponse'
 import { OUnits } from '../../model/ounitResponse'
@@ -63,6 +64,8 @@ class ResponseDTO {
 
   public setMobilityHEIInformation = (flow: number, mob: Mobility) =>
     this.getDataCollection().setMobilityHEI(flow, mob)
+  public setIIAHEIInformation = (flow: number, iia: IIA, sending: string) =>
+    this.getDataCollection().setIIAHEI(flow, iia, sending)
   public setStudentInformation = (mob: Mobility) => this.getDataCollection().setMobilityStudent(mob)
   public setInstitutionHEIInformation = (flow: number, inst: Institutions) =>
     this.getDataCollection().setInstitutionContacts(flow, inst)
