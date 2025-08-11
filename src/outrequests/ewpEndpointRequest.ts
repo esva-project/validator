@@ -26,6 +26,7 @@ const get = async (get_url: string, params: any) => {
     headers: {
       'Content-Type': 'application/xml; charset=UTF-8',
       Digest: 'SHA-256=' + digest.toString(),
+      Posing: '',
       'Request-Target': 'GET /' + parser.host.replace(':8443', ''),
       'X-Request-Id': uuidv4()
     },
@@ -38,6 +39,7 @@ const get = async (get_url: string, params: any) => {
   if (get_url.includes('up.pt')) {
     options.headers.Posing = params.posing_hei
   }
+  params.posing_hei = ''
 
   logger.ola.info('URL Found: ' + get_url)
   logger.ola.info('Parameters used: ' + JSON.stringify(params))
