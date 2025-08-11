@@ -64,10 +64,11 @@ const processMobility = async (contents: MobilityLaParameters, responseSoFar: Re
   )
 }
 
+// Fetch Mobility Data From EWP
 const processIIA = async (contents: IIAParameters, responseSoFar: ResponseDTO, posing: string) => {
-  // Fetch Mobility Data From EWP
   const iia_response = await fetchDataEWP.fetchIIAXMLFromEWP(contents, posing)
   if (iia_response instanceof ResponseDTO) {
+    console.log('error: ' + iia_response)
     return iia_response
   }
 
