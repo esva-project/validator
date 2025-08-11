@@ -3,18 +3,18 @@ WORKDIR /app
 
 COPY ./package.json ./
 
-
 ENV PYTHONUNBUFFERED=1
-RUN apk add --update --no-cache python3 && ln -sf python3 /usr/bin/python
-RUN apk add --update --no-cache openssl
-RUN python3 -m ensurepip
-RUN pip3 install --no-cache --upgrade pip setuptools
+RUN apk add --update --no-cache \
+    python3 \
+    py3-pip \
+    openssl \
+    make \
+    g++
+
+# Upgrade pip inside the system environment safely (with override)
+RUN pip3 install --no-cache --upgrade pip setuptools --break-system-packages
 
 RUN apk update && apk add make g++
-
-RUN npm install -g npm@6.14.15
-
-ENV NODE_OPTIONS=--max-old-space-size=16384
 
 RUN npm i
 

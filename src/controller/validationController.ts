@@ -76,10 +76,7 @@ const validateIIA = async (req: Request, res: Response) => {
   const file = JSON.parse(JSON.stringify(f))
 
   const params = req.fields
-  const iiaParams = new IIAParameters(
-    params?.omobility_id as string,
-    params?.sending_hei_id as string
-  )
+  const iiaParams = new IIAParameters(params?.iia_id as string, params?.sending_hei_id as string)
 
   fs.readFile(file.file.path, async function (_err: unknown, contents: Buffer) {
     logger.ola.info(new Date().toUTCString() + ' - Analyzing PDF of IIA ' + iiaParams.getIIAID())
