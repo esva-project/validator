@@ -36,7 +36,7 @@ const get = async (get_url: string, params: any) => {
   }
 
   if (get_url.includes('up.pt')) {
-    options.headers.Posing = 'up.pt'
+    options.headers.Posing = params.posing_hei
   }
 
   logger.ola.info('URL Found: ' + get_url)

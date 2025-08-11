@@ -62,11 +62,12 @@ const fetchMobilityXMLFromEWP = async (pdfContents: MobilityLaParameters) => {
   return new ResponseDTO(400, 'Could not fetch Mobility Response from EWP')
 }
 
-const fetchIIAXMLFromEWP = async (pdfContents: IIAParameters) => {
+const fetchIIAXMLFromEWP = async (pdfContents: IIAParameters, posing: string) => {
   updateDataFromEWP()
   const params = {
     hei_id: pdfContents.getSchac(),
-    iia_id: pdfContents.getIIAID()
+    iia_id: pdfContents.getIIAID(),
+    posing_hei: posing
   }
 
   let url = ''

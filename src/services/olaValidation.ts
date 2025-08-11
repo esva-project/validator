@@ -27,7 +27,7 @@ const validateIIA = async (fileMeta: string, params: IIAParameters, receiving: s
   const response = await fileHandling.validateFileValidatorResponse(fileMeta)
   if (response.countSignatures() == 0) return response
 
-  const mobilityValidation = await processIIA(params, response)
+  const mobilityValidation = await processIIA(params, response, receiving)
   if (mobilityValidation.getMessage().includes('Could not fetch')) return mobilityValidation
   const mob = new MobilityLaParameters(
     params.getIIAID() as string,
@@ -64,9 +64,9 @@ const processMobility = async (contents: MobilityLaParameters, responseSoFar: Re
   )
 }
 
-const processIIA = async (contents: IIAParameters, responseSoFar: ResponseDTO) => {
+const processIIA = async (contents: IIAParameters, responseSoFar: ResponseDTO, posing: string) => {
   // Fetch Mobility Data From EWP
-  const iia_response = await fetchDataEWP.fetchIIAXMLFromEWP(contents)
+  const iia_response = await fetchDataEWP.fetchIIAXMLFromEWP(contents, posing)
   if (iia_response instanceof ResponseDTO) {
     return iia_response
   }
