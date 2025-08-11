@@ -16,7 +16,13 @@ const get = async (get_url: string, params: any) => {
   const algorithm = 'sha256'
   const digest = crypto.createHash(algorithm).update('').digest('base64')
 
-  const options = {
+  const options: {
+    headers: Record<string, string>
+    host: string
+    method: string
+    path: string
+    port?: string | number
+  } = {
     headers: {
       'Content-Type': 'application/xml; charset=UTF-8',
       Digest: 'SHA-256=' + digest.toString(),
@@ -27,6 +33,10 @@ const get = async (get_url: string, params: any) => {
     method: 'GET',
     path: parser.pathname + '?' + new URLSearchParams(params).toString(),
     port: parser.port
+  }
+
+  if (get_url.includes('up.pt')) {
+    options.headers.Posing = 'up.pt'
   }
 
   logger.ola.info('URL Found: ' + get_url)
