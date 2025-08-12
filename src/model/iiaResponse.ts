@@ -94,7 +94,10 @@ class HEIIIA {
   public getContactPersonName = () => this.hei['signing-contact']?.['c:contact-name']
   public getContactPersonEmail = () => this.hei['signing-contact']?.['c:email']
   public getContactPersonRole = () => this.hei['signing-contact']?.['c:role-description']._text
-  public getOtherContactPersonName = () => this.hei.contact?.[0]?.['c:contact-name']
+  public getOtherContactPersonName() {
+    console.log(this.hei.contact)
+    this.hei.contact?.[0]?.['c:contact-name']
+  }
   public getOtherContactPersonEmail = () => this.hei.contact?.[0]?.['c:email']
   public getOtherContactPersonRole = () => {
     const role = this.hei.contact?.[0]?.['c:role-description']
