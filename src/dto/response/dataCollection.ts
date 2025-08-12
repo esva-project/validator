@@ -137,8 +137,8 @@ class DataCollectionDTO implements DataCollectionInterface {
     console.log('sign_contact_to_add')
     console.log(sign_contact_to_add)
     const ounit_contact_to_add = new EWPDataContact(
-      hei.getContactPersonName() as string,
-      hei.getContactPersonEmail() as string,
+      hei.getOtherContactPersonName() as string,
+      hei.getOtherContactPersonEmail() as string,
       '',
       'IIA Contact'
     )
