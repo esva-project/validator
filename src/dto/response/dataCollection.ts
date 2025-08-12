@@ -118,23 +118,33 @@ class DataCollectionDTO implements DataCollectionInterface {
   public setIIAHEI = (flow: number, _info: IIA, sending: string) => {
     const editing_hei = flow == 1 ? this.getEWPDataSendingHEI() : this.getEWPDataReceivingHEI()
 
+    console.log('editing_hei')
+    console.log(editing_hei)
     const hei =
       flow == 1
         ? (_info.getSendingHEI(sending) as HEIIIA)
         : (_info.getReceivingHEI(sending) as HEIIIA)
 
+    console.log('hei')
+    console.log(hei)
     const sign_contact_to_add = new EWPDataContact(
       hei.getContactPersonName() as string,
       hei.getContactPersonEmail() as string,
       hei.getContactPersonRole() as string,
       'IIA Signer'
     )
+
+    console.log('sign_contact_to_add')
+    console.log(sign_contact_to_add)
     const ounit_contact_to_add = new EWPDataContact(
       hei.getContactPersonName() as string,
       hei.getContactPersonEmail() as string,
       '',
       'IIA Contact'
     )
+
+    console.log('ounit_contact_to_add')
+    console.log(ounit_contact_to_add)
 
     const ounit_id = hei.getOUnitID()
     const ounit_name = hei.getOUnitName()
