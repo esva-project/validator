@@ -3,7 +3,7 @@ interface IIAGetResponseInterface {
 }
 
 interface IIAInterface {
-  iia: IIADetails
+  iia: IIADetails | undefined
 }
 
 interface IIADetails {
@@ -16,7 +16,7 @@ interface PartnerInterface {
   'ounit-name'?: string
   'iia-id': string
   'iia-code': string
-  'signing-contact'?: SigningContactInterface
+  contact?: SigningContactInterface
   'signing-date': string
 }
 
@@ -47,11 +47,29 @@ class IIA {
   }
 
   public getSendingHEI = (sending_hei: string) => {
+    if (this.iia['iias-get-response'].iia === undefined) {
+      return new HEIIIA({
+        'hei-id': 'not.found',
+        'iia-code': 'not.found',
+        'iia-id': 'not.found',
+        'ounit-id': 'not.found',
+        'signing-date': 'not.found'
+      })
+    }
     return this.iia['iias-get-response'].iia.partner[0]['hei-id'] == sending_hei
       ? new HEIIIA(this.iia['iias-get-response'].iia.partner[0])
       : new HEIIIA(this.iia['iias-get-response'].iia.partner[1])
   }
   public getReceivingHEI = (sending_hei: string) => {
+    if (this.iia['iias-get-response'].iia === undefined) {
+      return new HEIIIA({
+        'hei-id': 'not.found',
+        'iia-code': 'not.found',
+        'iia-id': 'not.found',
+        'ounit-id': 'not.found',
+        'signing-date': 'not.found'
+      })
+    }
     return this.iia['iias-get-response'].iia.partner[0]['hei-id'] != sending_hei
       ? new HEIIIA(this.iia['iias-get-response'].iia.partner[0])
       : new HEIIIA(this.iia['iias-get-response'].iia.partner[1])
@@ -64,9 +82,9 @@ class HEIIIA {
     this.hei = hei
   }
   public getHEIID = () => this.hei['hei-id']
-  public getContactPersonName = () => this.hei['signing-contact']?.['c:contact-name']
-  public getContactPersonEmail = () => this.hei['signing-contact']?.['c:email']
-  public getContactPersonRole = () => this.hei['signing-contact']?.['c:role-description']._text
+  public getContactPersonName = () => this.hei['contact']?.['c:contact-name']
+  public getContactPersonEmail = () => this.hei['contact']?.['c:email']
+  public getContactPersonRole = () => this.hei['contact']?.['c:role-description']._text
   public getOUnitID = () => this.hei['ounit-id']
   public getOUnitName = () => this.hei['ounit-name']
 }

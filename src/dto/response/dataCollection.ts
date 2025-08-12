@@ -278,11 +278,11 @@ class EWPDataHEI implements EWPDataHEIInterface {
 
   public getMobilitySignature = () =>
     this.institution_contacts.find((c: EWPDataContact) =>
-      c.api_fetched.find((x) => x.includes('LA Signer'))
+      c.api_fetched.find((x) => x.includes('Signer'))
     )
   public getMobilityContacts = () =>
     this.ounit_contacts.find((c: EWPDataContact) =>
-      c.api_fetched.find((x) => x.includes('LA Contact'))
+      c.api_fetched.find((x) => x.includes('Contact'))
     )
 }
 
