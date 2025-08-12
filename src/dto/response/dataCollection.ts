@@ -126,7 +126,7 @@ class DataCollectionDTO implements DataCollectionInterface {
         : (_info.getReceivingHEI(sending) as HEIIIA)
 
     console.log('hei')
-    console.log(hei)
+    console.log(JSON.stringify(hei))
     const sign_contact_to_add = new EWPDataContact(
       hei.getOtherContactPersonName() as string,
       hei.getOtherContactPersonEmail() as string,
@@ -135,7 +135,7 @@ class DataCollectionDTO implements DataCollectionInterface {
     )
 
     console.log('sign_contact_to_add')
-    console.log(sign_contact_to_add)
+    console.log(JSON.stringify(sign_contact_to_add))
     const ounit_contact_to_add = new EWPDataContact(
       hei.getOtherContactPersonName() as string,
       hei.getOtherContactPersonEmail() as string,
@@ -144,7 +144,7 @@ class DataCollectionDTO implements DataCollectionInterface {
     )
 
     console.log('ounit_contact_to_add')
-    console.log(ounit_contact_to_add)
+    console.log(JSON.stringify(ounit_contact_to_add))
 
     const ounit_id = hei.getOUnitID()
     const ounit_name = hei.getOUnitName()
