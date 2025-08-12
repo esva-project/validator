@@ -2,7 +2,7 @@ import { IIAParameters } from '../../dto/iiaParameters'
 import { MobilityLaParameters } from '../../dto/mobilityParameters'
 import { ResponseDTO } from '../../dto/response/response'
 import { Catalogue } from '../../model/catalogue'
-import { IIA, IIAInterface } from '../../model/iiaResponse'
+import { IIA, IIAGetResponseInterface } from '../../model/iiaResponse'
 import { Institutions, InstitutionsInterface } from '../../model/institutionResponse'
 import { Mobility, MobilityInterface } from '../../model/mobilityResponse'
 import { OUnits, OUnitsInterface } from '../../model/ounitResponse'
@@ -65,7 +65,7 @@ const fetchMobilityXMLFromEWP = async (pdfContents: MobilityLaParameters) => {
 const fetchIIAXMLFromEWP = async (pdfContents: IIAParameters, posing: string) => {
   updateDataFromEWP()
   const params = {
-    hei_id: pdfContents.getSchac(),
+    hei_id: posing,
     iia_id: pdfContents.getIIAID(),
     posing_hei: posing
   }
@@ -73,14 +73,14 @@ const fetchIIAXMLFromEWP = async (pdfContents: IIAParameters, posing: string) =>
   let url = ''
   for (const host of catalogue.getHosts()) {
     for (const instCovered of catalogue.getInstitutionsCovered(host)) {
-      if (params.hei_id === catalogue.getHEIID(instCovered)) {
+      if (pdfContents.getSchac() === catalogue.getHEIID(instCovered)) {
         url = catalogue.getOMobilityIIAAPIURL(catalogue.getAPIImplemented(host))
       }
     }
   }
 
   if (url) {
-    const iia_response: IIAInterface = await EWPRequest.get(url, params)
+    const iia_response: IIAGetResponseInterface = await EWPRequest.get(url, params)
     const i = new IIA(iia_response)
     return { i, url }
   }

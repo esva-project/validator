@@ -1,8 +1,12 @@
-interface IIAGetResponse {
-  iia: IIAInterface | IIAInterface[]
+interface IIAGetResponseInterface {
+  'iias-get-response': IIAInterface
 }
 
 interface IIAInterface {
+  iia: IIADetails
+}
+
+interface IIADetails {
   partner: PartnerInterface[]
 }
 
@@ -36,21 +40,21 @@ interface PhoneNumberInterface {
 }
 
 class IIA {
-  private iia: IIAInterface
+  private iia: IIAGetResponseInterface
 
-  constructor(iia: IIAInterface) {
+  constructor(iia: IIAGetResponseInterface) {
     this.iia = iia
   }
 
   public getSendingHEI = (sending_hei: string) => {
-    return this.iia.partner[0]['hei-id'] == sending_hei
-      ? new HEIIIA(this.iia.partner[0])
-      : new HEIIIA(this.iia.partner[1])
+    return this.iia['iias-get-response'].iia.partner[0]['hei-id'] == sending_hei
+      ? new HEIIIA(this.iia['iias-get-response'].iia.partner[0])
+      : new HEIIIA(this.iia['iias-get-response'].iia.partner[1])
   }
   public getReceivingHEI = (sending_hei: string) => {
-    return this.iia.partner[0]['hei-id'] != sending_hei
-      ? new HEIIIA(this.iia.partner[0])
-      : new HEIIIA(this.iia.partner[1])
+    return this.iia['iias-get-response'].iia.partner[0]['hei-id'] != sending_hei
+      ? new HEIIIA(this.iia['iias-get-response'].iia.partner[0])
+      : new HEIIIA(this.iia['iias-get-response'].iia.partner[1])
   }
 }
 
@@ -67,4 +71,4 @@ class HEIIIA {
   public getOUnitName = () => this.hei['ounit-name']
 }
 
-export { HEIIIA, IIA, IIAGetResponse, IIAInterface }
+export { HEIIIA, IIA, IIAGetResponseInterface, IIAInterface }
