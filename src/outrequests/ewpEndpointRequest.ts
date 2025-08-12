@@ -13,9 +13,14 @@ import { logger } from '../utils/logs'
 const get = async (get_url: string, params: any) => {
   const parser = new url.URL(get_url)
 
+  // const posing = params.posing_hei
+  params.posing_hei = ''
+
   const algorithm = 'sha256'
   const digest = crypto.createHash(algorithm).update('').digest('base64')
-
+  // const username = 'lIZ5$nrr8B4h'
+  // const password = 'tN21Fy9&3lrs'
+  // const authHeader = 'Basic ' + Buffer.from(`${username}:${password}`).toString('base64')
   const options = {
     headers: {
       'Content-Type': 'application/xml; charset=UTF-8',
@@ -31,10 +36,9 @@ const get = async (get_url: string, params: any) => {
   const actualUrl = Array.isArray(get_url) ? get_url[0] : get_url
 
   if (actualUrl.includes('ewp.up.pt')) {
-    options.headers.Posing = params.posing_hei
+    // options.headers.Posing = posing
+    // options.headers.Authorization = authHeader
   }
-
-  params.posing_hei = ''
 
   logger.ola.info('URL Found: ' + get_url)
   logger.ola.info('Parameters used: ' + JSON.stringify(params))
@@ -48,6 +52,8 @@ const get = async (get_url: string, params: any) => {
 }
 
 function doRequest(options: any) {
+  console.log('hereeee')
+  console.log(options)
   return new Promise((resolve, reject) => {
     const req = https.request(options, (res) => {
       res.setEncoding('utf8')

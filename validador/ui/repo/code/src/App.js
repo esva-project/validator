@@ -112,24 +112,53 @@ class App extends Component {
 		}
 	};
 
-	getEwp = async ({ id: fileId, ewpData }) => {
+	getEwp = async ({ id: fileId, idType, ewpData }) => {
 		const { files } = this.state;
 		const fileDump = files.find(({ id }) => id === fileId);
-		this.setState({ files: files.map((file) => (file.id === fileId ? { ...fileDump, ewpLoading: true, ewpError: false } : file)) });
-		fileDump.formData.append("omobility_id", ewpData.mobilityID);
+
+		this.setState({
+			files: files.map((file) =>
+				file.id === fileId
+					? { ...fileDump, ewpLoading: true, ewpError: false }
+					: file
+			)
+		});
+
+		if (idType === "iiaID") {
+			fileDump.formData.append("iia_id", ewpData.iiaID);
+		} else {
+			fileDump.formData.append("omobility_id", ewpData.mobilityID);
+		}
+
 		fileDump.formData.append("sending_hei_id", ewpData.sendingHeiCode);
 		fileDump.formData.append("receiving_hei_id", ewpData.receivingHeiCode);
-		const report = await this.getReportsFromEwp({ payload: fileDump.formData });
+
+		const report = await this.getReportsFromEwp({
+			payload: fileDump.formData,
+			idType // pass this down so we can change the endpoint
+		});
+
 		if (report) {
-			const newFile = { ...fileDump, ewpLoading: false, ewpSuccess: true, ewpReport: report };
-			this.setState({ files: files.map((file) => (file.id === fileId ? newFile : file)) });
+			const newFile = {
+				...fileDump,
+				ewpLoading: false,
+				ewpSuccess: true,
+				ewpReport: report
+			};
+			this.setState({
+				files: files.map((file) => (file.id === fileId ? newFile : file))
+			});
 			return report;
 		}
+
 		if (fileDump) {
 			const newFile = { ...fileDump, ewpLoading: false, ewpError: true };
-			this.setState({ files: files.map((file) => (file.id === fileId ? newFile : file)) });
+			this.setState({
+				files: files.map((file) => (file.id === fileId ? newFile : file))
+			});
 		}
 	};
+
 
 	deleteFile = ({ id }) => {
 		const { files } = this.state;
@@ -142,16 +171,26 @@ class App extends Component {
 			if (resp && resp.data) {
 				return Object.fromEntries(Object.entries(resp.data).filter(([_, v]) => v != null));
 			}
-		} catch (error) {}
+		} catch (error) { }
 	};
 
-	getReportsFromEwp = async ({ payload }) => {
+	getReportsFromEwp = async ({ payload, idType }) => {
 		try {
-			const resp = await axios.post(`${Configs.ewpUrl}/validador/ola`, payload);
+			const url =
+				idType === "iiaID"
+					? `${Configs.ewpUrl}/validador/iia`
+					: `${Configs.ewpUrl}/validador/ola`;
+
+			const resp = await axios.post(url, payload);
+
 			if (resp && resp.data) {
-				return Object.fromEntries(Object.entries(resp.data).filter(([_, v]) => v != null));
+				return Object.fromEntries(
+					Object.entries(resp.data).filter(([_, v]) => v != null)
+				);
 			}
-		} catch (error) {}
+		} catch (error) {
+			console.error("EWP request failed:", error);
+		}
 	};
 
 	render() {
