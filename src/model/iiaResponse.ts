@@ -28,10 +28,11 @@ interface SigningContactInterface {
   'c:role-description': RoleDescriptionInterface
 }
 interface ContactInterface {
-  'c:contact-name': string
-  'p:phone-number'?: PhoneNumberInterface
-  'c:email': string
-  'c:role-description'?: string[]
+  'contact-name': string
+  'phone-number'?: PhoneNumberInterface
+  'fax-number'?: PhoneNumberInterface
+  email: string
+  'role-description'?: string[]
 }
 
 interface RoleDescriptionInterface {
@@ -95,16 +96,16 @@ class HEIIIA {
   public getContactPersonEmail = () => this.hei['signing-contact']?.['c:email']
   public getContactPersonRole = () => this.hei['signing-contact']?.['c:role-description']._text
   public getOtherContactPersonName() {
-    console.log(this.hei.contact)
-    this.hei.contact?.[0]?.['c:contact-name']
-  }
-  public getOtherContactPersonEmail = () => this.hei.contact?.[0]?.['c:email']
-  public getOtherContactPersonRole = () => {
-    const role = this.hei.contact?.[0]?.['c:role-description']
-    if (Array.isArray(role)) {
-      return role.join(', ')
+    if (this.hei.contact != undefined) {
+      console.log(this.hei.contact[0])
     }
-    return
+    this.hei.contact?.[0]?.['contact-name'] ?? undefined
+  }
+
+  public getOtherContactPersonEmail = () => this.hei.contact?.[0]?.email ?? undefined
+  public getOtherContactPersonRole = () => {
+    const roles = this.hei.contact?.[0]?.['role-description']
+    return roles?.join(', ')
   }
   public getOUnitID = () => this.hei['ounit-id']
   public getOUnitName = () => this.hei['ounit-name']
