@@ -97,7 +97,7 @@ class HEIIIA {
   public getContactPersonRole = () => this.hei['signing-contact']?.['c:role-description']._text
   public getOtherContactPersonName() {
     if (this.hei.contact != undefined) {
-      console.log(this.hei.contact[0])
+      console.log(this.hei.contact[0]['contact-name'])
     }
     this.hei.contact?.[0]?.['contact-name'] ?? undefined
   }
