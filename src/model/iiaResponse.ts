@@ -99,7 +99,7 @@ class HEIIIA {
     if (this.hei.contact != undefined) {
       console.log(this.hei.contact[0]['contact-name'])
     }
-    this.hei.contact?.[0]?.['contact-name'] ?? undefined
+    return this.hei.contact?.[0]?.['contact-name'] ?? undefined
   }
 
   public getOtherContactPersonEmail = () => this.hei.contact?.[0]?.email ?? undefined
