@@ -16,6 +16,7 @@ interface PartnerInterface {
   'ounit-name'?: string
   'iia-id': string
   'iia-code': string
+  'signing-contact'?: SigningContactInterface
   contact?: SigningContactInterface
   'signing-date': string
 }
