@@ -83,9 +83,12 @@ class HEIIIA {
     this.hei = hei
   }
   public getHEIID = () => this.hei['hei-id']
-  public getContactPersonName = () => this.hei['contact']?.['c:contact-name']
-  public getContactPersonEmail = () => this.hei['contact']?.['c:email']
-  public getContactPersonRole = () => this.hei['contact']?.['c:role-description']._text
+  public getContactPersonName = () => this.hei['signing-contact']?.['c:contact-name']
+  public getContactPersonEmail = () => this.hei['signing-contact']?.['c:email']
+  public getContactPersonRole = () => this.hei['signing-contact']?.['c:role-description']._text
+  public getOtherContactPersonName = () => this.hei['signing-contact']?.['c:contact-name']
+  public getOtherContactPersonEmail = () => this.hei['signing-contact']?.['c:email']
+  public getOtherContactPersonRole = () => this.hei['signing-contact']?.['c:role-description']._text
   public getOUnitID = () => this.hei['ounit-id']
   public getOUnitName = () => this.hei['ounit-name']
 }
