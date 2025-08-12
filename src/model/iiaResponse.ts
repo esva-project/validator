@@ -17,7 +17,7 @@ interface PartnerInterface {
   'iia-id': string
   'iia-code': string
   'signing-contact'?: SigningContactInterface
-  contact: SigningContactInterface[]
+  contact?: SigningContactInterface[]
   'signing-date': string
 }
 
@@ -88,9 +88,9 @@ class HEIIIA {
   public getContactPersonName = () => this.hei['signing-contact']?.['c:contact-name']
   public getContactPersonEmail = () => this.hei['signing-contact']?.['c:email']
   public getContactPersonRole = () => this.hei['signing-contact']?.['c:role-description']._text
-  public getOtherContactPersonName = () => this.hei['contact'][0]['c:contact-name']
-  public getOtherContactPersonEmail = () => this.hei['contact'][0]['c:email']
-  public getOtherContactPersonRole = () => this.hei['contact'][0]['c:role-description']._text
+  public getOtherContactPersonName = () => this.hei.contact?.[0]?.['c:contact-name']
+  public getOtherContactPersonEmail = () => this.hei.contact?.[0]?.['c:email']
+  public getOtherContactPersonRole = () => this.hei.contact?.[0]?.['c:role-description']._text
   public getOUnitID = () => this.hei['ounit-id']
   public getOUnitName = () => this.hei['ounit-name']
 }
