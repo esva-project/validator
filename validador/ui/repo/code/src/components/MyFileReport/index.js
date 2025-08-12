@@ -7,9 +7,13 @@ import MyDialogEwpReport from "./MyDialogEwpReport";
 import MyDialogFullReport from "./MyDialogFullReport";
 import MySignature from "./MySignature";
 
+import { Select, MenuItem, FormControl, InputLabel } from "@mui/material";
+
 import Configs from "../../configs/Configs.json";
 
 import dictionary from "./index.dictionary.json";
+
+const validNMecs = [];
 
 export default class MyFileReport extends Component {
 	state = {
@@ -20,7 +24,18 @@ export default class MyFileReport extends Component {
 		mobilityID: "",
 		sendingHeiCode: "",
 		receivingHeiCode: "",
+		user: null, // ← Add this
 	};
+
+	async componentDidMount() {
+		try {
+			const res = await fetch(`${Configs.coreUrl}/api/v1/user`);
+			const user = await res.json();
+			this.setState({ user });
+		} catch (e) {
+			console.error("Failed to load user info", e);
+		}
+	}
 
 	componentDidUpdate(prevProps) {
 		if (prevProps.file.ewpReport !== this.props.file.ewpReport) {
@@ -53,8 +68,8 @@ export default class MyFileReport extends Component {
 								? allRight === 3
 									? { border: `4px solid ${lightGreen["A700"]}`, backgroundColor: lightGreen[50] }
 									: allRight === 2
-									? { border: `4px solid ${orange["A200"]}`, backgroundColor: orange[50] }
-									: { border: `4px solid ${red["A200"]}`, backgroundColor: red[50] }
+										? { border: `4px solid ${orange["A200"]}`, backgroundColor: orange[50] }
+										: { border: `4px solid ${red["A200"]}`, backgroundColor: red[50] }
 								: {}),
 							...(error ? { backgroundColor: grey[400] } : {}),
 							transition: "all 0.3s",
@@ -90,16 +105,22 @@ export default class MyFileReport extends Component {
 							)}
 							<div className="d-flex">
 								<div className="mx-2 position-relative">
-									{Configs.isEWPActive && (
-										<Button
-											variant="outlined"
-											color={file.ewpError ? "error" : file.ewpSuccess ? "success" : undefined}
-											disabled={file.ewpLoading}
-											onClick={(event) => (event.stopPropagation() || file.ewpSuccess ? this.setState({ ewpReportOpen: true }) : this.setState({ ewpFormOpen: true }))}
-										>
-											{dictionary.getEwp[language]}
-										</Button>
-									)}
+									{Configs.isEWPActive
+										&& validNMecs.includes(this.state.user?.nmec)
+										&& (
+											<Button
+												variant="outlined"
+												color={file.ewpError ? "error" : file.ewpSuccess ? "success" : undefined}
+												disabled={file.ewpLoading}
+												onClick={(event) =>
+													event.stopPropagation() || file.ewpSuccess
+														? this.setState({ ewpReportOpen: true })
+														: this.setState({ ewpFormOpen: true })
+												}
+											>
+												{dictionary.getEwp[language]}
+											</Button>
+										)}
 									<Fade in={file.ewpLoading} mountOnEnter unmountOnExit appear timeout={500}>
 										<div className="w-100 d-flex align-items-center justify-content-center" style={{ position: "absolute", top: 0, left: 0, backgroundColor: "rgba(0, 0, 0, 0.3)" }}>
 											<CircularProgress size={36.5} />
@@ -155,7 +176,33 @@ export default class MyFileReport extends Component {
 					</DialogTitle>
 					<DialogContent className="overflow-hidden">
 						<DialogContentText>Please insert the following data for the EWP Verification</DialogContentText>
-						<TextField autoFocus required margin="normal" id="mobilityID" label="Mobility ID" type="text" fullWidth variant="standard" value={mobilityID} onChange={(e) => this.setState({ mobilityID: e.target.value })} />
+						{/* Dropdown for selecting ID type */}
+						<FormControl fullWidth margin="normal" variant="standard">
+							<InputLabel id="id-type-label">ID Type</InputLabel>
+							<Select
+								labelId="id-type-label"
+								value={this.state.idType}
+								onChange={(e) => this.setState({ idType: e.target.value })}
+							>
+								<MenuItem value="mobilityID">Mobility ID</MenuItem>
+								<MenuItem value="iiaID">IIA ID</MenuItem>
+							</Select>
+						</FormControl>
+
+						{/* The ID input field changes its label depending on the dropdown */}
+						<TextField
+							autoFocus
+							required
+							margin="normal"
+							id="selectedID"
+							label={this.state.idType === "iiaID" ? "IIA ID" : "Mobility ID"}
+							type="text"
+							fullWidth
+							variant="standard"
+							value={this.state.selectedID}
+							onChange={(e) => this.setState({ selectedID: e.target.value })}
+						/>
+
 						<TextField
 							required
 							margin="normal"
@@ -179,18 +226,28 @@ export default class MyFileReport extends Component {
 							onChange={(e) => this.setState({ receivingHeiCode: e.target.value })}
 						/>
 					</DialogContent>
+
 					<DialogActions>
 						<Button
 							variant="outlined"
-							color={"primary"}
+							color="primary"
 							disabled={file.ewpLoading}
 							onClick={(event) => {
 								const ewpData = {
-									mobilityID: mobilityID,
 									sendingHeiCode: sendingHeiCode,
-									receivingHeiCode: receivingHeiCode,
+									receivingHeiCode: receivingHeiCode
 								};
-								event.stopPropagation() || file.ewpSuccess ? this.setState({ ewpReportOpen: true }) : this.props.onLoadEwp({ id, ewpData: ewpData });
+
+								// Add correct ID field based on selection
+								if (this.state.idType === "iiaID") {
+									ewpData.iiaID = this.state.selectedID;
+								} else {
+									ewpData.mobilityID = this.state.selectedID;
+								}
+
+								event.stopPropagation() || file.ewpSuccess
+									? this.setState({ ewpReportOpen: true })
+									: this.props.onLoadEwp({ id,  idType: this.state.idType, ewpData });
 							}}
 						>
 							Proceed with EWP match
