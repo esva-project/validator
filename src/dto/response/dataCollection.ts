@@ -280,10 +280,12 @@ class EWPDataHEI implements EWPDataHEIInterface {
     this.institution_contacts.find((c: EWPDataContact) =>
       c.api_fetched.find((x) => x.includes('Signer'))
     )
-  public getMobilityContacts = () =>
-    this.ounit_contacts.find((c: EWPDataContact) =>
+  public getMobilityContacts() {
+    console.log(this.ounit_contacts)
+    return this.ounit_contacts.find((c: EWPDataContact) =>
       c.api_fetched.find((x) => x.includes('Contact'))
     )
+  }
 }
 
 class ValueAPIFetched implements ValueAPIFetchedInterface {
@@ -300,7 +302,6 @@ class ValueAPIFetched implements ValueAPIFetchedInterface {
   public addAPI = (api: string) => this.api_fetched.push(api)
   public setValue = (v: string) => (this.value = v)
 }
-
 class EWPDataContact implements EWPDataContactInterface {
   'contact-name': string | undefined
   email: string | undefined

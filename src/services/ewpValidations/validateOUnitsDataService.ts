@@ -23,6 +23,7 @@ const validateEWPOUnitsResponse = async (
 
   const location = 'Institution or Organizational Unit Contact List'
 
+  console.log(JSON.stringify(ounit_information))
   institutionsAndMobilityValidation.addHEIValidation(
     flow,
     'LA Contact Person Name',
