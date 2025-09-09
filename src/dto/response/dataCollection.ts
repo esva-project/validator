@@ -281,10 +281,12 @@ class EWPDataHEI implements EWPDataHEIInterface {
       c.api_fetched.find((x) => x.includes('Signer'))
     )
   public getMobilityContacts() {
+    console.log('hsshsh ounit_contacts')
     console.log(this.ounit_contacts)
-    return this.ounit_contacts.find((c: EWPDataContact) =>
-      c.api_fetched.find((x) => x.includes('Contact'))
-    )
+    return this.ounit_contacts.find((c: EWPDataContact) => {
+      console.log(JSON.stringify(c))
+      return c.api_fetched.find((x) => x.includes('Contact'))
+    })
   }
 }
 
