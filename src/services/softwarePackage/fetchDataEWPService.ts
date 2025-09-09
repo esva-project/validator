@@ -135,6 +135,7 @@ const fetchOUnitsXMLFromEWP = async (hei_id: string, ounit_id: string) => {
     const o = new OUnits(ounits_response)
     return { o, url }
   }
+  console.log('after if')
 
   return new ResponseDTO(400, 'Could not fetch OUnits Response from EWP')
 }
