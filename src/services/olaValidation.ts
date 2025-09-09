@@ -38,6 +38,7 @@ const validateIIA = async (fileMeta: string, params: IIAParameters, receiving: s
   // if (institutionsAndMobilityValidation.getMessage().includes('Could not fetch'))
   //   return mobilityValidation
   const fullResponse = await processOUnits(mob, institutionsAndMobilityValidation)
+  console.log(JSON.stringify(fullResponse))
   return fullResponse
 }
 
