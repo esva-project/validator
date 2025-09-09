@@ -65,7 +65,7 @@ const fetchMobilityXMLFromEWP = async (pdfContents: MobilityLaParameters) => {
 const fetchIIAXMLFromEWP = async (pdfContents: IIAParameters, posing: string) => {
   updateDataFromEWP()
   const params = {
-    hei_id: posing,
+    // hei_id: posing,
     iia_id: pdfContents.getIIAID(),
     posing_hei: posing
   }

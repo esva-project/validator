@@ -113,7 +113,7 @@ class HEIIIA {
   public getOtherContactPersonEmail = () => {
     console.log('contact-email')
 
-    this.hei.contact?.[0]?.email ?? undefined
+    this.hei.contact?.[0]?.email ?? 'no email'
   }
   public getOtherContactPersonRole = () => {
     console.log('contact-role')
