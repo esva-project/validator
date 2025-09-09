@@ -98,10 +98,14 @@ class HEIIIA {
   public getOtherContactPersonName() {
     console.log('contact-name')
 
-    console.log(JSON.stringify(this.hei))
+    console.log(JSON.stringify(this.hei.contact))
 
     if (this.hei.contact != undefined) {
-      console.log(this.hei.contact[0]['contact-name'])
+      if (this.hei.contact.length === 0) {
+        return 'no name'
+      } else {
+        console.log(this.hei.contact[0]['contact-name'])
+      }
     }
     return this.hei.contact?.[0]?.['contact-name'] ?? undefined
   }
