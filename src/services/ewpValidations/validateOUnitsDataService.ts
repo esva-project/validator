@@ -20,20 +20,22 @@ const validateEWPOUnitsResponse = async (
   institutionsAndMobilityValidation.setOUnitHEIInformation(flow, ounits_response)
 
   const location = 'Institution or Organizational Unit Contact List'
-
+  console.log('ounit_information')
   console.log(JSON.stringify(ounit_information))
-  institutionsAndMobilityValidation.addHEIValidation(
-    flow,
-    'LA Contact Person Name',
-    ounit_information.getMobilityContacts()?.getName() as string,
-    location
-  )
-  institutionsAndMobilityValidation.addHEIValidation(
-    flow,
-    'LA Contact Person Email',
-    ounit_information.getMobilityContacts()?.getEmail() as string,
-    location
-  )
+  if (ounit_information.getMobilityContacts() != undefined) {
+    institutionsAndMobilityValidation.addHEIValidation(
+      flow,
+      'LA Contact Person Name',
+      ounit_information.getMobilityContacts()?.getName() as string,
+      location
+    )
+    institutionsAndMobilityValidation.addHEIValidation(
+      flow,
+      'LA Contact Person Email',
+      ounit_information.getMobilityContacts()?.getEmail() as string,
+      location
+    )
+  }
 
   const existing_ounit_names = []
   for (const val of ounit_information.getOUnitNames())
