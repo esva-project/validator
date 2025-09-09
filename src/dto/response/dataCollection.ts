@@ -154,9 +154,15 @@ class DataCollectionDTO implements DataCollectionInterface {
     ounit_name == undefined || ounit_name == ''
       ? editing_hei.setOUnitName('IIA', false, 'No Organizational Unit Name Found')
       : editing_hei.setOUnitName('IIA', true, ounit_name)
-    if (!editing_hei.contactExistsInInstitutionContacts(sign_contact_to_add, 'IIA Signer'))
+    if (
+      !editing_hei.contactExistsInInstitutionContacts(sign_contact_to_add, 'IIA Signer') &&
+      sign_contact_to_add.getName() != 'no name'
+    )
       editing_hei.addInstitutionContact(sign_contact_to_add)
-    if (!editing_hei.contactExistsInOUnitContacts(ounit_contact_to_add, 'IIA Contact'))
+    if (
+      !editing_hei.contactExistsInOUnitContacts(ounit_contact_to_add, 'IIA Contact') &&
+      ounit_contact_to_add.getName() != 'no name'
+    )
       editing_hei.addOUnitContact(ounit_contact_to_add)
   }
 
