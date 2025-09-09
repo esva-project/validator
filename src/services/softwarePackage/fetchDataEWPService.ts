@@ -120,6 +120,7 @@ const fetchOUnitsXMLFromEWP = async (hei_id: string, ounit_id: string) => {
 
   let url = ''
 
+  console.log('before for')
   for (const host of catalogue.getHosts()) {
     for (const instCovered of catalogue.getInstitutionsCovered(host)) {
       if (hei_id === catalogue.getHEIID(instCovered)) {
@@ -128,6 +129,7 @@ const fetchOUnitsXMLFromEWP = async (hei_id: string, ounit_id: string) => {
     }
   }
 
+  console.log('before if')
   if (url) {
     const ounits_response: OUnitsInterface = await EWPRequest.get(url, params)
     const o = new OUnits(ounits_response)
