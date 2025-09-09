@@ -96,6 +96,8 @@ class HEIIIA {
   public getContactPersonEmail = () => this.hei['signing-contact']?.['c:email']
   public getContactPersonRole = () => this.hei['signing-contact']?.['c:role-description']._text
   public getOtherContactPersonName() {
+    console.log('contact-name')
+
     console.log(JSON.stringify(this.hei))
 
     if (this.hei.contact != undefined) {
@@ -104,8 +106,14 @@ class HEIIIA {
     return this.hei.contact?.[0]?.['contact-name'] ?? undefined
   }
 
-  public getOtherContactPersonEmail = () => this.hei.contact?.[0]?.email ?? undefined
+  public getOtherContactPersonEmail = () => {
+    console.log('contact-email')
+
+    this.hei.contact?.[0]?.email ?? undefined
+  }
   public getOtherContactPersonRole = () => {
+    console.log('contact-role')
+
     const roles = this.hei.contact?.[0]?.['role-description']
     return roles?.join(', ')
   }
