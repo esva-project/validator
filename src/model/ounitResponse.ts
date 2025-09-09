@@ -60,8 +60,8 @@ class OUnits {
     if (this.ounit['ounits-response'].ounit != undefined) {
       const nameArray = this.ounit['ounits-response'].ounit.name
       return nameArray.some((e) => e.getLang() == 'en')
-        ? (nameArray.find((e) => e.getLang() == 'en') as StringLang)
-        : nameArray[0]
+        ? (nameArray.find((e) => e.getLang() == 'en') as StringLang).getValue()
+        : nameArray[0].getValue()
     }
     return ''
   }
@@ -69,7 +69,7 @@ class OUnits {
     if (this.ounit['ounits-response'].ounit != undefined) {
       return this.ounit['ounits-response'].ounit.name
     }
-    return ''
+    return []
   }
   public getContacts = () => {
     const list: Contact[] = []

@@ -9,9 +9,7 @@ const validateEWPOUnitsResponse = async (
   institutionsAndMobilityValidation: ResponseDTO
 ) => {
   // Add information about the institution found
-  const msg = `Fetched Information from ${ounits_response
-    .getOUnitName()
-    .getValue()} organizational unit`
+  const msg = `Fetched Information from ${ounits_response.getOUnitName()} organizational unit`
   logger.ola.info(msg)
 
   const ounit_information =
