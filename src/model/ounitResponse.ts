@@ -23,6 +23,8 @@ class OUnits {
     this.ounit = ounit
     console.log('Ounit')
     console.log(JSON.stringify(this.ounit['ounits-response'].ounit))
+    console.log(JSON.stringify(ounit))
+
     if (this.ounit['ounits-response'].ounit.contact == undefined) {
       this.ounit['ounits-response'].ounit.contact = []
     } else {
