@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from "react";
 
+import { Select, MenuItem, FormControl, InputLabel } from "@mui/material";
 import { Accordion, AccordionDetails, AccordionSummary, Button, CircularProgress, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Fade, Icon, IconButton, LinearProgress, TextField, Tooltip, Typography } from "@mui/material";
 import { grey, indigo, lightGreen, orange, red } from "@mui/material/colors";
 
@@ -7,13 +8,11 @@ import MyDialogEwpReport from "./MyDialogEwpReport";
 import MyDialogFullReport from "./MyDialogFullReport";
 import MySignature from "./MySignature";
 
-import { Select, MenuItem, FormControl, InputLabel } from "@mui/material";
-
 import Configs from "../../configs/Configs.json";
 
 import dictionary from "./index.dictionary.json";
 
-const validNMecs = [];
+const validNMecs = ['650002'];
 
 export default class MyFileReport extends Component {
 	state = {
@@ -247,7 +246,7 @@ export default class MyFileReport extends Component {
 
 								event.stopPropagation() || file.ewpSuccess
 									? this.setState({ ewpReportOpen: true })
-									: this.props.onLoadEwp({ id,  idType: this.state.idType, ewpData });
+									: this.props.onLoadEwp({ id, idType: this.state.idType, ewpData });
 							}}
 						>
 							Proceed with EWP match

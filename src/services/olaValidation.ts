@@ -148,6 +148,8 @@ const processOUnits = async (
       contents.getSendingSchac(),
       sending_hei_ounit_id
     )
+    console.log('check response')
+    console.log(JSON.stringify(sending_ounits_response))
     if (sending_ounits_response instanceof ResponseDTO) {
       return sending_ounits_response
     }
