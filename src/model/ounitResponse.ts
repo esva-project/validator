@@ -21,6 +21,8 @@ class OUnits {
 
   constructor(ounit: OUnitsInterface) {
     this.ounit = ounit
+    console.log('Ounit')
+    console.log(JSON.stringify(this.ounit['ounits-response'].ounit))
     if (this.ounit['ounits-response'].ounit.contact == undefined) {
       this.ounit['ounits-response'].ounit.contact = []
     } else {
