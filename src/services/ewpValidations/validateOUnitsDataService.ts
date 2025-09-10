@@ -22,19 +22,28 @@ const validateEWPOUnitsResponse = async (
   const location = 'Institution or Organizational Unit Contact List'
   console.log('OUnit_information')
   console.log(JSON.stringify(ounit_information))
-  if (ounit_information.getMobilityContacts() != undefined) {
-    institutionsAndMobilityValidation.addHEIValidation(
-      flow,
-      'LA Contact Person Name',
-      ounit_information.getMobilityContacts()?.getName() as string,
-      location
-    )
-    institutionsAndMobilityValidation.addHEIValidation(
-      flow,
-      'LA Contact Person Email',
-      ounit_information.getMobilityContacts()?.getEmail() as string,
-      location
-    )
+
+  let contacts = ounit_information.getMobilityContacts()
+  let l = 'LA Contact Person'
+  if (contacts.length > 0) {
+    contacts = ounit_information.geIIAContacts()
+    l = 'IIA Contact Person'
+  }
+  if (contacts.length > 0) {
+    for (const c of contacts) {
+      institutionsAndMobilityValidation.addHEIValidation(
+        flow,
+        l + ' Name',
+        c.getName() as string,
+        location
+      )
+      institutionsAndMobilityValidation.addHEIValidation(
+        flow,
+        l + ' Email',
+        c.getEmail() as string,
+        location
+      )
+    }
   }
 
   const existing_ounit_names = []
@@ -58,30 +67,27 @@ const validateEWPOUnitsResponse = async (
       institutionsAndMobilityValidation.foundSendingHEIValdiation('LA Signer Email', location)
     }
 
-    if (contact.getContactPersonName() === ounit_information.getMobilityContacts()?.getName()) {
-      institutionsAndMobilityValidation.foundSendingHEIValdiation(
-        'LA Contact Person Name',
-        location
-      )
-    } else if (
-      contact.getContactPersonEmail() === ounit_information.getMobilityContacts()?.getEmail() &&
-      partialPresentInFull(
-        contact.getContactPersonEmail(),
-        ounit_information.getMobilityContacts()?.getEmail() as string
-      )
-    ) {
-      institutionsAndMobilityValidation.foundSendingHEIValdiation(
-        'LA Contact Person Name',
-        location
-      )
-    }
-    if (contact.getContactPersonEmail() === ounit_information.getMobilityContacts()?.getEmail()) {
-      institutionsAndMobilityValidation.foundSendingHEIValdiation(
-        'LA Contact Person Email',
-        location
-      )
+    if (l == 'IIA Contact Person') {
+      if (contacts.some((x) => x.email == contact.getContactPersonEmail())) {
+        institutionsAndMobilityValidation.foundSendingHEIValdiation(l, location)
+      }
+    } else {
+      for (const c of contacts) {
+        if (contact.getContactPersonName() === c.getName()) {
+          institutionsAndMobilityValidation.foundSendingHEIValdiation(l + ' Name', location)
+        } else if (
+          contact.getContactPersonEmail() === c.getEmail() &&
+          partialPresentInFull(contact.getContactPersonEmail(), c.getEmail() as string)
+        ) {
+          institutionsAndMobilityValidation.foundSendingHEIValdiation(l + ' Name', location)
+        }
+        if (contact.getContactPersonEmail() === c.getEmail()) {
+          institutionsAndMobilityValidation.foundSendingHEIValdiation(l + ' Email', location)
+        }
+      }
     }
   }
+
   return institutionsAndMobilityValidation
 }
 
