@@ -283,7 +283,7 @@ class EWPDataHEI implements EWPDataHEIInterface {
     )
   public getMobilityContacts() {
     const list: EWPDataContact[] = []
-    for (const c of this.institution_contacts) {
+    for (const c of this.ounit_contacts) {
       console.log(JSON.stringify(c))
       console.log(c.api_fetched.includes('Mobility LA Contact'))
       if (c.api_fetched.includes('Mobility LA Contact')) {

@@ -25,7 +25,7 @@ const validateEWPOUnitsResponse = async (
 
   let contacts = ounit_information.getMobilityContacts()
   let l = 'LA Contact Person'
-  if (contacts.length > 0) {
+  if (contacts.length === 0) {
     contacts = ounit_information.geIIAContacts()
     l = 'IIA Contact Person'
   }
