@@ -148,6 +148,9 @@ class DataCollectionDTO implements DataCollectionInterface {
       )
         editing_hei.addInstitutionContact(sign_contact_to_add)
     }
+
+    console.log('Edited this HEI')
+    console.log(JSON.stringify(editing_hei))
   }
 
   public setMobilityStudent = (_info: Mobility) => {
@@ -271,8 +274,6 @@ class EWPDataHEI implements EWPDataHEIInterface {
       c.api_fetched.find((x) => x.includes('Signer'))
     )
   public getMobilityContacts() {
-    console.log('hsshsh ounit_contacts')
-    console.log(this.ounit_contacts)
     return this.ounit_contacts.find((c: EWPDataContact) => {
       console.log(JSON.stringify(c))
       return c.api_fetched.find((x) => x.includes('Contact'))
