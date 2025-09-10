@@ -120,10 +120,11 @@ class DataCollectionDTO implements DataCollectionInterface {
 
   public setIIAHEI = (flow: number, _info: IIA, sending: string) => {
     const editing_hei = flow == 1 ? this.getEWPDataSendingHEI() : this.getEWPDataReceivingHEI()
-    const hei =
+    const hei = normalizeContacts(
       flow == 1
         ? (_info.getSendingHEI(sending) as HEIIIA)
         : (_info.getReceivingHEI(sending) as HEIIIA)
+    )
 
     console.log('Handling HEI')
     console.log(JSON.stringify(hei))
@@ -211,6 +212,43 @@ class DataCollectionDTO implements DataCollectionInterface {
       )
     }
   }
+}
+type LocalizedString = string | { _: string; $?: any }
+
+// helper: unwraps either a plain string or {_:"...", $:{...}}
+function unwrap(value?: LocalizedString): string | undefined {
+  if (!value) return undefined
+  return typeof value === 'string' ? value : value._
+}
+
+// recursive normalization for contacts
+function normalizeContacts(data: any): any {
+  if (!data?.hei?.contact) return data
+
+  data.hei.contact = data.hei.contact.map((c: any) => {
+    return {
+      // eslint-disable-next-line node/no-unsupported-features/es-syntax
+      ...c,
+      'contact-name': unwrap(c['contact-name']),
+      'person-family-name': unwrap(c['person-family-name']),
+      'person-given-names': unwrap(c['person-given-names']),
+      'role-description': unwrap(c['role-description'])
+    }
+  })
+
+  // also normalize signing-contact if present
+  if (data.hei['signing-contact']) {
+    data.hei['signing-contact'] = {
+      // eslint-disable-next-line node/no-unsupported-features/es-syntax
+      ...data.hei['signing-contact'],
+      'contact-name': unwrap(data.hei['signing-contact']['contact-name']),
+      'person-family-name': unwrap(data.hei['signing-contact']['person-family-name']),
+      'person-given-names': unwrap(data.hei['signing-contact']['person-given-names']),
+      'role-description': unwrap(data.hei['signing-contact']['role-description'])
+    }
+  }
+
+  return data
 }
 
 class EWPData implements EWPDataInterface {
