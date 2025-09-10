@@ -22,10 +22,10 @@ interface PartnerInterface {
 }
 
 interface SigningContactInterface {
-  'c:contact-name': string
-  'p:phone-number'?: PhoneNumberInterface
-  'c:email': string
-  'c:role-description': RoleDescriptionInterface
+  'contact-name': string
+  'phone-number'?: PhoneNumberInterface
+  email: string
+  'role-description': RoleDescriptionInterface
 }
 interface ContactInterface {
   'contact-name': string
@@ -92,9 +92,9 @@ class HEIIIA {
     this.hei = hei
   }
   public getHEIID = () => this.hei['hei-id']
-  public getContactPersonName = () => this.hei['signing-contact']?.['c:contact-name']
-  public getContactPersonEmail = () => this.hei['signing-contact']?.['c:email']
-  public getContactPersonRole = () => this.hei['signing-contact']?.['c:role-description']._text
+  public getContactPersonName = () => this.hei['signing-contact']?.['contact-name']
+  public getContactPersonEmail = () => this.hei['signing-contact']?.['email']
+  public getContactPersonRole = () => this.hei['signing-contact']?.['role-description']._text
   public getOtherContactPersonNames = () =>
     this.hei.contact?.map((x) => x['contact-name']).filter(Boolean) ?? ['no name']
   public getOtherContactPersonEmails = () =>
