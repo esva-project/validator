@@ -222,7 +222,7 @@ function unwrap(value?: LocalizedString): string | undefined {
 }
 
 // recursive normalization for contacts
-function normalizeContacts(data: any): any {
+function normalizeContacts(data: any): HEIIIA {
   if (!data?.hei?.contact) return data
 
   data.hei.contact = data.hei.contact.map((c: any) => {

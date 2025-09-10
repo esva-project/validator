@@ -101,7 +101,8 @@ class HEIIIA {
   public getHEIID = () => this.hei['hei-id']
   public getContactPersonName = () =>
     this.resolveLocalizedString(this.hei['signing-contact']?.['contact-name'])
-  public getContactPersonEmail = () => this.hei['signing-contact']?.['email']
+  public getContactPersonEmail = () =>
+    this.resolveLocalizedString(this.hei['signing-contact']?.['email']) ?? 'no email'
   public getContactPersonRole = () =>
     this.hei['signing-contact']?.['role-description'] ?? ['no roles']
   public getOtherContactPersonNames = () =>
