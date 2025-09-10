@@ -140,7 +140,7 @@ class DataCollectionDTO implements DataCollectionInterface {
 
     console.log('mail')
     console.log(hei.getContactPersonEmail())
-    if (hei.getContactPersonEmail() != undefined) {
+    if (hei.getContactPersonEmail() != 'no email') {
       const sign = new EWPDataContact(
         hei.getContactPersonName() as string,
         hei.getContactPersonEmail() as string,
