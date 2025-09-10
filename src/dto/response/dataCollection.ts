@@ -292,8 +292,8 @@ class EWPDataHEI implements EWPDataHEIInterface {
     const list: EWPDataContact[] = []
     for (const c of this.institution_contacts) {
       console.log(JSON.stringify(c))
-      console.log(c.api_fetched.includes('Contact'))
-      if (c.api_fetched.includes('Contact')) {
+      console.log(c.api_fetched.includes('IIA Contact'))
+      if (c.api_fetched.includes('IIA Contact')) {
         list.push(c)
       }
     }
