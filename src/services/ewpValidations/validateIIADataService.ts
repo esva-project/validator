@@ -18,9 +18,9 @@ const validateEWPIIAResponse = async (
   const receiving_signatures = response.getReceivingHEIInformation().geIIAContacts()
 
   console.log('Fetched these sending contacts')
-  console.log(sending_signatures)
+  console.log(JSON.stringify(sending_signatures))
   console.log('Fetched these receiving contacts')
-  console.log(receiving_signatures)
+  console.log(JSON.stringify(receiving_signatures))
 
   // Compare PDF Signatures With Sending HEI, Receiving HEI, and Student Information
   if (sending_signatures.length > 0 && receiving_signatures.length > 0) {
