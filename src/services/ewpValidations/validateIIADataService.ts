@@ -50,6 +50,10 @@ const validateEWPIIAResponse = async (
       }
     }
     for (const receiving_signature of receiving_signatures) {
+      console.log('running receiving')
+      console.log(JSON.stringify(receiving_signature))
+      console.log(JSON.stringify(receiving_signature.getName() == undefined))
+      console.log(JSON.stringify(receiving_signature.getEmail() == undefined))
       if (
         receiving_signature.getName() == undefined &&
         receiving_signature.getEmail() == undefined
@@ -74,6 +78,7 @@ const validateEWPIIAResponse = async (
           location
         )
       }
+      console.log(JSON.stringify(response.getEWPReport()))
     }
 
     for (const signature of response.getSignatures()) {
