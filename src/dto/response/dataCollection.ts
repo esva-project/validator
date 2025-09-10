@@ -305,7 +305,7 @@ class EWPDataHEI implements EWPDataHEIInterface {
   public addInstitutionContact = (c: EWPDataContact) => this.institution_contacts.push(c)
   public removeEmptyInstitutionContact = () => {
     for (let i = 0; i < this.institution_contacts.length; i++) {
-      if (this.institution_contacts[i].getName() == undefined) {
+      if (this.institution_contacts[i].getName() == 'no name') {
         this.institution_contacts.splice(i, 1)
       }
     }
@@ -387,8 +387,8 @@ class EWPDataContact implements EWPDataContactInterface {
     this.api_fetched = [api]
   }
 
-  public getName = () => this['contact-name']
-  public getEmail = () => this.email
+  public getName = () => this['contact-name'] ?? 'no name'
+  public getEmail = () => this.email ?? 'no email'
   public getRole = () => this['role-description']
   public getApis = () => this.api_fetched
 

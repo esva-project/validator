@@ -21,7 +21,7 @@ const validateEWPIIAResponse = async (
   const location = 'Document Signatures'
 
   for (const sending_signature of sending_signatures) {
-    if (sending_signature.getName() == undefined && sending_signature.getEmail() == undefined) {
+    if (sending_signature.getName() == 'no name' && sending_signature.getEmail() == 'no email') {
       response.addHEIValidation(
         1,
         'No IIA Contact information was found to perform validations',
@@ -35,16 +35,14 @@ const validateEWPIIAResponse = async (
         sending_signature.getName() as string,
         location
       )
-      response.addHEIValidation(
-        1,
-        'IIA Contact Email',
-        sending_signature.getEmail() as string,
-        location
-      )
+      response.addHEIValidation(1, 'IIA Contact Email', sending_signature.getEmail(), location)
     }
   }
   for (const receiving_signature of receiving_signatures) {
-    if (receiving_signature.getName() == undefined && receiving_signature.getEmail() == undefined) {
+    if (
+      receiving_signature.getName() == 'no name' &&
+      receiving_signature.getEmail() == 'no email'
+    ) {
       response.addHEIValidation(
         2,
         'No IIA Contact information was found to perform validations',
@@ -58,12 +56,7 @@ const validateEWPIIAResponse = async (
         receiving_signature.getName() as string,
         location
       )
-      response.addHEIValidation(
-        2,
-        'IIA Contact Email',
-        receiving_signature.getEmail() as string,
-        location
-      )
+      response.addHEIValidation(2, 'IIA Contact Email', receiving_signature.getEmail(), location)
     }
     console.log(JSON.stringify(response.getEWPReport()))
   }
