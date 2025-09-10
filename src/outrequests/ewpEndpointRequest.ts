@@ -52,7 +52,7 @@ const get = async (get_url: string, params: any) => {
 }
 
 function doRequest(options: any) {
-  console.log('hereeee')
+  console.log('Headers of Request')
   console.log(options)
   return new Promise((resolve, reject) => {
     const req = https.request(options, (res) => {

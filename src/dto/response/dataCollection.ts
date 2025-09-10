@@ -117,34 +117,13 @@ class DataCollectionDTO implements DataCollectionInterface {
 
   public setIIAHEI = (flow: number, _info: IIA, sending: string) => {
     const editing_hei = flow == 1 ? this.getEWPDataSendingHEI() : this.getEWPDataReceivingHEI()
-
-    console.log('editing_hei')
-    console.log(editing_hei)
     const hei =
       flow == 1
         ? (_info.getSendingHEI(sending) as HEIIIA)
         : (_info.getReceivingHEI(sending) as HEIIIA)
 
-    console.log('hei')
+    console.log('Handling HEI')
     console.log(JSON.stringify(hei))
-    const sign_contact_to_add = new EWPDataContact(
-      hei.getOtherContactPersonName() as string,
-      hei.getOtherContactPersonEmail() as string,
-      hei.getOtherContactPersonRole() as string,
-      'IIA Signer'
-    )
-
-    console.log('sign_contact_to_add')
-    console.log(JSON.stringify(sign_contact_to_add))
-    const ounit_contact_to_add = new EWPDataContact(
-      hei.getOtherContactPersonName() as string,
-      hei.getOtherContactPersonEmail() as string,
-      '',
-      'IIA Contact'
-    )
-
-    console.log('ounit_contact_to_add')
-    console.log(JSON.stringify(ounit_contact_to_add))
 
     const ounit_id = hei.getOUnitID()
     const ounit_name = hei.getOUnitName()
@@ -154,16 +133,21 @@ class DataCollectionDTO implements DataCollectionInterface {
     ounit_name == undefined || ounit_name == ''
       ? editing_hei.setOUnitName('IIA', false, 'No Organizational Unit Name Found')
       : editing_hei.setOUnitName('IIA', true, ounit_name)
-    if (
-      !editing_hei.contactExistsInInstitutionContacts(sign_contact_to_add, 'IIA Signer') &&
-      sign_contact_to_add.getName() != 'no name'
-    )
-      editing_hei.addInstitutionContact(sign_contact_to_add)
-    if (
-      !editing_hei.contactExistsInOUnitContacts(ounit_contact_to_add, 'IIA Contact') &&
-      ounit_contact_to_add.getName() != 'no name'
-    )
-      editing_hei.addOUnitContact(ounit_contact_to_add)
+
+    for (let i = 0; i < hei.getOtherContactPersonNames().length; i++) {
+      const sign_contact_to_add = new EWPDataContact(
+        hei.getOtherContactPersonNames()[i],
+        hei.getOtherContactPersonEmails()[i],
+        hei.getOtherContactPersonRoles()[i],
+        'IIA Contact'
+      )
+
+      if (
+        !editing_hei.contactExistsInInstitutionContacts(sign_contact_to_add, 'IIA Contact') &&
+        sign_contact_to_add.getName() != 'no name'
+      )
+        editing_hei.addInstitutionContact(sign_contact_to_add)
+    }
   }
 
   public setMobilityStudent = (_info: Mobility) => {

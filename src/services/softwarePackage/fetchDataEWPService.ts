@@ -19,19 +19,15 @@ const updateDataFromEWP = async (): Promise<Catalogue> => {
     fetchCatalogue
       .fetchCatalogue()
       .then((newCatalogueData) => {
-        console.log('UPDATING')
         catalogue = new Catalogue(newCatalogueData)
         console.log(catalogue.getHosts().length)
         return catalogue
       })
       .catch((error) => {
-        console.log('ERROR')
         console.log(error)
       })
-    console.log('SECOND NORMAL')
     return catalogue
   } else {
-    console.log('RETURNING NORMAL')
     console.log(catalogue.getHosts().length)
     return catalogue
   }
