@@ -15,10 +15,6 @@ class Contact {
   }
 
   public getContactPersonName = () => {
-    console.log('another log')
-    console.log(this.contact['contact-name'])
-    console.log(typeof this.contact['contact-name'])
-    console.log(typeof this.contact['contact-name'] == 'object')
     if (this.contact['contact-name']) {
       return typeof this.contact['contact-name'] == 'object'
         ? this.contact['contact-name']['_']

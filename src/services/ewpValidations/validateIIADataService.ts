@@ -17,11 +17,6 @@ const validateEWPIIAResponse = async (
   response.setIIAHEIInformation(2, iia_response, sending)
   const receiving_signatures = response.getReceivingHEIInformation().geIIAContacts()
 
-  console.log('Fetched these sending contacts')
-  console.log(JSON.stringify(sending_signatures))
-  console.log('Fetched these receiving contacts')
-  console.log(JSON.stringify(receiving_signatures))
-
   // Compare PDF Signatures With Sending HEI, Receiving HEI, and Student Information
   const location = 'Document Signatures'
 
@@ -49,10 +44,6 @@ const validateEWPIIAResponse = async (
     }
   }
   for (const receiving_signature of receiving_signatures) {
-    console.log('running receiving')
-    console.log(JSON.stringify(receiving_signature))
-    console.log(JSON.stringify(receiving_signature.getName() == undefined))
-    console.log(JSON.stringify(receiving_signature.getEmail() == undefined))
     if (receiving_signature.getName() == undefined && receiving_signature.getEmail() == undefined) {
       response.addHEIValidation(
         2,
@@ -98,8 +89,6 @@ const validateEWPIIAResponse = async (
 
   response.getSendingHEIInformation().removeEmptyInstitutionContact()
   response.getReceivingHEIInformation().removeEmptyInstitutionContact()
-
-  console.log(JSON.stringify(response.getEWPReport()))
 
   return response
 }

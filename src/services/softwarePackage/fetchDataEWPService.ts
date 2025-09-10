@@ -20,17 +20,13 @@ const updateDataFromEWP = async (): Promise<Catalogue> => {
       .fetchCatalogue()
       .then((newCatalogueData) => {
         catalogue = new Catalogue(newCatalogueData)
-        console.log(catalogue.getHosts().length)
         return catalogue
       })
       .catch((error) => {
         console.log(error)
       })
-    return catalogue
-  } else {
-    console.log(catalogue.getHosts().length)
-    return catalogue
   }
+  return catalogue
 }
 
 const fetchMobilityXMLFromEWP = async (pdfContents: MobilityLaParameters) => {

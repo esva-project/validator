@@ -20,7 +20,7 @@ const validateEWPOUnitsResponse = async (
   institutionsAndMobilityValidation.setOUnitHEIInformation(flow, ounits_response)
 
   const location = 'Institution or Organizational Unit Contact List'
-  console.log('ounit_information')
+  console.log('OUnit_information')
   console.log(JSON.stringify(ounit_information))
   if (ounit_information.getMobilityContacts() != undefined) {
     institutionsAndMobilityValidation.addHEIValidation(
@@ -57,13 +57,6 @@ const validateEWPOUnitsResponse = async (
     if (contact.getContactPersonEmail() === ounit_information.getMobilitySignature()?.getEmail()) {
       institutionsAndMobilityValidation.foundSendingHEIValdiation('LA Signer Email', location)
     }
-
-    console.log('contacts')
-    console.log(contact.getContactPersonName())
-    console.log(ounit_information.getMobilityContacts()?.getName())
-    console.log(
-      ounit_information.getMobilityContacts()?.getName()?.includes(contact.getContactPersonName())
-    )
 
     if (contact.getContactPersonName() === ounit_information.getMobilityContacts()?.getName()) {
       institutionsAndMobilityValidation.foundSendingHEIValdiation(

@@ -138,26 +138,24 @@ const processOUnits = async (
   institutionsAndMobilityValidation: ResponseDTO
 ) => {
   let responseSoFar = institutionsAndMobilityValidation
+
   const sending_hei_ounit_id = institutionsAndMobilityValidation
     .getSendingHEIInformation()
     .getOUnitID()
-  console.log('sending_hei_ounit_id')
-  console.log(JSON.stringify(sending_hei_ounit_id))
   if (sending_hei_ounit_id) {
     // Fetch Data From Sending HEI EWP OUnits API
     const sending_ounits_response = await fetchDataEWP.fetchOUnitsXMLFromEWP(
       contents.getSendingSchac(),
       sending_hei_ounit_id
     )
-    console.log('check response')
+    console.log('Check Sending Institution OUnits')
     console.log(JSON.stringify(sending_ounits_response))
+
     if (sending_ounits_response instanceof ResponseDTO) {
       return sending_ounits_response
     }
 
     institutionsAndMobilityValidation.addURLs(sending_ounits_response.url[0])
-    console.log('institutionsAndMobilityValidation')
-    console.log(JSON.stringify(institutionsAndMobilityValidation))
     logger.ola.info(
       contents.getSendingSchac() + ' OUnits Response: ' + JSON.stringify(sending_ounits_response)
     )
@@ -178,6 +176,9 @@ const processOUnits = async (
       contents.getReceivingSchac(),
       receiving_hei_ounit_id
     )
+    console.log('Check Receiving Institution OUnits')
+    console.log(JSON.stringify(receiving_ounits_response))
+
     if (receiving_ounits_response instanceof ResponseDTO) {
       return receiving_ounits_response
     }
