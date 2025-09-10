@@ -137,6 +137,20 @@ class DataCollectionDTO implements DataCollectionInterface {
       ? editing_hei.setOUnitName('IIA', false, 'No Organizational Unit Name Found')
       : editing_hei.setOUnitName('IIA', true, ounit_name)
 
+    if (hei.getContactPersonEmail() != undefined) {
+      const sign = new EWPDataContact(
+        hei.getContactPersonName() as string,
+        hei.getContactPersonEmail() as string,
+        hei.getContactPersonRole() as string,
+        'IIA Contact'
+      )
+      if (
+        !editing_hei.contactExistsInInstitutionContacts(sign, 'IIA Contact') &&
+        sign.getName() != 'no name'
+      )
+        editing_hei.addInstitutionContact(sign)
+    }
+
     for (let i = 0; i < hei.getOtherContactPersonNames().length; i++) {
       const sign_contact_to_add = new EWPDataContact(
         hei.getOtherContactPersonNames()[i],
