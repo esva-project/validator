@@ -27,8 +27,15 @@ interface PartnerInterface {
 //   email: string
 //   'role-description': RoleDescriptionInterface
 // }
+type LocalizedString =
+  | string
+  | {
+      _: string
+      $?: { 'xml:lang': string }
+    }
+
 interface ContactInterface {
-  'contact-name': string
+  'contact-name': LocalizedString
   'phone-number'?: PhoneNumberInterface
   'fax-number'?: PhoneNumberInterface
   email: string
@@ -92,7 +99,8 @@ class HEIIIA {
     this.hei = hei
   }
   public getHEIID = () => this.hei['hei-id']
-  public getContactPersonName = () => this.hei['signing-contact']?.['contact-name']
+  public getContactPersonName = () =>
+    this.resolveLocalizedString(this.hei['signing-contact']?.['contact-name'])
   public getContactPersonEmail = () => this.hei['signing-contact']?.['email']
   public getContactPersonRole = () =>
     this.hei['signing-contact']?.['role-description'] ?? ['no roles']
@@ -106,6 +114,11 @@ class HEIIIA {
 
   public getOUnitID = () => this.hei['ounit-id']
   public getOUnitName = () => this.hei['ounit-name']
+
+  private resolveLocalizedString(value?: LocalizedString): string | undefined {
+    if (!value) return undefined
+    return typeof value === 'string' ? value : value._
+  }
 }
 
 export { HEIIIA, IIA, IIAGetResponseInterface, IIAInterface }

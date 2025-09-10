@@ -155,7 +155,7 @@ class DataCollectionDTO implements DataCollectionInterface {
 
     for (let i = 0; i < hei.getOtherContactPersonNames().length; i++) {
       const sign_contact_to_add = new EWPDataContact(
-        hei.getOtherContactPersonNames()[i],
+        hei.getOtherContactPersonNames()[i].toString(),
         hei.getOtherContactPersonEmails()[i],
         hei.getOtherContactPersonRoles()[i],
         'IIA Contact'
