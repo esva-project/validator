@@ -80,6 +80,9 @@ class DataCollectionDTO implements DataCollectionInterface {
   public getEWPDataReceivingHEI = () => this.ewpData.getReceivingHEI()
   public getEWPDataStudent = () => this.ewpData.student
 
+  public setEWPDataSendingHEI = (s: EWPDataHEI) => this.ewpData.setSendingHEI(s)
+  public setEWPDataReceivingHEI = (s: EWPDataHEI) => this.ewpData.setReceivingHEI(s)
+
   public setMobilityHEI = (flow: number, _info: Mobility) => {
     const editing_hei = flow == 1 ? this.getEWPDataSendingHEI() : this.getEWPDataReceivingHEI()
 
@@ -151,6 +154,7 @@ class DataCollectionDTO implements DataCollectionInterface {
 
     console.log('Edited this HEI')
     console.log(JSON.stringify(editing_hei))
+    flow == 1 ? this.setEWPDataSendingHEI(editing_hei) : this.setEWPDataReceivingHEI(editing_hei)
   }
 
   public setMobilityStudent = (_info: Mobility) => {
@@ -207,6 +211,13 @@ class EWPData implements EWPDataInterface {
   public getSendingHEI = () => this.sending_hei
   public getReceivingHEI = () => this.receiving_hei
   public getStudent = () => this.student
+
+  public setSendingHEI = (s: EWPDataHEI) => {
+    this.sending_hei = s
+  }
+  public setReceivingHEI = (s: EWPDataHEI) => {
+    this.receiving_hei = s
+  }
 }
 
 class EWPDataHEI implements EWPDataHEIInterface {
