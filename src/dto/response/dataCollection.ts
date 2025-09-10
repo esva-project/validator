@@ -291,6 +291,8 @@ class EWPDataHEI implements EWPDataHEIInterface {
   public geIIAContacts() {
     const list: EWPDataContact[] = []
     for (const c of this.institution_contacts) {
+      console.log(JSON.stringify(c))
+      console.log(c.api_fetched.includes('Contact'))
       if (c.api_fetched.includes('Contact')) {
         list.push(c)
       }
