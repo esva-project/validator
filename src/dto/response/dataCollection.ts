@@ -137,6 +137,8 @@ class DataCollectionDTO implements DataCollectionInterface {
       ? editing_hei.setOUnitName('IIA', false, 'No Organizational Unit Name Found')
       : editing_hei.setOUnitName('IIA', true, ounit_name)
 
+    console.log('mail')
+    console.log(hei.getContactPersonEmail())
     if (hei.getContactPersonEmail() != undefined) {
       const sign = new EWPDataContact(
         hei.getContactPersonName() as string,
