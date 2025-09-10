@@ -35,7 +35,7 @@ const validateEWPMobilityResponse = async (
     console.log('printing receiving stuff')
     console.log(receiving_signature.getName())
     console.log(receiving_signature.getName())
-    if (sending_signature.getName() == undefined && sending_signature.getEmail() == undefined) {
+    if (sending_signature.getName() == 'no name' && sending_signature.getEmail() == 'no email') {
       response.addHEIValidation(
         1,
         'No LA Signer information was found to perform validations',
@@ -57,7 +57,10 @@ const validateEWPMobilityResponse = async (
       )
     }
 
-    if (receiving_signature.getName() == undefined && receiving_signature.getEmail() == undefined) {
+    if (
+      receiving_signature.getName() == 'no name' &&
+      receiving_signature.getEmail() == 'no email'
+    ) {
       response.addHEIValidation(
         2,
         'No LA Signer information was found to perform validations',
