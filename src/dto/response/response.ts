@@ -37,7 +37,7 @@ class ResponseDTO {
 
   public getMessage = () => this.response.message
   private getDataCollection = () => this.response.dataCollection
-  private getEWPReport = () => this.response.ewpReport
+  public getEWPReport = () => this.response.ewpReport
 
   public clearDataForLogs = () => {
     this.response.ewpURLs = []

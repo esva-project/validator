@@ -99,6 +99,8 @@ const validateEWPIIAResponse = async (
     response.getReceivingHEIInformation().removeEmptyInstitutionContact()
   }
 
+  console.log(JSON.stringify(response.getEWPReport()))
+
   return response
 }
 
