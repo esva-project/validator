@@ -16,17 +16,17 @@ interface PartnerInterface {
   'ounit-name'?: string
   'iia-id': string
   'iia-code': string
-  'signing-contact'?: SigningContactInterface
+  'signing-contact'?: ContactInterface
   contact?: ContactInterface[]
   'signing-date': string
 }
 
-interface SigningContactInterface {
-  'contact-name': string
-  'phone-number'?: PhoneNumberInterface
-  email: string
-  'role-description': RoleDescriptionInterface
-}
+// interface SigningContactInterface {
+//   'contact-name': string
+//   'phone-number'?: PhoneNumberInterface
+//   email: string
+//   'role-description': RoleDescriptionInterface
+// }
 interface ContactInterface {
   'contact-name': string
   'phone-number'?: PhoneNumberInterface
@@ -35,12 +35,12 @@ interface ContactInterface {
   'role-description': string[]
 }
 
-interface RoleDescriptionInterface {
-  _text: string // the actual role description
-  _attributes?: {
-    'xml:lang': string
-  }
-}
+// interface RoleDescriptionInterface {
+//   _text: string // the actual role description
+//   _attributes?: {
+//     'xml:lang': string
+//   }
+// }
 
 interface PhoneNumberInterface {
   'p:other-format'?: string
@@ -94,7 +94,8 @@ class HEIIIA {
   public getHEIID = () => this.hei['hei-id']
   public getContactPersonName = () => this.hei['signing-contact']?.['contact-name']
   public getContactPersonEmail = () => this.hei['signing-contact']?.['email']
-  public getContactPersonRole = () => this.hei['signing-contact']?.['role-description']._text
+  public getContactPersonRole = () =>
+    this.hei['signing-contact']?.['role-description'] ?? ['no roles']
   public getOtherContactPersonNames = () =>
     this.hei.contact?.map((x) => x['contact-name']).filter(Boolean) ?? ['no name']
   public getOtherContactPersonEmails = () =>

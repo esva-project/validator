@@ -143,7 +143,7 @@ class DataCollectionDTO implements DataCollectionInterface {
       const sign = new EWPDataContact(
         hei.getContactPersonName() as string,
         hei.getContactPersonEmail() as string,
-        hei.getContactPersonRole() as string,
+        hei.getContactPersonRole()[0] as string,
         'IIA Contact'
       )
       if (
