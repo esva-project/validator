@@ -29,6 +29,10 @@ const validateEWPOUnitsResponse = async (
     contacts = ounit_information.geIIAContacts()
     l = 'IIA Contact Person'
   }
+
+  console.log('Obtained Contacts')
+  console.log(contacts)
+
   if (contacts.length > 0) {
     for (const c of contacts) {
       institutionsAndMobilityValidation.addHEIValidation(
