@@ -13,9 +13,9 @@ const validateEWPIIAResponse = async (
 
   // Set the EWPResponse object in the response JSON
   response.setIIAHEIInformation(1, iia_response, sending)
-  const sending_signature = response.getSendingHEIInformation().getMobilityContacts()
+  const sending_signature = response.getSendingHEIInformation().geIIAContacts()
   response.setIIAHEIInformation(2, iia_response, sending)
-  const receiving_signature = response.getReceivingHEIInformation().getMobilityContacts()
+  const receiving_signature = response.getReceivingHEIInformation().geIIAContacts()
 
   // Compare PDF Signatures With Sending HEI, Receiving HEI, and Student Information
   if (sending_signature && receiving_signature) {

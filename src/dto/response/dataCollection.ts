@@ -248,13 +248,10 @@ class EWPDataHEI implements EWPDataHEIInterface {
   public contactExistsInInstitutionContacts = (c: EWPDataContact, api: string) => {
     for (const contact of this.institution_contacts) {
       if (contact.checkSimilarContact(c)) {
-        console.log('already exists')
         contact.addAPI(api)
         return true
       }
     }
-
-    console.log('return false')
     return false
   }
 
@@ -275,6 +272,13 @@ class EWPDataHEI implements EWPDataHEIInterface {
     )
   public getMobilityContacts() {
     return this.ounit_contacts.find((c: EWPDataContact) => {
+      console.log(JSON.stringify(c))
+      return c.api_fetched.find((x) => x.includes('Contact'))
+    })
+  }
+
+  public geIIAContacts() {
+    return this.institution_contacts.find((c: EWPDataContact) => {
       console.log(JSON.stringify(c))
       return c.api_fetched.find((x) => x.includes('Contact'))
     })
