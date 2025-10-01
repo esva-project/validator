@@ -29,7 +29,7 @@ class App extends Component {
 	}
 
 	state = {
-		language: Languages[navigator.language.slice(0, 2)] ? Languages[navigator.language.slice(0, 2)].id : "en",
+		language: Languages[navigator.language.slice(0, 2)] ? Languages[navigator.language.slice(0, 2)].id : "pt",
 		bigScreen: window.innerWidth >= 1000,
 		files: [],
 		faqModalOpenned: false,
