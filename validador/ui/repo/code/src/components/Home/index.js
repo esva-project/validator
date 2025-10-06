@@ -37,7 +37,7 @@ export default class Home extends Component {
 					</Typography>
 					<Zoom in={anim1} timeout={500}>
 						<div className="w-100 flex-grow-1 d-flex align-items-center">
-							<div className="w-100">
+							<div className="w-100" style="margin-bottom: 100px !important;">
 								<Typography align="center" color="white" className="mb-2">
 									{dictionary.whenUsingThisValidator[language]}{" "}
 									<a href={PrivacyPolicy} target="_blank" rel="noopener noreferrer">
@@ -60,13 +60,28 @@ export default class Home extends Component {
 										</div>
 									</div>
 								</div>
-								<Typography align="center" color="white" className="mb-2">
+								<Typography align="center" color="white" className="mb-2" style="margin-bottom: 100px !important;">
 									{dictionary.andValidate[language]}
 								</Typography>
 								<div className="w-100 d-flex justify-content-center mb-2 mb-sm-5">
-									<Button variant="contained" color="warning" onClick={this.props.onOpenFaq}>
-										{dictionary.findMore[language]}
-									</Button>
+									<div className="d-flex gap-3">
+										<Button
+											variant="contained"
+											color="primary"
+											background-color="black"
+											onClick={() => window.open("https://esva-project.eu", "_blank")}
+										>
+											{dictionary.goHome[language]} {/* e.g., "Projects Home" */}
+										</Button>
+										<Button
+											variant="contained"
+											color="primary"
+											background-color="black"
+											onClick={this.props.onOpenFaq}
+										>
+											{dictionary.findMore[language]}
+										</Button>
+									</div>
 								</div>
 								<div className="text-center">
 									<Typography variant="caption" color="white">

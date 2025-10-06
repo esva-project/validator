@@ -28,7 +28,7 @@ export default class MainAppBar extends Component {
 					<Toolbar className="h-100">
 						<div style={{ maxWidth: 256, minWidth: 200 }}>
 							<Slide in={anim2} mountOnEnter unmountOnExit appear timeout={500} direction="right">
-								<a href="https://esva-project.eu/" target="_blank" rel="noopener noreferrer">
+								<a href="https://esva.up.pt/" target="_blank" rel="noopener noreferrer">
 									<img src={ImgESVA} alt="ImgESVA" style={{ maxHeight: "45%", maxWidth: "45%" }} />
 								</a>
 							</Slide>
@@ -41,11 +41,11 @@ export default class MainAppBar extends Component {
 						<div className="ms-4">
 							<LanguageMenu language={language} onUpdateLanguage={this.props.onUpdateLanguage} />
 						</div>
-						<div className="ms-4" style={{ maxWidth: 42, minWidth: 25 }}>
+						{/* <div className="ms-4" style={{ maxWidth: 42, minWidth: 25 }}>
 							<Slide in={anim2} mountOnEnter unmountOnExit appear timeout={500} direction="left">
 								<img src={ImgCeLock} alt="CeLock" style={{ maxHeight: "100%", maxWidth: "100%" }} />
 							</Slide>
-						</div>
+						</div> */}
 					</Toolbar>
 				</AppBar>
 			</Slide>

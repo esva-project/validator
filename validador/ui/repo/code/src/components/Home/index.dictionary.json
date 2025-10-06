@@ -23,6 +23,10 @@
         "en": "Find out more in our FAQ",
         "pt": "Descobre mais no nosso FAQ"
     },
+    "goHome": {
+        "en": "Find out more in our project's home page",
+        "pt": "Descobre mais na nossa página do Projeto"
+    },
     "footer": {
         "en": "The files submitted in this validator will only be analysed for the purpose of validating the existence of an electronic signature identifying its typology, being immediately deleted after the completion of this process. Thus, we inform you that there will be no retention of any information regarding the content of the submitted files, such as personal data or other context data.",
         "pt": "Os ficheiros submetidos neste validador apenas serão analisados tendo como finalidade a validação da existência de uma assinatura eletrónica identificando a sua tipologia, sendo imediatamente apagados após a conclusão deste processo. Neste sentido, informamos que não se verificará a conservação de qualquer informação relativa ao conteúdo dos ficheiros submetidos, tais como dados pessoais ou outros dados de contexto."
