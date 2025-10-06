@@ -37,7 +37,7 @@ export default class Home extends Component {
 					</Typography>
 					<Zoom in={anim1} timeout={500}>
 						<div className="w-100 flex-grow-1 d-flex align-items-center">
-							<div className="w-100">
+							<div className="w-100" style={{ marginBottom: "100px" }}>
 								<Typography align="center" color="white" className="mb-2">
 									{dictionary.whenUsingThisValidator[language]}{" "}
 									<a href={PrivacyPolicy} target="_blank" rel="noopener noreferrer">
@@ -54,19 +54,33 @@ export default class Home extends Component {
 										<div className="w-100 d-flex justify-content-center" style={{ position: "absolute", bottom: "8%", height: "51%" }}>
 											<div style={{ width: "32%", marginLeft: "1%" }}>
 												<p className={Classes.Arrow} style={{ cursor: "pointer" }} onClick={this.props.onFileInput}>
-													<a hreef="#"></a>
+													<a href="#"></a>
 												</p>
 											</div>
 										</div>
 									</div>
 								</div>
-								<Typography align="center" color="white" className="mb-2">
+								<Typography align="center" color="white" className="mb-2" style={{ marginBottom: "100px" }}>
 									{dictionary.andValidate[language]}
 								</Typography>
 								<div className="w-100 d-flex justify-content-center mb-2 mb-sm-5">
-									<Button variant="contained" color="warning" onClick={this.props.onOpenFaq}>
-										{dictionary.findMore[language]}
-									</Button>
+									<div className="d-flex gap-3">
+										<Button
+											variant="contained"
+											style={{ backgroundColor: "black", color: "white" }}
+											onClick={() => window.open("https://esva-project.eu", "_blank")}
+										>
+											{dictionary.goHome[language]} {/* e.g., "Projects Home" */}
+										</Button>
+										<Button
+											variant="contained"
+											color="primary"
+											background-color="black"
+											onClick={this.props.onOpenFaq}
+										>
+											{dictionary.findMore[language]}
+										</Button>
+									</div>
 								</div>
 								<div className="text-center">
 									<Typography variant="caption" color="white">
