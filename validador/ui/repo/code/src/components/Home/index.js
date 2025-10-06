@@ -45,7 +45,7 @@ export default class Home extends Component {
 									</a>
 									.
 								</Typography>
-								<Typography align="center" color="white" className="mb-2" sx={{ mb: "100px !important" }}>
+								<Typography align="center" color="white" className="mb-2" sx={{ mt: "100px !important" }}>
 									{dictionary.dragYourPdfs[language]}
 								</Typography>
 								<div className="w-100 d-flex justify-content-center">

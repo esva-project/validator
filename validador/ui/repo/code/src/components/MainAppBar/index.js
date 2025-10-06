@@ -28,7 +28,7 @@ export default class MainAppBar extends Component {
 					<Toolbar className="h-100">
 						<div style={{ maxWidth: 256, minWidth: 200 }}>
 							<Slide in={anim2} mountOnEnter unmountOnExit appear timeout={500} direction="right">
-								<a href="https://esva.up.pt/" target="_blank" rel="noopener noreferrer">
+								<a href="https://esva.up.pt/" rel="noopener noreferrer">
 									<img src={ImgESVA} alt="ImgESVA" style={{ maxHeight: "45%", maxWidth: "45%" }} />
 								</a>
 							</Slide>
