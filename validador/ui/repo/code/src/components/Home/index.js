@@ -37,7 +37,7 @@ export default class Home extends Component {
 					</Typography>
 					<Zoom in={anim1} timeout={500}>
 						<div className="w-100 flex-grow-1 d-flex align-items-center">
-							<div className="w-100"  sx={{ mb: "100px !important" }}>
+							<div className="w-100">
 								<Typography align="center" color="white" className="mb-2">
 									{dictionary.whenUsingThisValidator[language]}{" "}
 									<a href={PrivacyPolicy} target="_blank" rel="noopener noreferrer">
@@ -45,7 +45,7 @@ export default class Home extends Component {
 									</a>
 									.
 								</Typography>
-								<Typography align="center" color="white" className="mb-2">
+								<Typography align="center" color="white" className="mb-2" sx={{ mb: "100px !important" }}>
 									{dictionary.dragYourPdfs[language]}
 								</Typography>
 								<div className="w-100 d-flex justify-content-center">
@@ -60,7 +60,7 @@ export default class Home extends Component {
 										</div>
 									</div>
 								</div>
-								<Typography align="center" color="white" className="mb-2" sx={{ mb: "100px !important" }}>
+								<Typography align="center" color="white" className="mb-2" sx={{ m: "30px !important" }}>
 									{dictionary.andValidate[language]}
 								</Typography>
 								<div className="w-100 d-flex justify-content-center mb-2 mb-sm-5">
@@ -74,7 +74,7 @@ export default class Home extends Component {
 										</Button>
 										<Button
 											variant="contained"
-											backgroundColor
+											style={{ backgroundColor: "black", color: "white" }}
 											onClick={this.props.onOpenFaq}
 										>
 											{dictionary.findMore[language]}
